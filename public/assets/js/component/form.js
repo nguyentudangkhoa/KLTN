@@ -98,6 +98,7 @@ $(document).ready(function() {
                     if (data.report == "Tài khoản đã tồn tại") {
                         $('#img-loading-sign-up').css('display', 'none');
                         alert(data.report);
+                        $('#sign-up-status').css('display', 'none');
                     } else {
                         $('#img-loading-sign-up').css('display', 'none');
                         alert(data.report);
