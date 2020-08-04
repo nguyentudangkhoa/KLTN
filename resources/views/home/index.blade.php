@@ -56,8 +56,8 @@ Grocery Shoppy an Ecommerce Categoryme|Home
                                         VND</span>
                                     <del id="discount{{ $nut->id }}">{{ number_format($nut->price) }}</del>
                                     @else
-                                    <span class="item_price"
-                                        id="price{{ $nut->id }}">{{ number_format($nut->price) }} VND</span>
+                                    <span class="item_price" id="price{{ $nut->id }}">{{ number_format($nut->price) }}
+                                        VND</span>
                                     <del id="discount{{ $nut->id }}"></del>
                                     @endif
 
@@ -121,8 +121,8 @@ Grocery Shoppy an Ecommerce Categoryme|Home
                                         VND</span>
                                     <del id="discount{{ $oil->id }}">{{ number_format($oil->price) }}</del>
                                     @else
-                                    <span class="item_price"
-                                        id="price{{ $oil->id }}">{{ number_format($nut->price) }} VND</span>
+                                    <span class="item_price" id="price{{ $oil->id }}">{{ number_format($nut->price) }}
+                                        VND</span>
                                     <del id="discount{{ $oil->id }}"></del>
                                     @endif
 
@@ -230,8 +230,8 @@ Grocery Shoppy an Ecommerce Categoryme|Home
                             </h4>
                             <div class="w3l-pricehkj">
                                 <span class="item_price"
-                                        id="price{{ $discount->id }}">{{number_format($discount->promotion_price)}}
-                                        VND</span>
+                                    id="price{{ $discount->id }}">{{number_format($discount->promotion_price)}}
+                                    VND</span>
                                 <p> Save {{ number_format($discount->Product->price - $discount->promotion_price)}} VND
                                 </p>
                             </div>
