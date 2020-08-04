@@ -15,7 +15,7 @@ class MailSend extends Controller
     public function SignUp(Request $req){
         $user = User::where('email',$req->email)->First();
         if($user){
-            return response()->json(['report'=>"Đã tồn tại thành viên ".$req->email]);
+            return response()->json(['report'=>"Tài khoản đã tồn tại"]);
         }else{
             $details = [
                 'title' => 'Xác nhận tài khoản đăng ký',

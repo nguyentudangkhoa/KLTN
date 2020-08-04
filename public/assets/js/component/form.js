@@ -95,9 +95,14 @@ $(document).ready(function() {
                     _token: _token
                 },
                 success: function(data) {
-                    $('#img-loading-sign-up').css('display', 'none');
-                    alert(data.report);
-                    $('#sign-up-status').text('Xin vui lòng check mail để hoàn tất đăng ký!');
+                    if (data.report == "Tài khoản đã tồn tại") {
+                        $('#img-loading-sign-up').css('display', 'none');
+                        alert(data.report);
+                    } else {
+                        $('#img-loading-sign-up').css('display', 'none');
+                        alert(data.report);
+                        $('#sign-up-status').text('Xin vui lòng check mail để hoàn tất đăng ký!');
+                    }
                 }
             });
         }
