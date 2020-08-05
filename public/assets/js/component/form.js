@@ -99,6 +99,10 @@ $(document).ready(function() {
                         $('#img-loading-sign-up').css('display', 'none');
                         alert(data.report);
                         $('#sign-up-status').css('display', 'none');
+                    } else if (data.report == "Email không hợp lệ") {
+                        $('#img-loading-sign-up').css('display', 'none');
+                        alert(data.report);
+                        $('#sign-up-status').css('display', 'none');
                     } else {
                         $('#img-loading-sign-up').css('display', 'none');
                         alert(data.report);

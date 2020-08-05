@@ -16,6 +16,8 @@ class MailSend extends Controller
         $user = User::where('email',$req->email)->First();
         if($user){
             return response()->json(['report'=>"Tài khoản đã tồn tại"]);
+        }else if(!filter_var($req->email, FILTER_VALIDATE_EMAIL)){
+            return response()->json(['report'=>"Email không hợp lệ"]);
         }else{
             $details = [
                 'title' => 'Xác nhận tài khoản đăng ký',
