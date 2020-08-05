@@ -36,3 +36,5 @@ Route::post('/sign-in', 'AccountController@SignIn')->name('sign-in');
 Route::post('send-mail-signup','MailSend@SignUp')->name('send-mail-signup');
 Route::get('sign-up','AccountController@SignUp')->name('sign-up');
 Route::get('log-out','AccountController@Logout')->name('log-out');
+//Cart
+Route::post('add-to-cart','CartController@AddToCart')->name('add-to-cart');

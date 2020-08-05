@@ -67,7 +67,7 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
                             <span class="fa fa-map-marker" aria-hidden="true"></span> Vị trí</a>
                     </li>
                     <li>
-                            <span class="fa fa-truck" aria-hidden="true"></span>Giao hàng
+                        <span class="fa fa-truck" aria-hidden="true"></span>Giao hàng
                     </li>
                     <li>
                         <span class="fa fa-phone" aria-hidden="true"></span> 001 234 5678
@@ -113,9 +113,21 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
                 <!-- cart details -->
                 <div class="top_nav_right">
                     <div class="wthreecartaits wthreecartaits2 cart cart box_1" style="text-align: center;">
-                        <button class="w3view-cart" data-toggle="modal" data-target="#modalCart" value="">
-                            <i class="fa fa-cart-arrow-down" aria-hidden="true"></i>
+                        <button class="w3view-cart" id="btn-cart-shopping" title=" Bạn hiện đang có @if(Session::has('cart'))
+                        {{Session('cart')->totalQty}}
+                        @endif sản phẩm trong giỏ hàng" value="@if(Session::has('cart'))
+                        {{Session('cart')->totalQty}}
+                        @endif"><i class="fa fa-cart-arrow-down" aria-hidden="true"></i>
                         </button>
+                        @if(Session::has('cart'))
+                        (
+                        <label id="lbl_quantity">
+                            {{Session('cart')->totalQty}}
+                        </label>
+                        )
+                        @endif
+                        <label id="lbl_quantity">
+                        </label>
                     </div>
                 </div>
                 <!-- //cart details -->

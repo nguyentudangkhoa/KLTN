@@ -2,13 +2,22 @@ $(document).ready(function() {
     $('.submit_form_product').submit(function(e) {
         e.preventDefault();
         var _token = $('input[name="_token"]').val();
-        var id = $(this).data('id')
-        var price = $('#price' + id).text();
-        var price_replace = price.replace(",", "")
-        var price_array = price_replace.split(" ");
-        var product_price = parseInt(price_array[0])
-
-        alert(product_price);
+        var id = $(this).data('id');
+        var quantity = $('#lbl_quantity').text();
+        var total = 0;
+        total = parseInt(quantity) + 1;
+        $.ajax({
+            url: "add-to-cart",
+            method: "POST",
+            data: {
+                id: id,
+                _token: _token
+            },
+            success: function(data) {
+                alert(data.report);
+                $('#lbl_quantity').text(total);
+            }
+        });
     });
     $('#form_sigin').submit(function(e) {
         e.preventDefault();
@@ -120,4 +129,8 @@ $(document).ready(function() {
         $('#txt_user_cof_gender').css('display', 'none');
         $('#sign-up-status').css('display', 'none');
     })
+    $('#btn-cart-shopping').click(function() {
+        var quantity = $(this).val();
+        alert(parseInt(quantity));
+    });
 });
