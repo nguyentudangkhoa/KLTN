@@ -4,8 +4,9 @@ $(document).ready(function() {
         var _token = $('input[name="_token"]').val();
         var id = $(this).data('id');
         var quantity = $('#lbl_quantity').text();
-        var total = 0;
+        var total = 1;
         total = parseInt(quantity) + 1;
+
         $.ajax({
             url: "add-to-cart",
             method: "POST",
@@ -15,7 +16,7 @@ $(document).ready(function() {
             },
             success: function(data) {
                 alert(data.report);
-                $('#lbl_quantity').text(total);
+                $('#lbl_quantity').text('(' + data.quantity + ')');
             }
         });
     });
@@ -129,8 +130,4 @@ $(document).ready(function() {
         $('#txt_user_cof_gender').css('display', 'none');
         $('#sign-up-status').css('display', 'none');
     })
-    $('#btn-cart-shopping').click(function() {
-        var quantity = $(this).val();
-        alert(parseInt(quantity));
-    });
 });

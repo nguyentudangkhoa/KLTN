@@ -120,11 +120,9 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
                         @endif"><i class="fa fa-cart-arrow-down" aria-hidden="true"></i>
                         </button>
                         @if(Session::has('cart'))
-                        (
                         <label id="lbl_quantity">
-                            {{Session('cart')->totalQty}}
+                            ({{Session('cart')->totalQty}})
                         </label>
-                        )
                         @endif
                         <label id="lbl_quantity">
                         </label>

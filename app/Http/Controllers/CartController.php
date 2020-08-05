@@ -19,6 +19,6 @@ class CartController extends Controller
         $cart = new Cart($oldCart); //Add sesion to model Cart
         $cart->add($product, $req->id);
         $req->session()->put('cart', $cart);
-        return response()->json(['report'=>"Đã thêm $product->name vào giỏ hàng thành công"]);
+        return response()->json(['report'=>"Đã thêm $product->name vào giỏ hàng thành công",'quantity'=>Session('cart')->totalQty]);
     }
 }
