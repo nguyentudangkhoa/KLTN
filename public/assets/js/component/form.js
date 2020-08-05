@@ -83,7 +83,7 @@ $(document).ready(function() {
         } else {
             $('#sign-up-status').css('display', 'block');
             $('#img-loading-sign-up').css('display', 'block');
-            $('#sign-up-status').text('Xin vui lòng chờ một lúc để có thể nhận mail xác nhận đăng ký!');
+            $('#sign-up-status').text('Xin vui lòng chờ một lúc !!!');
             $.ajax({
                 url: "send-mail-signup",
                 method: "POSt",
