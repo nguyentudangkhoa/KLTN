@@ -25,7 +25,7 @@ Route::get('/fast-answer-question', 'SupportController@Faqs')->name('faqs');
 //About us page
 Route::get('/about-us', 'SupportController@About')->name('about');
 //Checkout page
-Route::get('/checkout', 'CheckoutController@Checkout')->name('checkout');
+Route::get('/check-out', 'CheckoutController@Checkout')->name('check-out');
 //Contact page
 Route::get('/contact-us', 'SupportController@Contact')->name('contact');
 //Privacy page

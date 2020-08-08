@@ -80,6 +80,7 @@ Product
                                 <div
                                     class="snipcart-details top_brand_home_details item_add single-item hvr-outline-out">
                                     <form data-id="{{ $product->id }}" class="submit_form_product">
+                                        @csrf
                                         <input type="submit" name="submit" value="Add to cart"
                                             class="btn_product_cart button" />
                                     </form>

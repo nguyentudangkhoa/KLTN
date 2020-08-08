@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Aug 03, 2020 at 07:04 PM
+-- Generation Time: Aug 08, 2020 at 03:29 AM
 -- Server version: 10.4.11-MariaDB
 -- PHP Version: 7.4.5
 
@@ -29,7 +29,8 @@ SET time_zone = "+00:00";
 
 CREATE TABLE `bills` (
   `id` int(10) UNSIGNED NOT NULL,
-  `id_user` int(10) UNSIGNED NOT NULL,
+  `id_user` int(10) UNSIGNED DEFAULT NULL,
+  `id_customer` int(10) UNSIGNED DEFAULT NULL,
   `id_payment` int(10) UNSIGNED NOT NULL,
   `order_date` datetime NOT NULL,
   `status` int(10) NOT NULL,
@@ -66,6 +67,23 @@ CREATE TABLE `comments` (
   `parent_id` int(10) NOT NULL,
   `id_product` int(10) UNSIGNED NOT NULL,
   `id_user` int(10) UNSIGNED NOT NULL,
+  `created_at` timestamp NOT NULL DEFAULT current_timestamp(),
+  `updated_at` timestamp NOT NULL DEFAULT current_timestamp()
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_vietnamese_ci;
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `customer`
+--
+
+CREATE TABLE `customer` (
+  `id` int(10) UNSIGNED NOT NULL,
+  `name` varchar(100) COLLATE utf8mb4_vietnamese_ci NOT NULL,
+  `email` varchar(100) COLLATE utf8mb4_vietnamese_ci NOT NULL,
+  `gender` varchar(20) COLLATE utf8mb4_vietnamese_ci DEFAULT NULL,
+  `address` varchar(200) COLLATE utf8mb4_vietnamese_ci NOT NULL,
+  `phone_number` varchar(11) COLLATE utf8mb4_vietnamese_ci NOT NULL,
   `created_at` timestamp NOT NULL DEFAULT current_timestamp(),
   `updated_at` timestamp NOT NULL DEFAULT current_timestamp()
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_vietnamese_ci;
@@ -114,12 +132,12 @@ CREATE TABLE `discount_info` (
 --
 
 INSERT INTO `discount_info` (`id`, `promotion_price`, `begin_at`, `end_at`, `id_product`, `status`, `created_at`, `updated_at`) VALUES
-(1, 10000, '2020-07-26', '2020-07-28', 39, 1, '2020-07-26 07:16:09', '2020-07-26 07:16:09'),
-(2, 35000, '2020-07-26', '2020-07-30', 23, 1, '2020-07-26 07:17:01', '2020-07-26 07:17:01'),
-(3, 10000, '2020-07-26', '2020-07-29', 24, 1, '2020-07-26 07:17:48', '2020-07-26 07:17:48'),
-(4, 15000, '2020-07-26', '2020-07-28', 45, 1, '2020-07-26 07:18:23', '2020-07-26 15:51:56'),
-(5, 20000, '2020-07-26', '2020-07-31', 10, 1, '2020-07-26 07:18:54', '2020-07-26 07:18:54'),
-(6, 40000, '2020-07-26', '2020-07-29', 25, 1, '2020-07-26 07:19:50', '2020-07-26 07:19:50');
+(1, 10000, '2020-07-26', '2020-08-09', 39, 1, '2020-07-26 07:16:09', '2020-07-26 07:16:09'),
+(2, 35000, '2020-07-26', '2020-08-07', 23, 1, '2020-07-26 07:17:01', '2020-07-26 07:17:01'),
+(3, 10000, '2020-07-26', '2020-08-09', 24, 1, '2020-07-26 07:17:48', '2020-07-26 07:17:48'),
+(4, 15000, '2020-07-26', '2020-08-14', 45, 1, '2020-07-26 07:18:23', '2020-07-26 15:51:56'),
+(5, 20000, '2020-07-26', '2020-08-11', 10, 1, '2020-07-26 07:18:54', '2020-07-26 07:18:54'),
+(6, 40000, '2020-07-26', '2020-08-14', 25, 1, '2020-07-26 07:19:50', '2020-07-26 07:19:50');
 
 -- --------------------------------------------------------
 
@@ -393,7 +411,8 @@ CREATE TABLE `user_details` (
 ALTER TABLE `bills`
   ADD PRIMARY KEY (`id`),
   ADD KEY `Fk_Bill_User` (`id_user`),
-  ADD KEY `FK_Bill_payment` (`id_payment`);
+  ADD KEY `FK_Bill_payment` (`id_payment`),
+  ADD KEY `FK_Bill_Customer` (`id_customer`);
 
 --
 -- Indexes for table `bill_detail`
@@ -410,6 +429,12 @@ ALTER TABLE `comments`
   ADD PRIMARY KEY (`id`),
   ADD KEY `FK_Comment_Product` (`id_product`),
   ADD KEY `FK_Comment_User` (`id_user`);
+
+--
+-- Indexes for table `customer`
+--
+ALTER TABLE `customer`
+  ADD PRIMARY KEY (`id`);
 
 --
 -- Indexes for table `description_images`
@@ -503,6 +528,12 @@ ALTER TABLE `comments`
   MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT;
 
 --
+-- AUTO_INCREMENT for table `customer`
+--
+ALTER TABLE `customer`
+  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT;
+
+--
 -- AUTO_INCREMENT for table `description_images`
 --
 ALTER TABLE `description_images`
@@ -576,6 +607,7 @@ ALTER TABLE `user_details`
 -- Constraints for table `bills`
 --
 ALTER TABLE `bills`
+  ADD CONSTRAINT `FK_Bill_Customer` FOREIGN KEY (`id_customer`) REFERENCES `customer` (`id`),
   ADD CONSTRAINT `FK_Bill_payment` FOREIGN KEY (`id_payment`) REFERENCES `payment` (`id`),
   ADD CONSTRAINT `Fk_Bill_User` FOREIGN KEY (`id_user`) REFERENCES `users` (`id`);
 

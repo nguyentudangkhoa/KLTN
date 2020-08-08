@@ -32,7 +32,8 @@ class ProductController extends Controller
     public function Single(Request $req)
     {
         //Product info
-        $product = Product::leftJoin('discount_info', 'discount_info.id_product', '=', 'product.id')
+        $product = Product::select('product.id', 'product.name', 'product.images', 'product.id_type', 'product.price', 'discount_info.promotion_price', 'discount_info.end_at', 'discount_info.status', 'product.created_at')
+            ->leftJoin('discount_info', 'discount_info.id_product', '=', 'product.id')
             ->where('product.name', 'like', '%' . $req->product_name . '%')
             ->where('product.status', 1)
             ->orderBy('product.created_at', 'DESC')

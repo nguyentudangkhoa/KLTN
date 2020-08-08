@@ -113,7 +113,8 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
                 <!-- cart details -->
                 <div class="top_nav_right">
                     <div class="wthreecartaits wthreecartaits2 cart cart box_1" style="text-align: center;">
-                        <button class="w3view-cart" id="btn-cart-shopping" title=" Bạn hiện đang có @if(Session::has('cart'))
+                        <form action="{{ route('check-out') }}" action="get">
+                            <button class="w3view-cart" id="btn-cart-shopping" title=" Bạn hiện đang có @if(Session::has('cart'))
                         {{Session('cart')->totalQty}}
                         @endif sản phẩm trong giỏ hàng" value="@if(Session::has('cart'))
                         {{Session('cart')->totalQty}}
@@ -126,6 +127,8 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
                         @endif
                         <label id="lbl_quantity">
                         </label>
+                        </form>
+
                     </div>
                 </div>
                 <!-- //cart details -->

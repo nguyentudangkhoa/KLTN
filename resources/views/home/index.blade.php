@@ -131,6 +131,7 @@ Grocery Shoppy an Ecommerce Categoryme|Home
                                 <div
                                     class="snipcart-details top_brand_home_details item_add single-item hvr-outline-out">
                                     <form data-id="{{ $oil->id }}" class="submit_form_product">
+                                        @csrf
                                         <input type="submit" name="submit" value="Add to cart" class="button" />
                                     </form>
                                 </div>
@@ -182,6 +183,7 @@ Grocery Shoppy an Ecommerce Categoryme|Home
                                 <div
                                     class="snipcart-details top_brand_home_details item_add single-item hvr-outline-out">
                                     <form data-id="{{ $noodle->id }}" class="submit_form_product">
+                                        @csrf
                                         <input type="submit" name="submit" value="Add to cart" class="button" />
                                     </form>
                                 </div>
