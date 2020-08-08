@@ -47,7 +47,7 @@ class ProductController extends Controller
             ->inRandomOrder()
             ->limit(10)
             ->get();
-        $images = Description_images::where('id_product', $product->id_product)->get();
+        $images = Description_images::where('id_product', $product->id)->get();
         return view('product.single', compact('product', 'same_type_products', 'images'));
     }
 }

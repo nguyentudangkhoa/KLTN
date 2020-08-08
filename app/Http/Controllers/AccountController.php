@@ -24,6 +24,8 @@ class AccountController extends Controller
         }else{
             if (Auth::attempt($credentials)) { //Check Existing user
                 $user = User::where('email',$req->email)->first();
+                $user->login_time = date("Y-m-d H:i:s");//current time log in
+                $user->save();
                 return response()->json(['report'=>"Đã đăng nhập với tài khoản ".$req->email,'name'=>$user->name]);
             } else {
                 return response()->json(['report'=>"Thông tin đăng nhập sai hoặc tài khoản không tồn tại"]);
@@ -48,8 +50,11 @@ class AccountController extends Controller
     public function Logout()
     {
         if(Auth::check()){
+            $user = User::where('email',Auth::user()->email)->first();
+            $user->logout_time = date("Y-m-d H:i:s");//current time log out
+            $user->save();
             Auth::logout(); //Logout
-        return redirect()->back();
+            return redirect()->back();
         }
     }
 }

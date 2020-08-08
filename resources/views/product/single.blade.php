@@ -43,13 +43,27 @@ Single
                                 <img src="assets/images/{{ $product->images }}" data-imagezoom="true"
                                     class="img-responsive" alt=""> </div>
                         </li>
-                        @foreach($images as $image)
+                        @if ($product->Description_Images->count()>0)
+                        @foreach($product->Description_Images as $image)
                         <li data-thumb="assets/images/{{ $image->images }}">
                             <div class="thumb-image">
                                 <img src="assets/images/{{ $image->images }}" data-imagezoom="true" class="img-responsive" alt="">
                             </div>
                         </li>
                         @endforeach
+                        @else
+                        <li data-thumb="assets/images/{{ $product->images }}">
+                            <div class="thumb-image">
+                                <img src="assets/images/{{ $product->images }}" data-imagezoom="true" class="img-responsive" alt="">
+                            </div>
+                        </li>
+                        <li data-thumb="assets/images/{{ $product->images }}">
+                            <div class="thumb-image">
+                                <img src="assets/images/{{ $product->images }}" data-imagezoom="true" class="img-responsive" alt="">
+                            </div>
+                        </li>
+                        @endif
+
                     </ul>
                     <div class="clearfix"></div>
                 </div>

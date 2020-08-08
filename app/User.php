@@ -42,4 +42,7 @@ class User extends Authenticatable
     public function User_Detail(){
         return $this->hasMany("App\User_detail","id_user","id");
     }
+    public function Bill(){
+        $this->hasMany("App\Bills","id_user","id");
+    }
 }
