@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Aug 08, 2020 at 03:29 AM
+-- Generation Time: Aug 11, 2020 at 07:36 AM
 -- Server version: 10.4.11-MariaDB
 -- PHP Version: 7.4.5
 
@@ -32,6 +32,7 @@ CREATE TABLE `bills` (
   `id_user` int(10) UNSIGNED DEFAULT NULL,
   `id_customer` int(10) UNSIGNED DEFAULT NULL,
   `id_payment` int(10) UNSIGNED NOT NULL,
+  `total` int(11) DEFAULT NULL,
   `order_date` datetime NOT NULL,
   `status` int(10) NOT NULL,
   `note` varchar(500) COLLATE utf8mb4_vietnamese_ci DEFAULT NULL,
@@ -148,6 +149,7 @@ INSERT INTO `discount_info` (`id`, `promotion_price`, `begin_at`, `end_at`, `id_
 CREATE TABLE `group_type` (
   `id` int(10) UNSIGNED NOT NULL,
   `name` varchar(100) COLLATE utf8mb4_vietnamese_ci NOT NULL,
+  `status` int(11) NOT NULL DEFAULT 1,
   `created_at` timestamp NOT NULL DEFAULT current_timestamp(),
   `updated_at` timestamp NOT NULL DEFAULT current_timestamp()
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_vietnamese_ci;
@@ -156,9 +158,9 @@ CREATE TABLE `group_type` (
 -- Dumping data for table `group_type`
 --
 
-INSERT INTO `group_type` (`id`, `name`, `created_at`, `updated_at`) VALUES
-(1, 'Thực phẩm', '2020-07-25 05:16:57', '2020-07-25 05:16:57'),
-(2, 'Vật dụng gia đình', '2020-07-25 05:17:16', '2020-07-25 05:17:16');
+INSERT INTO `group_type` (`id`, `name`, `status`, `created_at`, `updated_at`) VALUES
+(1, 'Thực phẩm', 1, '2020-07-25 05:16:57', '2020-07-25 05:16:57'),
+(2, 'Vật dụng gia đình', 1, '2020-07-25 05:17:16', '2020-07-25 05:17:16');
 
 -- --------------------------------------------------------
 
@@ -169,6 +171,7 @@ INSERT INTO `group_type` (`id`, `name`, `created_at`, `updated_at`) VALUES
 CREATE TABLE `payment` (
   `id` int(10) UNSIGNED NOT NULL,
   `name` varchar(100) COLLATE utf8mb4_vietnamese_ci NOT NULL,
+  `status` int(11) NOT NULL DEFAULT 1,
   `created_at` timestamp NOT NULL DEFAULT current_timestamp(),
   `updated_at` timestamp NOT NULL DEFAULT current_timestamp()
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_vietnamese_ci;
@@ -254,6 +257,7 @@ CREATE TABLE `product_type` (
   `id` int(10) UNSIGNED NOT NULL,
   `name` varchar(100) COLLATE utf8mb4_vietnamese_ci NOT NULL,
   `id_group_type` int(10) UNSIGNED NOT NULL,
+  `status` int(11) NOT NULL DEFAULT 1,
   `created_at` timestamp NOT NULL DEFAULT current_timestamp(),
   `updated_at` timestamp NOT NULL DEFAULT current_timestamp()
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_vietnamese_ci;
@@ -262,34 +266,34 @@ CREATE TABLE `product_type` (
 -- Dumping data for table `product_type`
 --
 
-INSERT INTO `product_type` (`id`, `name`, `id_group_type`, `created_at`, `updated_at`) VALUES
-(1, 'Bánh', 1, '2020-07-25 05:25:57', '2020-07-25 05:25:57'),
-(2, 'Nguyên liệu làm bánh', 1, '2020-07-25 05:27:18', '2020-07-25 05:27:18'),
-(3, 'Cà phê, trà và thức uống khác', 1, '2020-07-25 05:27:56', '2020-07-25 05:27:56'),
-(4, 'Mì, Pasta', 1, '2020-07-25 05:28:37', '2020-07-25 05:28:37'),
-(5, 'Đồ ngọt, socola', 1, '2020-07-25 05:29:33', '2020-07-25 05:29:33'),
-(6, 'Gia vị', 1, '2020-07-25 05:30:26', '2020-07-25 05:30:26'),
-(7, 'Mứt, mật ong', 1, '2020-07-25 05:31:47', '2020-07-25 05:31:47'),
-(8, 'Các loại dưa', 1, '2020-07-25 05:32:05', '2020-07-25 05:32:05'),
-(9, 'Thực phẩm khô', 1, '2020-07-25 05:32:37', '2020-07-25 05:32:37'),
-(10, 'Gạo, bột, các loại đậu', 1, '2020-07-25 05:33:55', '2020-07-25 05:33:55'),
-(11, 'Nước chấm', 1, '2020-07-25 05:35:46', '2020-07-25 05:35:46'),
-(12, 'Thức ăn nhẹ', 1, '2020-07-25 05:36:30', '2020-07-25 05:36:30'),
-(13, 'Dầu ăn, giấm', 1, '2020-07-25 05:37:26', '2020-07-25 05:37:26'),
-(14, 'Các loại thịt và hải sản', 1, '2020-07-25 05:38:54', '2020-07-25 05:38:54'),
-(15, 'Vật dụng nhà bếp', 2, '2020-07-25 05:40:56', '2020-07-25 05:40:56'),
-(16, 'Chất tẩy rửa', 2, '2020-07-25 05:41:31', '2020-07-25 05:41:31'),
-(17, 'Dụng cụ vệ sinh', 2, '2020-07-25 05:42:16', '2020-07-25 05:42:16'),
-(18, 'Túi dựng rác', 2, '2020-07-25 05:43:22', '2020-07-25 05:43:22'),
-(19, 'Vật dụng khử mùi', 2, '2020-07-25 05:45:19', '2020-07-25 05:45:19'),
-(20, 'Phụ kiện vệ sinh', 2, '2020-07-25 05:46:14', '2020-07-25 05:46:14'),
-(21, 'Đồ nhựa', 2, '2020-07-25 05:48:22', '2020-07-25 05:48:22'),
-(23, 'Nước giặt, xả quần áo', 2, '2020-07-25 06:09:33', '2020-07-25 06:09:33'),
-(25, 'Dầu gội, sữa tắm và vật dụng cá nhân khác', 2, '2020-07-25 06:13:57', '2020-07-25 06:13:57'),
-(26, 'Diệt côn trùng', 2, '2020-07-25 06:26:05', '2020-07-25 06:26:05'),
-(27, 'Vật dụng khác...', 2, '2020-07-25 06:29:22', '2020-07-25 06:29:22'),
-(28, 'Các loại hạt', 1, '2020-07-25 06:29:34', '2020-07-25 06:29:34'),
-(29, 'Thực phẩm khác...', 1, '2020-07-25 08:10:38', '2020-07-25 08:10:38');
+INSERT INTO `product_type` (`id`, `name`, `id_group_type`, `status`, `created_at`, `updated_at`) VALUES
+(1, 'Bánh', 1, 1, '2020-07-25 05:25:57', '2020-07-25 05:25:57'),
+(2, 'Nguyên liệu làm bánh', 1, 1, '2020-07-25 05:27:18', '2020-07-25 05:27:18'),
+(3, 'Cà phê, trà và thức uống khác', 1, 1, '2020-07-25 05:27:56', '2020-07-25 05:27:56'),
+(4, 'Mì, Pasta', 1, 1, '2020-07-25 05:28:37', '2020-07-25 05:28:37'),
+(5, 'Đồ ngọt, socola', 1, 1, '2020-07-25 05:29:33', '2020-07-25 05:29:33'),
+(6, 'Gia vị', 1, 1, '2020-07-25 05:30:26', '2020-07-25 05:30:26'),
+(7, 'Mứt, mật ong', 1, 1, '2020-07-25 05:31:47', '2020-07-25 05:31:47'),
+(8, 'Các loại dưa', 1, 1, '2020-07-25 05:32:05', '2020-07-25 05:32:05'),
+(9, 'Thực phẩm khô', 1, 1, '2020-07-25 05:32:37', '2020-07-25 05:32:37'),
+(10, 'Gạo, bột, các loại đậu', 1, 1, '2020-07-25 05:33:55', '2020-07-25 05:33:55'),
+(11, 'Nước chấm', 1, 1, '2020-07-25 05:35:46', '2020-07-25 05:35:46'),
+(12, 'Thức ăn nhẹ', 1, 1, '2020-07-25 05:36:30', '2020-07-25 05:36:30'),
+(13, 'Dầu ăn, giấm', 1, 1, '2020-07-25 05:37:26', '2020-07-25 05:37:26'),
+(14, 'Các loại thịt và hải sản', 1, 1, '2020-07-25 05:38:54', '2020-07-25 05:38:54'),
+(15, 'Vật dụng nhà bếp', 2, 1, '2020-07-25 05:40:56', '2020-07-25 05:40:56'),
+(16, 'Chất tẩy rửa', 2, 1, '2020-07-25 05:41:31', '2020-07-25 05:41:31'),
+(17, 'Dụng cụ vệ sinh', 2, 1, '2020-07-25 05:42:16', '2020-07-25 05:42:16'),
+(18, 'Túi dựng rác', 2, 1, '2020-07-25 05:43:22', '2020-07-25 05:43:22'),
+(19, 'Vật dụng khử mùi', 2, 1, '2020-07-25 05:45:19', '2020-07-25 05:45:19'),
+(20, 'Phụ kiện vệ sinh', 2, 1, '2020-07-25 05:46:14', '2020-07-25 05:46:14'),
+(21, 'Đồ nhựa', 2, 1, '2020-07-25 05:48:22', '2020-07-25 05:48:22'),
+(23, 'Nước giặt, xả quần áo', 2, 1, '2020-07-25 06:09:33', '2020-07-25 06:09:33'),
+(25, 'Dầu gội, sữa tắm và vật dụng cá nhân khác', 2, 1, '2020-07-25 06:13:57', '2020-07-25 06:13:57'),
+(26, 'Diệt côn trùng', 2, 1, '2020-07-25 06:26:05', '2020-07-25 06:26:05'),
+(27, 'Vật dụng khác...', 2, 1, '2020-07-25 06:29:22', '2020-07-25 06:29:22'),
+(28, 'Các loại hạt', 1, 1, '2020-07-25 06:29:34', '2020-07-25 06:29:34'),
+(29, 'Thực phẩm khác...', 1, 1, '2020-07-25 08:10:38', '2020-07-25 08:10:38');
 
 -- --------------------------------------------------------
 
@@ -315,6 +319,7 @@ CREATE TABLE `rating` (
 CREATE TABLE `roles` (
   `id` int(10) UNSIGNED NOT NULL,
   `name` varchar(100) COLLATE utf8mb4_vietnamese_ci NOT NULL,
+  `status` int(11) NOT NULL DEFAULT 1,
   `created_at` timestamp NOT NULL DEFAULT current_timestamp(),
   `updated_at` timestamp NOT NULL DEFAULT current_timestamp()
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_vietnamese_ci;
@@ -323,10 +328,10 @@ CREATE TABLE `roles` (
 -- Dumping data for table `roles`
 --
 
-INSERT INTO `roles` (`id`, `name`, `created_at`, `updated_at`) VALUES
-(1, 'Khách hàng', '2020-08-02 03:49:35', '2020-08-02 03:49:35'),
-(2, 'Nhân viên', '2020-08-02 03:49:52', '2020-08-02 03:49:52'),
-(3, 'Admin', '2020-08-02 03:50:09', '2020-08-02 03:50:09');
+INSERT INTO `roles` (`id`, `name`, `status`, `created_at`, `updated_at`) VALUES
+(1, 'Khách hàng', 0, '2020-08-02 03:49:35', '2020-08-02 03:49:35'),
+(2, 'Nhân viên', 0, '2020-08-02 03:49:52', '2020-08-02 03:49:52'),
+(3, 'Admin', 0, '2020-08-02 03:50:09', '2020-08-02 03:50:09');
 
 -- --------------------------------------------------------
 
@@ -337,6 +342,7 @@ INSERT INTO `roles` (`id`, `name`, `created_at`, `updated_at`) VALUES
 CREATE TABLE `unit` (
   `id` int(10) UNSIGNED NOT NULL,
   `name` varchar(100) COLLATE utf8mb4_vietnamese_ci NOT NULL,
+  `status` int(11) NOT NULL DEFAULT 1,
   `created_at` timestamp NOT NULL DEFAULT current_timestamp(),
   `updated_at` timestamp NOT NULL DEFAULT current_timestamp()
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_vietnamese_ci;
@@ -345,16 +351,16 @@ CREATE TABLE `unit` (
 -- Dumping data for table `unit`
 --
 
-INSERT INTO `unit` (`id`, `name`, `created_at`, `updated_at`) VALUES
-(1, 'Hộp', '2020-07-25 05:55:47', '2020-07-25 05:55:47'),
-(2, 'kg', '2020-07-25 05:57:09', '2020-07-25 05:57:09'),
-(3, 'Bao', '2020-07-25 05:57:28', '2020-07-25 05:57:28'),
-(4, 'Bộ', '2020-07-25 05:57:55', '2020-07-25 05:57:55'),
-(5, 'Gói', '2020-07-25 05:58:59', '2020-07-25 05:58:59'),
-(6, 'Chai', '2020-07-25 06:01:46', '2020-07-25 06:01:46'),
-(7, 'Cây', '2020-07-25 06:20:46', '2020-07-25 06:20:46'),
-(8, 'Cái', '2020-07-25 06:30:58', '2020-07-25 06:30:58'),
-(9, 'Lọ', '2020-07-25 08:00:41', '2020-07-25 08:00:41');
+INSERT INTO `unit` (`id`, `name`, `status`, `created_at`, `updated_at`) VALUES
+(1, 'Hộp', 1, '2020-07-25 05:55:47', '2020-07-25 05:55:47'),
+(2, 'kg', 1, '2020-07-25 05:57:09', '2020-07-25 05:57:09'),
+(3, 'Bao', 1, '2020-07-25 05:57:28', '2020-07-25 05:57:28'),
+(4, 'Bộ', 1, '2020-07-25 05:57:55', '2020-07-25 05:57:55'),
+(5, 'Gói', 1, '2020-07-25 05:58:59', '2020-07-25 05:58:59'),
+(6, 'Chai', 1, '2020-07-25 06:01:46', '2020-07-25 06:01:46'),
+(7, 'Cây', 1, '2020-07-25 06:20:46', '2020-07-25 06:20:46'),
+(8, 'Cái', 1, '2020-07-25 06:30:58', '2020-07-25 06:30:58'),
+(9, 'Lọ', 1, '2020-07-25 08:00:41', '2020-07-25 08:00:41');
 
 -- --------------------------------------------------------
 
@@ -381,8 +387,8 @@ CREATE TABLE `users` (
 --
 
 INSERT INTO `users` (`id`, `name`, `email`, `password`, `id_role`, `status`, `gender`, `login_time`, `logout_time`, `created_at`, `updated_at`) VALUES
-(1, 'nguyentudangkhoa', 'khoakute1997@gmail.com', '$2y$10$rvkDxSkpT.636joJ2c1OTOEgj.T96t2Kpr9Xj5htSopnuz1qtQYYm', 1, 1, 'nam', NULL, NULL, '2020-08-02 05:00:42', '2020-08-02 05:00:42'),
-(2, 'nguyentudangkhoa', 'nguyentudangkhoa@gmail.com', '$2y$10$ETT7p6CsL8xVm6rX7jdXj.aoXGx6HZO7UMfIWjn5TmNrd.tBg9co2', 1, 1, 'nam', NULL, NULL, '2020-08-03 03:32:02', '2020-08-03 03:32:02'),
+(1, 'nguyentudangkhoa', 'khoakute1997@gmail.com', '$2y$10$rvkDxSkpT.636joJ2c1OTOEgj.T96t2Kpr9Xj5htSopnuz1qtQYYm', 1, 1, 'nam', '2020-08-08 12:25:11', '2020-08-08 12:26:06', '2020-08-02 05:00:42', '2020-08-08 05:26:06'),
+(2, 'nguyentudangkhoa', 'nguyentudangkhoa@gmail.com', '$2y$10$ETT7p6CsL8xVm6rX7jdXj.aoXGx6HZO7UMfIWjn5TmNrd.tBg9co2', 1, 1, 'nam', '2020-08-09 10:25:57', '2020-08-09 10:26:06', '2020-08-03 03:32:02', '2020-08-09 03:26:06'),
 (4, 'admin', 'admin@gmail.com', '$2y$10$ixKszR6DnemkVDNFOQPJ0uk7LLL45TPMgCzmXkfsFgAlK3ZSCz6YC', 3, 1, 'nam', NULL, NULL, '2020-08-03 13:33:46', '2020-08-03 13:33:46'),
 (5, 'nguyentudangkhoa', 'nguyentudangkhoa1997@gmail.com', '$2y$10$KkWkcwvc.EvKTMxK0VIPGen9J0mPzyiS/zeKT0ObJHMmvMCxRDtm.', 1, 1, 'nam', NULL, NULL, '2020-08-03 15:38:45', '2020-08-03 15:38:45');
 
