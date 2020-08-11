@@ -27,6 +27,11 @@ Grocery Shoppy an Ecommerce Categoryme|Home
                 <!-- first section (nuts) -->
                 <div class="product-sec1">
                     <h3 class="heading-tittle">Các loại hạt</h3>
+                    @if ($product_nuts->count() == 0)
+                    <div class="col-md-4 product-men">
+                        Không có sản phẩm nào
+                    </div>
+                    @else
                     @foreach($product_nuts as $nut)
                     <div class="col-md-4 product-men">
                         <div class="men-pro-item simpleCart_shelfItem">
@@ -74,6 +79,7 @@ Grocery Shoppy an Ecommerce Categoryme|Home
                         </div>
                     </div>
                     @endforeach
+                    @endif
                     <div class="clearfix"></div>
                 </div>
                 <!-- //first section (nuts) -->
@@ -94,6 +100,11 @@ Grocery Shoppy an Ecommerce Categoryme|Home
                 <!-- third section (oils) -->
                 <div class="product-sec1">
                     <h3 class="heading-tittle">Dầu ăn</h3>
+                    @if ($product_nuts->count() == 0)
+                    <div class="col-md-4 product-men">
+                        Không có sản phẩm nào
+                    </div>
+                    @else
                     @foreach($product_oils as $oil)
                     <div class="col-md-4 product-men">
                         <div class="men-pro-item simpleCart_shelfItem">
@@ -140,12 +151,18 @@ Grocery Shoppy an Ecommerce Categoryme|Home
                         </div>
                     </div>
                     @endforeach
+                    @endif
                     <div class="clearfix"></div>
                 </div>
                 <!-- //third section (oils) -->
                 <!-- fourth section (noodles) -->
                 <div class="product-sec1">
                     <h3 class="heading-tittle">Mì, Pasta</h3>
+                    @if ($product_nuts->count() == 0)
+                    <div class="col-md-4 product-men">
+                        Không có sản phẩm nào
+                    </div>
+                    @else
                     @foreach($product_noodles as $noodle)
                     <div class="col-md-4 product-men">
                         <div class="men-pro-item simpleCart_shelfItem">
@@ -192,6 +209,7 @@ Grocery Shoppy an Ecommerce Categoryme|Home
                         </div>
                     </div>
                     @endforeach
+                    @endif
                     <div class="clearfix"></div>
                 </div>
                 <!-- //fourth section (noodles) -->

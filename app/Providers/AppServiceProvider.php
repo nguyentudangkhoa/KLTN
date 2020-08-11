@@ -25,11 +25,11 @@ class AppServiceProvider extends ServiceProvider
     public function boot()
     {
         view()->composer('component.hf.header',function($view){
-            $option_kitchen = Product_type::where('id_group_type',1)->get();//Kitchen item
+            $option_kitchen = Product_type::where('id_group_type',1)->where('status',1)->get();//Kitchen item
             $view->with('option_kitchen',$option_kitchen);
         });
         view()->composer('component.hf.header',function($view){
-            $option_household = Product_type::where('id_group_type',2)->get();//Household item
+            $option_household = Product_type::where('id_group_type',2)->where('status',1)->get();//Household item
             $view->with('option_household',$option_household);
         });
     }

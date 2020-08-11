@@ -41,7 +41,7 @@ Product
             <div class="wrapper">
                 <!-- first section -->
                 <div class="product-sec1">
-                    @if(count($product_arrays)==0)
+                    @if($product_arrays->count()==0)
                     <h1>Chưa có sản phẩm thuộc loại này </h1>
                     @else
                     @foreach($product_arrays as $product)

@@ -15,8 +15,8 @@ class ProductController extends Controller
     public function Product(Request $req)
     {
         //Show product by product type
-        $type = Product_type::where('name', 'like', '%' . $req->product_type . '%')->first();
-        $group = Group_type::where('id', $type->id_group_type)->first();
+        $type = Product_type::where('name', 'like', '%' . $req->product_type . '%')->where('status',1)->first();
+        $group = Group_type::where('id', $type->id_group_type)->where('status',1)->first();
         $product_arrays = Product::select('product.id', 'product.name', 'product.images', 'product.price', 'discount_info.promotion_price', 'discount_info.end_at', 'discount_info.status', 'product.created_at')
             ->leftJoin('discount_info', 'discount_info.id_product', '=', 'product.id')
             ->where('product.id_type', $type->id)

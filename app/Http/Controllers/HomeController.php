@@ -13,7 +13,7 @@ class HomeController extends Controller
     public function Index()
     {
         // Show nut product to index
-        $nuts_id = Product_type::where('name', 'like', '%hạt%')->first();
+        $nuts_id = Product_type::where('name', 'like', '%hạt%')->where('status',1)->first();
         $product_nuts = Product::select('product.id','product.name','product.images','product.price','discount_info.promotion_price','discount_info.end_at','discount_info.status','product.created_at')
                         ->leftJoin('discount_info','discount_info.id_product','=','product.id')
                         ->where('product.id_type',$nuts_id->id)
@@ -24,7 +24,7 @@ class HomeController extends Controller
                         ->get();
 
         //Show oil product to Index
-        $oils_id = Product_type::where('name', 'like', '%dầu ăn%')->first();
+        $oils_id = Product_type::where('name', 'like', '%dầu ăn%')->where('status',1)->first();
         $product_oils = Product::select('product.id','product.name','product.images','product.price','discount_info.promotion_price','discount_info.end_at','discount_info.status','product.created_at')
                         ->leftJoin('discount_info','discount_info.id_product','=','product.id')
                         ->where('product.id_type',$oils_id->id)
@@ -35,7 +35,7 @@ class HomeController extends Controller
                         ->get();
 
         //Show noodle to index
-        $noodle_id = Product_type::where('name', 'like', '%Mì, Pasta%')->first();
+        $noodle_id = Product_type::where('name', 'like', '%Mì, Pasta%')->where('status',1)->first();
         $product_noodles = Product::select('product.id','product.name','product.images','product.price','discount_info.promotion_price','discount_info.end_at','discount_info.status','product.created_at')
                             ->leftJoin('discount_info','discount_info.id_product','=','product.id')
                             ->where('product.id_type',$noodle_id->id)
