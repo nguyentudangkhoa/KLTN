@@ -32,7 +32,7 @@ Xác nhận thanh toán
         <!-- //tittle heading -->
         <div class="checkout-right">
             <h4>Your shopping cart contains:
-                <span>3 Products</span>
+                <span>{{ $cart->totalQty }} Products</span>
             </h4>
             <div class="table-responsive">
                 <table class="timetable_sub">
@@ -47,85 +47,40 @@ Xác nhận thanh toán
                             <th>Remove</th>
                         </tr>
                     </thead>
-                    <tbody>
+                    <tbody><input type="hidden" name="" value="{{ $i=1 }}">
+                        @foreach($product_cart as $product)
                         <tr class="rem1">
-                            <td class="invert">1</td>
+                            <td class="invert">{{ $i++ }}</td>
                             <td class="invert-image">
                                 <a href="single2.html">
-                                    <img src="assets/images/a7.jpg" alt=" " class="img-responsive">
+                                    <img src="assets/images/{{$product['item']['images']}}" alt=" " class="img-responsive">
                                 </a>
                             </td>
                             <td class="invert">
                                 <div class="quantity">
                                     <div class="quantity-select">
-                                        <div class="entry value-minus">&nbsp;</div>
-                                        <div class="entry value">
-                                            <span>1</span>
+                                        <div class="entry value-minus btn-minus" data-token={{ csrf_token() }} data-id={{  $product['item']['id']  }}>&nbsp;</div>
+                                        <div class="entry value" id="quantity{{ $product['item']['id'] }}">
+                                            <span >{{$product['qty']}}</span>
                                         </div>
-                                        <div class="entry value-plus active">&nbsp;</div>
+                                        <div class="entry value-plus active btn-">&nbsp;</div>
                                     </div>
                                 </div>
                             </td>
-                            <td class="invert">Spotzero Spin Mop</td>
-                            <td class="invert">$888.00</td>
+                            <td class="invert">{{ $product['item']['name'] }}</td>
+                            @if($product['item']['promotion_price'] == null)
+                            <td class="invert">{{ number_format($product['item']['price']) }} VND</td>
+                            @else
+                            <td class="invert">{{ number_format($product['item']['promotion_price']) }} VND</td>
+                            @endif
                             <td class="invert">
                                 <div class="rem">
                                     <div class="close1"> </div>
                                 </div>
                             </td>
                         </tr>
-                        <tr class="rem2">
-                            <td class="invert">2</td>
-                            <td class="invert-image">
-                                <a href="single2.html">
-                                    <img src="assets/images/s6.jpg" alt=" " class="img-responsive">
-                                </a>
-                            </td>
-                            <td class="invert">
-                                <div class="quantity">
-                                    <div class="quantity-select">
-                                        <div class="entry value-minus">&nbsp;</div>
-                                        <div class="entry value">
-                                            <span>1</span>
-                                        </div>
-                                        <div class="entry value-plus active">&nbsp;</div>
-                                    </div>
-                                </div>
-                            </td>
-                            <td class="invert">Fair & Lovely, 80 g</td>
-                            <td class="invert">$121.60</td>
-                            <td class="invert">
-                                <div class="rem">
-                                    <div class="close2"> </div>
-                                </div>
-                            </td>
-                        </tr>
-                        <tr class="rem3">
-                            <td class="invert">3</td>
-                            <td class="invert-image">
-                                <a href="single.html">
-                                    <img src="assets/images/s5.jpg" alt=" " class="img-responsive">
-                                </a>
-                            </td>
-                            <td class="invert">
-                                <div class="quantity">
-                                    <div class="quantity-select">
-                                        <div class="entry value-minus">&nbsp;</div>
-                                        <div class="entry value">
-                                            <span>1</span>
-                                        </div>
-                                        <div class="entry value-plus active">&nbsp;</div>
-                                    </div>
-                                </div>
-                            </td>
-                            <td class="invert">Sprite, 2.25L (Pack of 2)</td>
-                            <td class="invert">$180.00</td>
-                            <td class="invert">
-                                <div class="rem">
-                                    <div class="close3"> </div>
-                                </div>
-                            </td>
-                        </tr>
+                        @endforeach
+
                     </tbody>
                 </table>
             </div>

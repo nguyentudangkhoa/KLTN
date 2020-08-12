@@ -129,5 +129,30 @@ $(document).ready(function() {
         $('#txt_user_cof_pass').css('display', 'none');
         $('#txt_user_cof_gender').css('display', 'none');
         $('#sign-up-status').css('display', 'none');
-    })
+    });
+    $('.btn-minus').click(function() {
+        var id = $(this).data('id');
+        var quantity_text = $('#quantity' + id).text();
+        var quantity = 1;
+        if (parseInt(quantity_text) == 1) {
+            quantity = 1;
+        } else {
+            quantity = parseInt(quantity_text) + 1;
+        }
+
+        $.ajax({
+            url: "minus-cart",
+            method: "POSt",
+            data: {
+                id: id,
+                quantity: quantity,
+                _token: $(this).data('token')
+            },
+            success: function(data) {
+                alert(data.report);
+                $('#lbl_quantity').text('(' + data.quantity + ')');
+                $('#quantity' + id).text(data.produt_quantity);
+            }
+        });
+    });
 });

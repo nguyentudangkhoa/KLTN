@@ -38,3 +38,4 @@ Route::get('sign-up','AccountController@SignUp')->name('sign-up');
 Route::get('log-out','AccountController@Logout')->name('log-out');
 //Cart
 Route::post('add-to-cart','CartController@AddToCart')->name('add-to-cart');
+Route::post('minus-cart','CartController@MinusQuantity')->name('minus-cart');
