@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Aug 11, 2020 at 07:41 AM
+-- Generation Time: Aug 12, 2020 at 10:24 AM
 -- Server version: 10.4.11-MariaDB
 -- PHP Version: 7.4.5
 
@@ -36,6 +36,7 @@ CREATE TABLE `bills` (
   `order_date` datetime NOT NULL,
   `status` int(10) NOT NULL,
   `note` varchar(500) COLLATE utf8mb4_vietnamese_ci DEFAULT NULL,
+  `address` varchar(200) COLLATE utf8mb4_vietnamese_ci NOT NULL,
   `created_at` timestamp NOT NULL DEFAULT current_timestamp(),
   `updated_at` timestamp NOT NULL DEFAULT current_timestamp()
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_vietnamese_ci;
