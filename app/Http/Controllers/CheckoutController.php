@@ -19,7 +19,7 @@ class CheckoutController extends Controller
                 'totalQty' => $cart->totalQty
             ]);
         }else{
-            return view('checkout-payment.checkout');
+            return abort(404);
         }
 
     }

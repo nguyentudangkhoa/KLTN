@@ -12,17 +12,18 @@ Xác nhận thanh toán
                     <a href="index.html">Home</a>
                     <i>|</i>
                 </li>
-                <li>Checkout</li>
+                <li>Giỏ hàng</li>
             </ul>
         </div>
     </div>
 </div>
 <!-- //page -->
 <!-- checkout page -->
+@if(Session::has('cart'))
 <div class="privacy">
     <div class="container">
         <!-- tittle heading -->
-        <h3 class="tittle-w3l">Checkout
+        <h3 class="tittle-w3l">Giỏ hàng
             <span class="heading-style">
                 <i></i>
                 <i></i>
@@ -31,43 +32,45 @@ Xác nhận thanh toán
         </h3>
         <!-- //tittle heading -->
         <div class="checkout-right">
-            <h4>Your shopping cart contains:
-                <span>{{ $cart->totalQty }} Products</span>
+            <h4>Giỏ hàng của bạn đang có:
+                <span><label id="lbl-quantity-info"> {{ $cart->totalQty }} </label> sản phẩm</span>
             </h4>
-            <div class="table-responsive">
+            <div class="table-responsive" id="tb_cart">
                 <table class="timetable_sub">
                     <thead>
                         <tr>
                             <th>SL No.</th>
-                            <th>Product</th>
-                            <th>Quality</th>
-                            <th>Product Name</th>
+                            <th>Sản phẩm</th>
+                            <th>Tên sản phẩm</th>
+                            <th>Số lượng</th>
 
-                            <th>Price</th>
-                            <th>Remove</th>
+                            <th>Đơn giá</th>
+                            <th>Xóa sản phẩm</th>
                         </tr>
                     </thead>
                     <tbody><input type="hidden" name="" value="{{ $i=1 }}">
                         @foreach($product_cart as $product)
-                        <tr class="rem1">
+                        <tr class="rem{{ $product['item']['id'] }}">
                             <td class="invert">{{ $i++ }}</td>
                             <td class="invert-image">
                                 <a href="single2.html">
-                                    <img src="assets/images/{{$product['item']['images']}}" alt=" " class="img-responsive">
+                                    <img src="assets/images/{{$product['item']['images']}}" alt=" "
+                                        class="img-responsive">
                                 </a>
                             </td>
+                            <td class="invert">{{ $product['item']['name'] }}</td>
                             <td class="invert">
                                 <div class="quantity">
                                     <div class="quantity-select">
-                                        <div class="entry value-minus btn-minus" data-token={{ csrf_token() }} data-id={{  $product['item']['id']  }}>&nbsp;</div>
+                                        <div class="entry value-minus btn-minus" data-token="{{ csrf_token() }}"
+                                            data-id={{  $product['item']['id']  }}>&nbsp;</div>
                                         <div class="entry value" id="quantity{{ $product['item']['id'] }}">
-                                            <span >{{$product['qty']}}</span>
+                                            <span>{{$product['qty']}}</span>
                                         </div>
                                         <div class="entry value-plus active btn-">&nbsp;</div>
                                     </div>
                                 </div>
                             </td>
-                            <td class="invert">{{ $product['item']['name'] }}</td>
                             @if($product['item']['promotion_price'] == null)
                             <td class="invert">{{ number_format($product['item']['price']) }} VND</td>
                             @else
@@ -75,7 +78,8 @@ Xác nhận thanh toán
                             @endif
                             <td class="invert">
                                 <div class="rem">
-                                    <div class="close1"> </div>
+                                    <div class="close1" data-toggle="modal" data-target="#confirm-cart-delete"
+                                      data-name="{{ $product['item']['name'] }}"   data-id="{{ $product['item']['id'] }}"> </div>
                                 </div>
                             </td>
                         </tr>
@@ -85,7 +89,7 @@ Xác nhận thanh toán
                 </table>
             </div>
         </div>
-        <div class="checkout-left">
+        <div class="checkout-left" id="cart_bottom">
             <div class="address_form_agile">
                 <h4>Add a new Details</h4>
                 <form action="payment.html" method="post" class="creditly-card-form agileinfo_form">
@@ -137,4 +141,22 @@ Xác nhận thanh toán
     </div>
 </div>
 <!-- //checkout page -->
-@endsection
+@else
+<div class="privacy">
+    <div class="container">
+        <!-- tittle heading -->
+        <h3 class="tittle-w3l">Giỏ hàng
+            <span class="heading-style">
+                <i></i>
+                <i></i>
+                <i></i>
+            </span>
+        </h3>
+        <div class="checkout-right">
+            <h4>Giỏ hàng của bạn đang có:
+                <span><label id="lbl-quantity-info"> 0 </label> sản phẩm</span>
+            </h4>
+        </div>
+    </div>
+    @endif
+    @endsection

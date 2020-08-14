@@ -31,6 +31,8 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
     <!--pop-up-box-->
     <link href="assets/css/popuo-box.css" rel="stylesheet" type="text/css" media="all" />
     <!--//pop-up-box-->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/jquery-confirm/3.3.2/jquery-confirm.min.css">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-confirm/3.3.2/jquery-confirm.min.js"></script>
     <!-- price range -->
     <link rel="stylesheet" type="text/css" href="assets/css/jquery-ui1.css">
     <!-- flexslider -->
@@ -114,19 +116,19 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
                 <div class="top_nav_right">
                     <div class="wthreecartaits wthreecartaits2 cart cart box_1" style="text-align: center;">
                         <form action="{{ route('check-out') }}" action="get">
-                            <button class="w3view-cart" id="btn-cart-shopping" title=" Bạn hiện đang có @if(Session::has('cart'))
+                            <button class="w3view-cart btn-cart" id="btn-cart-shopping" title=" Bạn hiện đang có @if(Session::has('cart'))
                         {{Session('cart')->totalQty}}
                         @endif sản phẩm trong giỏ hàng" value="@if(Session::has('cart'))
                         {{Session('cart')->totalQty}}
                         @endif"><i class="fa fa-cart-arrow-down" aria-hidden="true"></i>
-                        </button>
-                        @if(Session::has('cart'))
-                        <label id="lbl_quantity">
-                            ({{Session('cart')->totalQty}})
-                        </label>
-                        @endif
-                        <label id="lbl_quantity">
-                        </label>
+                            </button>
+                            @if(Session::has('cart'))
+                            <label id="lbl_quantity">
+                                ({{Session('cart')->totalQty}})
+                            </label>
+                            @endif
+                            <label id="lbl_quantity">
+                            </label>
                         </form>
 
                     </div>
@@ -161,6 +163,10 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
     <!-- signup Model -->
     @include('component.account.signup')
     <!-- //signup Model -->
+    <!--alert cart model-->
+    @include('component.cart.add-to-cart-model')
+    @include('component.cart.confirm-cart')
+    <!--//alert cart model-->
     <!-- //header-bot -->
     <!-- navigation -->
     @include('component.hf.header')

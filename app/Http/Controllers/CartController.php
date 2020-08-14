@@ -32,14 +32,30 @@ class CartController extends Controller
         } else {
             $oldCart = Session::get('cart');
 
-            if($oldCart->items[$id]['item']['promotion_price'] == null){
+            if ($oldCart->items[$id]['item']['promotion_price'] == null) {
                 $oldCart->totalPrice -= $oldCart->items[$id]['item']['price'];
-            }else{
+            } else {
                 $oldCart->totalPrice -= $oldCart->items[$id]['item']['promotion_price'];
             }
             $oldCart->totalQty -= 1;
-            $oldCart->items[$id]['qty']-=1;
-            return response()->json(['report' => 'Giảm số lượng thành công','produt_quantity'=>$oldCart->items[$id]['qty'],'quantity' => Session('cart')->totalQty]);
+            $oldCart->items[$id]['qty'] -= 1;
+            return response()->json(['produt_quantity' => $oldCart->items[$id]['qty'], 'quantity' => Session('cart')->totalQty]);
         }
+    }
+    //Delete shopping cart
+    public function DeleteCart(Request $req)
+    {
+        $oldCart = Session::has('cart') ? Session::get('cart') : null; //Check Session
+        $cart = new Cart($oldCart);
+        $product = Product::find($req->id);
+        $cart->removeItem($req->id);
+        if (count($cart->items) > 0) {
+            Session::put('cart', $cart);
+            return response()->json(['report' => "xóa $product->name trong giỏ hàng thành công", 'quantity' => Session::get('cart') ? Session::get('cart')->totalQty : 0 ]);
+        } else {
+            Session::forget('cart');
+            return response()->json(['route'=>route('index')]);
+        }
+
     }
 }

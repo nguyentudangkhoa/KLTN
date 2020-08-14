@@ -39,3 +39,4 @@ Route::get('log-out','AccountController@Logout')->name('log-out');
 //Cart
 Route::post('add-to-cart','CartController@AddToCart')->name('add-to-cart');
 Route::post('minus-cart','CartController@MinusQuantity')->name('minus-cart');
+Route::post('delete-cart','CartController@DeleteCart')->name('delete-cart');
