@@ -133,7 +133,7 @@ Grocery Shoppy an Ecommerce Categoryme|Home
                                         VND</span>
                                     <del id="discount{{ $oil->id }}">{{ number_format($oil->price) }}</del>
                                     @else
-                                    <span class="item_price" id="price{{ $oil->id }}">{{ number_format($nut->price) }}
+                                    <span class="item_price" id="price{{ $oil->id }}">{{ number_format($oil->price) }}
                                         VND</span>
                                     <del id="discount{{ $oil->id }}"></del>
                                     @endif

@@ -3,6 +3,10 @@ $(document).ready(function(c) {
         $('#id_cart_item').val($(this).data('id'));
         $('#name-cart-item').text($(this).data('name'));
     });
+    //number format
+    function formatNumber(num) {
+        return num.toString().replace(/(\d)(?=(\d{3})+(?!\d))/g, "$1,")
+    }
     $('#confirm_cart_btn').click(function() {
         var id = $('#id_cart_item').val();
         $.ajax({
@@ -17,6 +21,7 @@ $(document).ready(function(c) {
                     $('.rem' + id).fadeOut('slow', function(c) {
                         $('.rem' + id).remove();
                     });
+                    $('#total_price').text(formatNumber(data.total_price) + ' VND');
                     $('#confirm-cart-delete').modal('hide');
                     $('#lbl_quantity').text('(' + data.quantity + ')');
                     $('#lbl-quantity-info').text(data.quantity);

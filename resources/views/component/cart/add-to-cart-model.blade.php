@@ -4,6 +4,9 @@
         <!-- Modal content-->
         <div class="modal-content" style="text-align: center">
             <div class="modal-body modal-body-sub_agile">
+                <div class="main-mailposi">
+                    <span class="fa fa-envelope-o" aria-hidden="true"></span>
+                </div>
                 <div class="modal_body_left modal_body_left1">
                     <h3 class="agileinfo_sign">Thông báo </h3>
                     <p id="name_cart_product"></p>

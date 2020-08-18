@@ -12,18 +12,19 @@ class CartController extends Controller
 {
     public function AddToCart(Request $req)
     {
-        $product = Product::select('product.id', 'product.name', 'product.images', 'product.price', 'discount_info.promotion_price', 'discount_info.end_at', 'discount_info.status', 'product.created_at')
+        $product = Product::select('product.id', 'product.name', 'product.images', 'product.price','discount_info.promotion_price', 'discount_info.end_at', 'discount_info.status', 'product.created_at', 'product.id_unit')
             ->leftJoin('discount_info', 'discount_info.id_product', '=', 'product.id')
             ->where('product.id', $req->id)
             ->orderBy('discount_info.end_at', 'DESC')
             ->first(); //Find product by id
+
         $oldCart = Session('cart') ? Session::get('cart') : null; // Check Session
         $cart = new Cart($oldCart); //Add sesion to model Cart
         $cart->add($product, $req->id);
         $req->session()->put('cart', $cart);
-        // dd(Session::get('cart'));
         return response()->json(['report' => "Đã thêm $product->name vào giỏ hàng thành công", 'quantity' => Session('cart')->totalQty]);
     }
+    //Minus quantity
     public function MinusQuantity(Request $req)
     {
         $id = $req->id;
@@ -33,14 +34,49 @@ class CartController extends Controller
             $oldCart = Session::get('cart');
 
             if ($oldCart->items[$id]['item']['promotion_price'] == null) {
+                $oldCart->items[$id]['price'] -= $oldCart->items[$id]['item']['price'];
+                $oldCart->totalPrice -= $oldCart->items[$id]['item']['price'];
+            } else if ($oldCart->items[$id]['item']['promotion_price'] > 0 && strtotime($oldCart->items[$id]['item']['end_at']) < strtotime(date("Y-m-d"))) {
+                $oldCart->items[$id]['price'] -= $oldCart->items[$id]['item']['price'];
                 $oldCart->totalPrice -= $oldCart->items[$id]['item']['price'];
             } else {
+                $oldCart->items[$id]['price'] -= $oldCart->items[$id]['item']['promotion_price'];
                 $oldCart->totalPrice -= $oldCart->items[$id]['item']['promotion_price'];
             }
             $oldCart->totalQty -= 1;
             $oldCart->items[$id]['qty'] -= 1;
-            return response()->json(['produt_quantity' => $oldCart->items[$id]['qty'], 'quantity' => Session('cart')->totalQty]);
+            return response()->json([
+                'produt_quantity' => $oldCart->items[$id]['qty'],
+                'price_product_all' => $oldCart->items[$id]['price'],
+                'quantity' => Session('cart')->totalQty ? Session('cart')->totalQty : 1,
+                'total_price' => $oldCart->totalPrice
+            ]);
         }
+    }
+    //Add more quantity
+    public function PlusQuantity(Request $req)
+    {
+        $id = $req->id;
+        $oldCart = Session::get('cart');
+
+        if ($oldCart->items[$id]['item']['promotion_price'] == null) {
+            $oldCart->items[$id]['price'] += $oldCart->items[$id]['item']['price'];
+            $oldCart->totalPrice += $oldCart->items[$id]['item']['price'];
+        } else if ($oldCart->items[$id]['item']['promotion_price'] > 0 && strtotime($oldCart->items[$id]['item']['end_at']) < strtotime(date("Y-m-d"))) {
+            $oldCart->items[$id]['price'] += $oldCart->items[$id]['item']['price'];
+            $oldCart->totalPrice += $oldCart->items[$id]['item']['price'];
+        } else {
+            $oldCart->items[$id]['price'] += $oldCart->items[$id]['item']['promotion_price'];
+            $oldCart->totalPrice += $oldCart->items[$id]['item']['promotion_price'];
+        }
+        $oldCart->totalQty += 1;
+        $oldCart->items[$id]['qty'] += 1;
+        return response()->json([
+            'produt_quantity' => $oldCart->items[$id]['qty'],
+            'price_product_all' => $oldCart->items[$id]['price'],
+            'quantity' => Session('cart')->totalQty ? Session('cart')->totalQty : 1,
+            'total_price' => $oldCart->totalPrice
+        ]);
     }
     //Delete shopping cart
     public function DeleteCart(Request $req)
@@ -51,11 +87,14 @@ class CartController extends Controller
         $cart->removeItem($req->id);
         if (count($cart->items) > 0) {
             Session::put('cart', $cart);
-            return response()->json(['report' => "xóa $product->name trong giỏ hàng thành công", 'quantity' => Session::get('cart') ? Session::get('cart')->totalQty : 0 ]);
+            return response()->json([
+                'report' => "xóa $product->name trong giỏ hàng thành công",
+                'quantity' => Session::get('cart') ? Session::get('cart')->totalQty : 0,
+                'total_price' => ($oldCart->totalPrice - $oldCart->items[$req->id]['price'])
+            ]);
         } else {
             Session::forget('cart');
-            return response()->json(['route'=>route('index')]);
+            return response()->json(['route' => route('index')]);
         }
-
     }
 }

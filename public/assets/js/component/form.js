@@ -22,8 +22,9 @@ $(document).ready(function() {
                 $('#add-to-cart-confirm').modal('show');
                 setTimeout(() => {
                     $('#add-to-cart-confirm').modal('hide');
-                }, 700);
+                }, 1000);
                 $('#lbl_quantity').text('(' + data.quantity + ')');
+                $('#btn-cart-shopping').prop('title', 'Bạn hiện đang có ' + data.quantity + ' sản phẩm trong giỏ hàng')
             }
         });
     });
@@ -140,6 +141,10 @@ $(document).ready(function() {
         $('#txt_user_cof_gender').css('display', 'none');
         $('#sign-up-status').css('display', 'none');
     });
+    //number format
+    function formatNumber(num) {
+        return num.toString().replace(/(\d)(?=(\d{3})+(?!\d))/g, "$1,")
+    }
     // Minus item in shopping cart
     $('.btn-minus').click(function() {
         var id = $(this).data('id');
@@ -163,14 +168,19 @@ $(document).ready(function() {
                     $('#lbl_quantity').text('(' + data.quantity + ')');
                     $('#quantity' + id).text(data.produt_quantity);
                     $('#lbl-quantity-info').text(data.quantity);
+                    $('#btn-cart-shopping').prop('title', 'Bạn hiện đang có ' + data.quantity + ' sản phẩm trong giỏ hàng')
                 } else {
                     $('#lbl_quantity').text('(' + data.quantity + ')');
                     $('#quantity' + id).text(data.produt_quantity);
                     $('#lbl-quantity-info').text(data.quantity);
+                    $('#price_product_all_' + id).text(formatNumber(data.price_product_all) + ' VND');
+                    $('#total_price').text(formatNumber(data.total_price) + ' VND');
+                    $('#btn-cart-shopping').prop('title', 'Bạn hiện đang có ' + data.quantity + ' sản phẩm trong giỏ hàng')
                 }
             }
         });
     });
+    //Cart button
     $('.btn-cart').click(function(e) {
         var cart = $('#lbl_quantity').text();
         if (cart == 0) {
@@ -181,5 +191,29 @@ $(document).ready(function() {
                 $('#add-to-cart-confirm').modal('hide');
             }, 2000);
         }
+    });
+    //add more quantity
+    $('.btn-plus').click(function() {
+        var id = $(this).data('id');
+        var quantity_text = $('#quantity' + id).text();
+        var quantity = parseInt(quantity_text);
+        $.ajax({
+            url: "plus-cart",
+            method: "POSt",
+            data: {
+                id: id,
+                quantity: quantity,
+                _token: $(this).data('token')
+            },
+            success: function(data) {
+                $('#lbl_quantity').text('(' + data.quantity + ')');
+                $('#quantity' + id).text(data.produt_quantity);
+                $('#lbl-quantity-info').text(data.quantity);
+                $('#price_product_all_' + id).text(formatNumber(data.price_product_all) + ' VND');
+                $('#total_price').text(formatNumber(data.total_price) + ' VND');
+                $('#btn-cart-shopping').prop('title', 'Bạn hiện đang có ' + data.quantity + ' sản phẩm trong giỏ hàng')
+
+            }
+        });
     });
 });

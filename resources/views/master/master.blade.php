@@ -126,9 +126,11 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
                             <label id="lbl_quantity">
                                 ({{Session('cart')->totalQty}})
                             </label>
-                            @endif
+                            @else
                             <label id="lbl_quantity">
                             </label>
+                            @endif
+
                         </form>
 
                     </div>

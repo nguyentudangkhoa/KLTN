@@ -45,6 +45,7 @@ Xác nhận thanh toán
                             <th>Số lượng</th>
 
                             <th>Đơn giá</th>
+                            <th>Thành tiền</th>
                             <th>Xóa sản phẩm</th>
                         </tr>
                     </thead>
@@ -67,24 +68,34 @@ Xác nhận thanh toán
                                         <div class="entry value" id="quantity{{ $product['item']['id'] }}">
                                             <span>{{$product['qty']}}</span>
                                         </div>
-                                        <div class="entry value-plus active btn-">&nbsp;</div>
+                                        <div class="entry value-plus active btn-plus" data-token="{{ csrf_token() }}"
+                                            data-id={{  $product['item']['id']  }}>&nbsp;</div>
                                     </div>
+                                    @if($product['item']['id_unit']==2)
+                                    <p>x 100G </p>
+                                    @endif
                                 </div>
                             </td>
-                            @if($product['item']['promotion_price'] == null)
-                            <td class="invert">{{ number_format($product['item']['price']) }} VND</td>
-                            @else
+                            @if($product['item']['promotion_price'] != null && strtotime($product['item']['end_at']) >
+                            strtotime(date("Y-m-d")))
                             <td class="invert">{{ number_format($product['item']['promotion_price']) }} VND</td>
+
+                            @else
+                            <td class="invert">{{ number_format($product['item']['price'])}} VND </td>
                             @endif
+                            <td class="invert">
+                                <p id="price_product_all_{{  $product['item']['id']  }}">{{ number_format($product['price']) }} VND</p>
+                            </td>
                             <td class="invert">
                                 <div class="rem">
                                     <div class="close1" data-toggle="modal" data-target="#confirm-cart-delete"
-                                      data-name="{{ $product['item']['name'] }}"   data-id="{{ $product['item']['id'] }}"> </div>
+                                        data-name="{{ $product['item']['name'] }}"
+                                        data-id="{{ $product['item']['id'] }}"> </div>
                                 </div>
                             </td>
                         </tr>
                         @endforeach
-
+                        <td class="invert" colspan="7" style="text-align: right; border:none"><strong>Tổng tiền: </strong><label style="font-weight:normal" id="total_price">{{ number_format($cart->totalPrice) }} VND</label></td>
                     </tbody>
                 </table>
             </div>

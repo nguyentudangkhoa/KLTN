@@ -19,8 +19,9 @@ class Cart
 	public function add($item, $id){
 		if($item->promotion_price == 0){
 			$cart = ['qty'=>0, 'price' => $item->price, 'item' => $item];
-		}
-		else{
+		}else if($item->promotion_price > 0 && strtotime($item->end_at) < strtotime(date("Y-m-d"))){
+            $cart = ['qty'=>0, 'price' => $item->price, 'item' => $item];
+        }else{
 			$cart = ['qty'=>0, 'price' => $item->promotion_price, 'item' => $item];
 		}
 		if($this->items){
@@ -31,16 +32,18 @@ class Cart
 		$cart['qty']++;
 		if($item->promotion_price == 0){
 			$cart['price'] = $item->price * $cart['qty'];
-		}
-		else{
+		}else if($item->promotion_price > 0 && strtotime($item->end_at) < strtotime(date("Y-m-d"))){
+            $cart['price'] = $item->price * $cart['qty'];
+        }else{
 			$cart['price'] = $item->promotion_price * $cart['qty'];
 		}
 		$this->items[$id] = $cart;
 		$this->totalQty++;
 		if($item->promotion_price == 0){
 			$this->totalPrice += $item->price;
-		}
-		else{
+		}else if($item->promotion_price > 0 && strtotime($item->end_at) < strtotime(date("Y-m-d"))){
+            $this->totalPrice += $item->price;
+        }else{
 			$this->totalPrice += $item->promotion_price;
 		}
 
