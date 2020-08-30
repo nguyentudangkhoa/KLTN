@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Aug 12, 2020 at 10:24 AM
+-- Generation Time: Aug 30, 2020 at 05:02 AM
 -- Server version: 10.4.11-MariaDB
 -- PHP Version: 7.4.5
 
@@ -36,7 +36,6 @@ CREATE TABLE `bills` (
   `order_date` datetime NOT NULL,
   `status` int(10) NOT NULL,
   `note` varchar(500) COLLATE utf8mb4_vietnamese_ci DEFAULT NULL,
-  `address` varchar(200) COLLATE utf8mb4_vietnamese_ci NOT NULL,
   `created_at` timestamp NOT NULL DEFAULT current_timestamp(),
   `updated_at` timestamp NOT NULL DEFAULT current_timestamp()
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_vietnamese_ci;
@@ -48,7 +47,6 @@ CREATE TABLE `bills` (
 --
 
 CREATE TABLE `bill_detail` (
-  `id` int(10) UNSIGNED NOT NULL,
   `id_bill` int(10) UNSIGNED NOT NULL,
   `id_product` int(10) UNSIGNED NOT NULL,
   `price` int(11) NOT NULL,
@@ -134,7 +132,7 @@ CREATE TABLE `discount_info` (
 --
 
 INSERT INTO `discount_info` (`id`, `promotion_price`, `begin_at`, `end_at`, `id_product`, `status`, `created_at`, `updated_at`) VALUES
-(1, 10000, '2020-07-26', '2020-08-09', 39, 1, '2020-07-26 07:16:09', '2020-07-26 07:16:09'),
+(1, 10000, '2020-07-26', '2020-08-12', 39, 1, '2020-07-26 07:16:09', '2020-07-26 07:16:09'),
 (2, 35000, '2020-07-26', '2020-08-07', 23, 1, '2020-07-26 07:17:01', '2020-07-26 07:17:01'),
 (3, 10000, '2020-07-26', '2020-08-09', 24, 1, '2020-07-26 07:17:48', '2020-07-26 07:17:48'),
 (4, 15000, '2020-07-26', '2020-08-14', 45, 1, '2020-07-26 07:18:23', '2020-07-26 15:51:56'),
@@ -354,7 +352,7 @@ CREATE TABLE `unit` (
 
 INSERT INTO `unit` (`id`, `name`, `status`, `created_at`, `updated_at`) VALUES
 (1, 'Hộp', 1, '2020-07-25 05:55:47', '2020-07-25 05:55:47'),
-(2, 'kg', 1, '2020-07-25 05:57:09', '2020-07-25 05:57:09'),
+(2, 'G', 1, '2020-07-25 05:57:09', '2020-07-25 05:57:09'),
 (3, 'Bao', 1, '2020-07-25 05:57:28', '2020-07-25 05:57:28'),
 (4, 'Bộ', 1, '2020-07-25 05:57:55', '2020-07-25 05:57:55'),
 (5, 'Gói', 1, '2020-07-25 05:58:59', '2020-07-25 05:58:59'),
@@ -377,8 +375,10 @@ CREATE TABLE `users` (
   `id_role` int(10) UNSIGNED DEFAULT 1,
   `status` int(11) NOT NULL DEFAULT 1,
   `gender` varchar(10) COLLATE utf8mb4_vietnamese_ci NOT NULL,
+  `phone` varchar(11) COLLATE utf8mb4_vietnamese_ci DEFAULT NULL,
   `login_time` datetime DEFAULT NULL,
   `logout_time` datetime DEFAULT NULL,
+  `remember_token` varchar(100) COLLATE utf8mb4_vietnamese_ci DEFAULT NULL,
   `created_at` timestamp NOT NULL DEFAULT current_timestamp(),
   `updated_at` timestamp NOT NULL DEFAULT current_timestamp()
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_vietnamese_ci;
@@ -387,22 +387,22 @@ CREATE TABLE `users` (
 -- Dumping data for table `users`
 --
 
-INSERT INTO `users` (`id`, `name`, `email`, `password`, `id_role`, `status`, `gender`, `login_time`, `logout_time`, `created_at`, `updated_at`) VALUES
-(1, 'nguyentudangkhoa', 'khoakute1997@gmail.com', '$2y$10$rvkDxSkpT.636joJ2c1OTOEgj.T96t2Kpr9Xj5htSopnuz1qtQYYm', 1, 1, 'nam', '2020-08-08 12:25:11', '2020-08-08 12:26:06', '2020-08-02 05:00:42', '2020-08-08 05:26:06'),
-(2, 'nguyentudangkhoa', 'nguyentudangkhoa@gmail.com', '$2y$10$ETT7p6CsL8xVm6rX7jdXj.aoXGx6HZO7UMfIWjn5TmNrd.tBg9co2', 1, 1, 'nam', '2020-08-09 10:25:57', '2020-08-09 10:26:06', '2020-08-03 03:32:02', '2020-08-09 03:26:06'),
-(4, 'admin', 'admin@gmail.com', '$2y$10$ixKszR6DnemkVDNFOQPJ0uk7LLL45TPMgCzmXkfsFgAlK3ZSCz6YC', 3, 1, 'nam', NULL, NULL, '2020-08-03 13:33:46', '2020-08-03 13:33:46'),
-(5, 'nguyentudangkhoa', 'nguyentudangkhoa1997@gmail.com', '$2y$10$KkWkcwvc.EvKTMxK0VIPGen9J0mPzyiS/zeKT0ObJHMmvMCxRDtm.', 1, 1, 'nam', NULL, NULL, '2020-08-03 15:38:45', '2020-08-03 15:38:45');
+INSERT INTO `users` (`id`, `name`, `email`, `password`, `id_role`, `status`, `gender`, `phone`, `login_time`, `logout_time`, `remember_token`, `created_at`, `updated_at`) VALUES
+(1, 'nguyentudangkhoa', 'nv_nguyentudangkhoa@gmail.com', '$2y$10$rvkDxSkpT.636joJ2c1OTOEgj.T96t2Kpr9Xj5htSopnuz1qtQYYm', 2, 1, 'nam', NULL, '2020-08-08 12:25:11', '2020-08-08 12:26:06', NULL, '2020-08-02 05:00:42', '2020-08-08 05:26:06'),
+(2, 'nguyentudangkhoa', 'nguyentudangkhoa@gmail.com', '$2y$10$ETT7p6CsL8xVm6rX7jdXj.aoXGx6HZO7UMfIWjn5TmNrd.tBg9co2', 1, 1, 'nam', '0389643555', '2020-08-27 20:29:57', '2020-08-27 20:31:16', 'ZKWHXW7s2JSSv9JLhU88bOq5ZzgHn8X2Duq2oxRkV9YGzNokZ3hMmneBcA71', '2020-08-03 03:32:02', '2020-08-27 13:31:16'),
+(4, 'admin', 'admin@gmail.com', '$2y$10$ixKszR6DnemkVDNFOQPJ0uk7LLL45TPMgCzmXkfsFgAlK3ZSCz6YC', 3, 1, 'nam', NULL, NULL, NULL, NULL, '2020-08-03 13:33:46', '2020-08-03 13:33:46'),
+(5, 'nguyentudangkhoa', 'nguyentudangkhoa1997@gmail.com', '$2y$10$KkWkcwvc.EvKTMxK0VIPGen9J0mPzyiS/zeKT0ObJHMmvMCxRDtm.', 1, 1, 'nam', '0389643555', NULL, NULL, NULL, '2020-08-03 15:38:45', '2020-08-03 15:38:45'),
+(9, 'nguyentudangkhoa', 'khoakute1997@gmail.com', '$2y$10$KYUy4uCO79QN7MatZHe6G.jTTLiRVJF/UGraLKdlUAvKbt8fBshTq', 1, 1, 'nam', '0389643555', '2020-08-27 20:31:23', '2020-08-19 14:17:30', NULL, '2020-08-19 06:19:05', '2020-08-27 13:31:23');
 
 -- --------------------------------------------------------
 
 --
--- Table structure for table `user_details`
+-- Table structure for table `user_address`
 --
 
-CREATE TABLE `user_details` (
+CREATE TABLE `user_address` (
   `id` int(10) UNSIGNED NOT NULL,
   `address` varchar(300) COLLATE utf8mb4_vietnamese_ci DEFAULT NULL,
-  `phone_number` varchar(12) COLLATE utf8mb4_vietnamese_ci DEFAULT NULL,
   `id_user` int(10) UNSIGNED DEFAULT NULL,
   `created_at` timestamp NOT NULL DEFAULT current_timestamp(),
   `updated_at` timestamp NOT NULL DEFAULT current_timestamp()
@@ -425,7 +425,6 @@ ALTER TABLE `bills`
 -- Indexes for table `bill_detail`
 --
 ALTER TABLE `bill_detail`
-  ADD PRIMARY KEY (`id`),
   ADD KEY `FK_Bill_detail_Bills` (`id_bill`),
   ADD KEY `FK_Bill_details_Product` (`id_product`);
 
@@ -512,21 +511,15 @@ ALTER TABLE `users`
   ADD KEY `Fk_Users_Roles` (`id_role`);
 
 --
--- Indexes for table `user_details`
+-- Indexes for table `user_address`
 --
-ALTER TABLE `user_details`
+ALTER TABLE `user_address`
   ADD PRIMARY KEY (`id`),
-  ADD KEY `FK_User_details_User` (`id_user`);
+  ADD KEY `FK_User_address_User` (`id_user`);
 
 --
 -- AUTO_INCREMENT for dumped tables
 --
-
---
--- AUTO_INCREMENT for table `bill_detail`
---
-ALTER TABLE `bill_detail`
-  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT;
 
 --
 -- AUTO_INCREMENT for table `comments`
@@ -598,12 +591,12 @@ ALTER TABLE `unit`
 -- AUTO_INCREMENT for table `users`
 --
 ALTER TABLE `users`
-  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=9;
+  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=10;
 
 --
--- AUTO_INCREMENT for table `user_details`
+-- AUTO_INCREMENT for table `user_address`
 --
-ALTER TABLE `user_details`
+ALTER TABLE `user_address`
   MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT;
 
 --
@@ -671,10 +664,10 @@ ALTER TABLE `users`
   ADD CONSTRAINT `Fk_Users_Roles` FOREIGN KEY (`id_role`) REFERENCES `roles` (`id`);
 
 --
--- Constraints for table `user_details`
+-- Constraints for table `user_address`
 --
-ALTER TABLE `user_details`
-  ADD CONSTRAINT `FK_User_details_User` FOREIGN KEY (`id_user`) REFERENCES `users` (`id`);
+ALTER TABLE `user_address`
+  ADD CONSTRAINT `FK_User_address_User` FOREIGN KEY (`id_user`) REFERENCES `users` (`id`);
 COMMIT;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
