@@ -4,10 +4,10 @@ namespace App;
 
 use Illuminate\Database\Eloquent\Model;
 
-class User_detail extends Model
+class User_address extends Model
 {
-    protected $table = "user_details";
-    public $fillable = ['address','phone_number','id_user'];
+    protected $table = "user_address";
+    public $fillable = ['address','id_user'];
     public function Users(){
         return $this->belongsTo("App\Users","id_user","id");
     }

@@ -36,6 +36,11 @@
                             <p id="txt_user_cof_pass" style="display:none; color:#FF3333"></p>
                         </div>
                         <div class="styled-input">
+                            <input type="text" placeholder="Số điện thoại" name="phone_number" id="phone_number"
+                                required="">
+                            <p id="txt_user_phone" style="display:none; color:#FF3333"></p>
+                        </div>
+                        <div class="styled-input">
                             <select class="form-control" name="gender" id="inputGrandudateYear">
                                 <option selected disabled> Chọn giới tính</option>
                                 <option value="nam">nam</option>

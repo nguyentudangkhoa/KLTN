@@ -28,6 +28,10 @@
                                 required="">
                             <p id="txt_user_password" style="display:none; color:#FF3333"></p>
                         </div>
+                        <div class="styled-input">
+                            <input type="checkbox" name="remember" id="remember"> Ghi nhớ đăng nhập
+                        </div>
+
                         <input type="submit" value="Sign In">
                     </form>
                     <div class="clearfix"></div>

@@ -49,6 +49,7 @@ $(document).ready(function() {
                 data: {
                     email: email,
                     password: password,
+                    remember: formData.get('remember'),
                     _token: _token
                 },
                 success: function(data) {
@@ -75,6 +76,7 @@ $(document).ready(function() {
         var email = formData.get('user_email'); //email
         var password = formData.get('user_password'); //password
         var conf_pass = formData.get('conf_pass');
+        var phone = formData.get('phone_number');
         var _token = $('input[name="_token"]').val();
         if (name == "") {
             $('#txt_user_name_up').css('display', 'block');
@@ -100,6 +102,15 @@ $(document).ready(function() {
         } else if (formData.get('gender') == null) {
             $('#txt_user_cof_gender').css('display', 'block');
             $('#txt_user_cof_gender').text('Xin vui lòng chọn giới tính');
+        } else if (formData.get('phone_number') == null) {
+            $('#txt_user_phone').css('display', 'block');
+            $('#txt_user_phone').text('Xin vui nhập số diện thoại');
+        } else if (formData.get('phone_number').length < 10 || formData.get('phone_number').length > 10) {
+            $('#txt_user_phone').css('display', 'block');
+            $('#txt_user_phone').text('Số điện thoại phải dúng 10 số');
+        } else if (isNaN(formData.get('phone_number'))) {
+            $('#txt_user_phone').css('display', 'block');
+            $('#txt_user_phone').text('Số điện thoại không được chứa các ký tự không phải là số');
         } else {
             $('#sign-up-status').css('display', 'block');
             $('#img-loading-sign-up').css('display', 'block');
@@ -112,6 +123,7 @@ $(document).ready(function() {
                     email: email,
                     password: password,
                     gender: formData.get('gender'),
+                    phone: formData.get('phone_number'),
                     _token: _token
                 },
                 success: function(data) {
@@ -148,37 +160,46 @@ $(document).ready(function() {
     // Minus item in shopping cart
     $('.btn-minus').click(function() {
         var id = $(this).data('id');
-        var quantity_text = $('#quantity' + id).text();
+        var quantity_text = $('#quantity' + id).val();
         var quantity = parseInt(quantity_text);
-        $.ajax({
-            url: "minus-cart",
-            method: "POSt",
-            data: {
-                id: id,
-                quantity: quantity,
-                _token: $(this).data('token')
-            },
-            success: function(data) {
-                if (data.report) {
-                    $('#name_cart_product').text(data.report);
-                    $('#add-to-cart-confirm').modal('show');
-                    setTimeout(() => {
-                        $('#add-to-cart-confirm').modal('hide');
-                    }, 700);
-                    $('#lbl_quantity').text('(' + data.quantity + ')');
-                    $('#quantity' + id).text(data.produt_quantity);
-                    $('#lbl-quantity-info').text(data.quantity);
-                    $('#btn-cart-shopping').prop('title', 'Bạn hiện đang có ' + data.quantity + ' sản phẩm trong giỏ hàng')
-                } else {
-                    $('#lbl_quantity').text('(' + data.quantity + ')');
-                    $('#quantity' + id).text(data.produt_quantity);
-                    $('#lbl-quantity-info').text(data.quantity);
-                    $('#price_product_all_' + id).text(formatNumber(data.price_product_all) + ' VND');
-                    $('#total_price').text(formatNumber(data.total_price) + ' VND');
-                    $('#btn-cart-shopping').prop('title', 'Bạn hiện đang có ' + data.quantity + ' sản phẩm trong giỏ hàng')
+        if (quantity_text == 1) {
+            $('#name_cart_product').text("Không thể giảm số luợng xuống thêm");
+            $('#add-to-cart-confirm').modal('show');
+            setTimeout(() => {
+                $('#add-to-cart-confirm').modal('hide');
+            }, 700);
+        } else {
+            $.ajax({
+                url: "minus-cart",
+                method: "POSt",
+                data: {
+                    id: id,
+                    quantity: quantity,
+                    _token: $(this).data('token')
+                },
+                success: function(data) {
+                    if (data.report && parseInt(quantity_text) <= 1) {
+                        $('#name_cart_product').text(data.report);
+                        $('#add-to-cart-confirm').modal('show');
+                        setTimeout(() => {
+                            $('#add-to-cart-confirm').modal('hide');
+                        }, 700);
+                        $('#quantity' + id).val(1);
+                        $('#lbl_quantity').text('(' + data.quantity + ')');
+                        $('#lbl-quantity-info').text(data.quantity);
+                        $('#btn-cart-shopping').prop('title', 'Bạn hiện đang có ' + data.quantity + ' sản phẩm trong giỏ hàng');
+                    } else {
+                        $('#lbl_quantity').text('(' + data.quantity + ')');
+                        $('#quantity' + id).val(data.produt_quantity);
+                        $('#lbl-quantity-info').text(data.quantity);
+                        $('#price_product_all_' + id).text(formatNumber(data.price_product_all) + ' VND');
+                        $('#total_price').text(formatNumber(data.total_price) + ' VND');
+                        $('#btn-cart-shopping').prop('title', 'Bạn hiện đang có ' + data.quantity + ' sản phẩm trong giỏ hàng')
+                    }
                 }
-            }
-        });
+            });
+        }
+
     });
     //Cart button
     $('.btn-cart').click(function(e) {
@@ -195,7 +216,7 @@ $(document).ready(function() {
     //add more quantity
     $('.btn-plus').click(function() {
         var id = $(this).data('id');
-        var quantity_text = $('#quantity' + id).text();
+        var quantity_text = $('#quantity' + id).val();
         var quantity = parseInt(quantity_text);
         $.ajax({
             url: "plus-cart",
@@ -207,7 +228,7 @@ $(document).ready(function() {
             },
             success: function(data) {
                 $('#lbl_quantity').text('(' + data.quantity + ')');
-                $('#quantity' + id).text(data.produt_quantity);
+                $('#quantity' + id).val(data.produt_quantity);
                 $('#lbl-quantity-info').text(data.quantity);
                 $('#price_product_all_' + id).text(formatNumber(data.price_product_all) + ' VND');
                 $('#total_price').text(formatNumber(data.total_price) + ' VND');

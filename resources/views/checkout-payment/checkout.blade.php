@@ -65,14 +65,17 @@ Xác nhận thanh toán
                                     <div class="quantity-select">
                                         <div class="entry value-minus btn-minus" data-token="{{ csrf_token() }}"
                                             data-id={{  $product['item']['id']  }}>&nbsp;</div>
-                                        <div class="entry value" id="quantity{{ $product['item']['id'] }}">
+                                        <input type="text" name="" class="entry value" id="quantity{{ $product['item']['id'] }}" value="{{$product['qty']}}">
+                                        {{--  <div class="entry value" id="quantity{{ $product['item']['id'] }}">
                                             <span>{{$product['qty']}}</span>
-                                        </div>
+                                        </div>  --}}
                                         <div class="entry value-plus active btn-plus" data-token="{{ csrf_token() }}"
                                             data-id={{  $product['item']['id']  }}>&nbsp;</div>
                                     </div>
                                     @if($product['item']['id_unit']==2)
                                     <p>x 100G </p>
+                                    @else
+                                    <p>x {{ $product['item']->Unit->name }}</p>
                                     @endif
                                 </div>
                             </td>
@@ -102,7 +105,47 @@ Xác nhận thanh toán
         </div>
         <div class="checkout-left" id="cart_bottom">
             <div class="address_form_agile">
-                <h4>Add a new Details</h4>
+                <h4>Nhập thông tin địa chỉ giao hàng</h4>
+                @if (Auth::check())
+                <form action="payment.html" method="post" class="creditly-card-form agileinfo_form">
+                    <div class="creditly-wrapper wthree, w3_agileits_wrapper">
+                        <div class="information-wrapper">
+                            <div class="first-row">
+                                <div class="controls">
+                                    <input class="billing-address-name" type="text" name="name" placeholder="Full Name"
+                                      value="{{ Auth::user()->name }}" disabled  required="">
+                                </div>
+                                <div class="w3_agileits_card_number_grids">
+                                    <div class="w3_agileits_card_number_grid_left">
+                                        <div class="controls">
+                                            <input type="text" placeholder="Mobile Number" name="number" value="{{ Auth::user()->phone }}"  required="">
+                                        </div>
+                                    </div>
+                                    <div class="w3_agileits_card_number_grid_right">
+                                        <div class="controls">
+                                            <input type="text" placeholder="Số nhà, tên đường" name="landmark" required="">
+                                        </div>
+                                    </div>
+                                    <div class="clear"> </div>
+                                </div>
+                                <div class="controls">
+                                    <input type="text" placeholder="Thành phố" name="city" required="">
+                                </div>
+                                <div class="controls">
+                                    <select class="option-w3ls">
+                                        <option>Select Address type</option>
+                                        <option>Office</option>
+                                        <option>Home</option>
+                                        <option>Commercial</option>
+
+                                    </select>
+                                </div>
+                            </div>
+                            <button class="submit check_out">Delivery to this Address</button>
+                        </div>
+                    </div>
+                </form>
+                @else
                 <form action="payment.html" method="post" class="creditly-card-form agileinfo_form">
                     <div class="creditly-wrapper wthree, w3_agileits_wrapper">
                         <div class="information-wrapper">
@@ -141,6 +184,8 @@ Xác nhận thanh toán
                         </div>
                     </div>
                 </form>
+                @endif
+
                 <div class="checkout-right-basket">
                     <a href="payment.html">Make a Payment
                         <span class="fa fa-hand-o-right" aria-hidden="true"></span>

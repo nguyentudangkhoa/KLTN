@@ -22,7 +22,7 @@ class MailSend extends Controller
             $details = [
                 'title' => 'Xác nhận tài khoản đăng ký',
                 'body' => 'Click vào link để hoàn thành đăng ký',
-                'link' => route('sign-up','name='.$req->name.'&email='.$req->email.'&password='.Hash::make($req->password).'&gender='.$req->gender),
+                'link' => route('sign-up','name='.$req->name.'&email='.$req->email.'&password='.Hash::make($req->password).'&gender='.$req->gender.'&phone='.$req->phone),
                 'layout'=>'mail.sign-up-mail'
             ];
 

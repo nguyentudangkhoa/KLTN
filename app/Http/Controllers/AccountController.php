@@ -22,7 +22,7 @@ class AccountController extends Controller
         }else if(strlen($req->password) <= 6){
             return response()->json(['report'=>"Password phải trên 6 ký tự"]);
         }else{
-            if (Auth::attempt($credentials)) { //Check Existing user
+            if (Auth::attempt($credentials,$req->remember)) { //Check Existing user
                 $user = User::where('email',$req->email)->first();
                 $user->login_time = date("Y-m-d H:i:s");//current time log in
                 $user->save();
@@ -34,7 +34,11 @@ class AccountController extends Controller
     }
     //Sign Up function
     public function SignUp(Request $req){
-        User::create(['name'=>$req->name,'email'=>$req->email,'password'=>$req->password,'gender'=>$req->gender]);
+        User::create(['name'=>$req->name,
+                      'email'=>$req->email,
+                      'password'=>$req->password,
+                      'gender'=>$req->gender,
+                      'phone'=>$req->phone]);
         $details = [
             'title' => 'Cảm ơn đã đăng ký thành viên tại Grocery shop',
             'name'=>$req->name,
