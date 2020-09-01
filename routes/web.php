@@ -41,3 +41,4 @@ Route::post('add-to-cart','CartController@AddToCart')->name('add-to-cart');
 Route::post('minus-cart','CartController@MinusQuantity')->name('minus-cart');
 Route::post('delete-cart','CartController@DeleteCart')->name('delete-cart');
 Route::post('plus-cart','CartController@PlusQuantity')->name('plus-cart');
+Route::post('change-quantity','CartController@ChangeQuantity')->name('change-quantity');

@@ -65,7 +65,7 @@ Xác nhận thanh toán
                                     <div class="quantity-select">
                                         <div class="entry value-minus btn-minus" data-token="{{ csrf_token() }}"
                                             data-id={{  $product['item']['id']  }}>&nbsp;</div>
-                                        <input type="text" name="" class="entry value" id="quantity{{ $product['item']['id'] }}" value="{{$product['qty']}}">
+                                        <input type="text" name="" class="entry value txt_quantity" id="quantity{{ $product['item']['id'] }}" data-id="{{ $product['item']['id'] }}" data-token="{{ csrf_token() }}" value="{{$product['qty']}}">
                                         {{--  <div class="entry value" id="quantity{{ $product['item']['id'] }}">
                                             <span>{{$product['qty']}}</span>
                                         </div>  --}}

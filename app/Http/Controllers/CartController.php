@@ -78,6 +78,40 @@ class CartController extends Controller
             'total_price' => $oldCart->totalPrice
         ]);
     }
+    //Change quantity
+    public function ChangeQuantity(Request $req){
+        if($req->id){
+            $total_price = 0;
+            $total_quan = 0;
+            $oldCart = Session::get('cart');
+            $id = $req->id;
+            if($req->quantity > 0 || $req->quantity != null){
+                $quantity = $req->quantity;
+            }else if($req->quantity == null) {
+                $quantity = 1;
+            }else{
+                $quantity = 1;
+            }
+            $oldCart->items[$id]['qty'] = $quantity;
+            if($oldCart->items[$id]['item']['promotion_price'] == null){
+                $oldCart->items[$id]['price'] = $oldCart->items[$id]['qty'] * $oldCart->items[$id]['item']['price'];
+            }else{
+                $oldCart->items[$id]['price'] = $oldCart->items[$id]['qty'] * $oldCart->items[$id]['item']['promotion_price'];
+            }
+            foreach($oldCart->items as $key => $value){
+                $total_price += $value['price'];
+                $total_quan += $value['qty'];
+            }
+            $oldCart->totalPrice = $total_price;
+            $oldCart->totalQty =$total_quan;
+            return response()->json([
+                'produt_quantity' => $oldCart->items[$id]['qty'],
+                'price_product_all' => $oldCart->items[$id]['price'],
+                'quantity' => Session('cart')->totalQty ? Session('cart')->totalQty : 1,
+                'total_price' => $oldCart->totalPrice
+            ]);
+        }
+    }
     //Delete shopping cart
     public function DeleteCart(Request $req)
     {

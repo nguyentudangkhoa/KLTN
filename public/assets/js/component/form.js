@@ -237,4 +237,37 @@ $(document).ready(function() {
             }
         });
     });
+    $('.txt_quantity').click(function() {
+        $(this).select();
+    });
+    $('.txt_quantity').keyup(function() {
+        var quantity = $(this).val();
+        var id = $(this).data("id");
+        if (quantity <= 0) {
+            $('#name_cart_product').text("Số lượng sản phẩm bạn nhập phải lớn hơn 0 hoặc đang trống bạn vui lòng bôi đen hoặc click vào ô số lượng của sản phẩm muốn thay đổi");
+            $('#add-to-cart-confirm').modal('show');
+            $('#quantity' + id).val(1);
+            setTimeout(() => {
+                $('#add-to-cart-confirm').modal('hide');
+            }, 2000);
+        } else {
+            $.ajax({
+                url: "change-quantity",
+                method: "POSt",
+                data: {
+                    id: id,
+                    quantity: quantity,
+                    _token: $(this).data('token')
+                },
+                success: function(data) {
+                    $('#lbl_quantity').text('(' + data.quantity + ')');
+                    $('#quantity' + id).val(data.produt_quantity);
+                    $('#lbl-quantity-info').text(data.quantity);
+                    $('#price_product_all_' + id).text(formatNumber(data.price_product_all) + ' VND');
+                    $('#total_price').text(formatNumber(data.total_price) + ' VND');
+                    $('#btn-cart-shopping').prop('title', 'Bạn hiện đang có ' + data.quantity + ' sản phẩm trong giỏ hàng');
+                }
+            });
+        }
+    });
 });
