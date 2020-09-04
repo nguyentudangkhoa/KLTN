@@ -11,9 +11,9 @@
                     <span class="fa fa-envelope-o" aria-hidden="true"></span>
                 </div>
                 <div class="modal_body_left modal_body_left1">
-                    <h3 class="agileinfo_sign">Sign Up</h3>
+                    <h3 class="agileinfo_sign">Đăng ký</h3>
                     <p>
-                        Come join the Grocery Shoppy! Let's set up your Account.
+                        Tham gia vào gia đình Grocery Store cùng chúng tôi
                     </p>
                     <form id="form_signup">
                         <div class="styled-input agile-styled-input-top">
@@ -49,12 +49,12 @@
                             </select>
                             <p id="txt_user_cof_gender" style="display:none; color:#FF3333"></p>
                         </div>
-                        <input type="submit" value="Sign Up"><img src="assets/images/giphy.gif" id="img-loading-sign-up"
+                        <input type="submit" value="Đăng ký"><img src="assets/images/giphy.gif" id="img-loading-sign-up"
                             style="height:100px;width:100px;display:none" alt="">
                         <p id="sign-up-status" style="display: none; color:#FF3333"></p>
                     </form>
                     <p>
-                        <a href="#">By clicking register, I agree to your terms</a>
+                        <a href="#">Khi click vào đăng ký đồng nghĩa bạn đã chấp nhân chính sách của chúng tôi</a>
                     </p>
                 </div>
             </div>

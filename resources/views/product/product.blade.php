@@ -81,7 +81,7 @@ Product
                                     class="snipcart-details top_brand_home_details item_add single-item hvr-outline-out">
                                     <form data-id="{{ $product->id }}" class="submit_form_product">
                                         @csrf
-                                        <input type="submit" name="submit" value="Add to cart"
+                                        <input type="submit" name="submit" value="Thêm vào giỏ hàng"
                                             class="btn_product_cart button" />
                                     </form>
                                 </div>
@@ -101,6 +101,9 @@ Product
 </div>
 <!-- //top products -->
 <!-- special offers -->
+@foreach($product_discounts as $discount)
+@if($discount->promotion_price > 0 && $discount->status == 1 && strtotime($discount->end_at) >
+strtotime(date("Y-m-d")))
 <div class="featured-section" id="projects">
     <div class="container">
         <!-- tittle heading -->
@@ -114,9 +117,7 @@ Product
         <!-- //tittle heading -->
         <div class="content-bottom-in">
             <ul id="flexiselDemo1">
-                @foreach($product_discounts as $discount)
-                @if($discount->promotion_price > 0 && $discount->status == 1 && strtotime($discount->end_at) >
-                strtotime(date("Y-m-d")))
+
                 <li>
                     <div class="w3l-specilamk">
                         <div class="speioffer-agile">
@@ -139,11 +140,12 @@ Product
                         </div>
                     </div>
                 </li>
-                @endif
-                @endforeach
+
             </ul>
         </div>
     </div>
 </div>
+@endif
+@endforeach
 <!-- //special offers -->
 @endsection

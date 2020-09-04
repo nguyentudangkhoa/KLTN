@@ -112,34 +112,26 @@ Xác nhận thanh toán
                         <div class="information-wrapper">
                             <div class="first-row">
                                 <div class="controls">
-                                    <input class="billing-address-name" type="text" name="name" placeholder="Full Name"
+                                    <input class="billing-address-name" type="text" name="name" placeholder="Họ và tên"
                                       value="{{ Auth::user()->name }}" disabled  required="">
                                 </div>
                                 <div class="w3_agileits_card_number_grids">
                                     <div class="w3_agileits_card_number_grid_left">
                                         <div class="controls">
-                                            <input type="text" placeholder="Mobile Number" name="number" value="{{ Auth::user()->phone }}"  required="">
+                                            <input type="text" placeholder="Số điện thoại" name="number" value="{{ Auth::user()->phone }}"  required="">
                                         </div>
+                                    </div>
+                                    <div class="controls">
+                                        <input type="text" placeholder="Email" name="city" value="{{ Auth::user()->email }}">
                                     </div>
                                     <div class="w3_agileits_card_number_grid_right">
                                         <div class="controls">
-                                            <input type="text" placeholder="Số nhà, tên đường" name="landmark" required="">
+                                            <input type="text" placeholder="Số nhà, tên đường, tỉnh/thành phố" name="landmark" required="">
                                         </div>
                                     </div>
                                     <div class="clear"> </div>
                                 </div>
-                                <div class="controls">
-                                    <input type="text" placeholder="Thành phố" name="city" required="">
-                                </div>
-                                <div class="controls">
-                                    <select class="option-w3ls">
-                                        <option>Select Address type</option>
-                                        <option>Office</option>
-                                        <option>Home</option>
-                                        <option>Commercial</option>
 
-                                    </select>
-                                </div>
                             </div>
                             <button class="submit check_out">Delivery to this Address</button>
                         </div>
@@ -151,43 +143,35 @@ Xác nhận thanh toán
                         <div class="information-wrapper">
                             <div class="first-row">
                                 <div class="controls">
-                                    <input class="billing-address-name" type="text" name="name" placeholder="Full Name"
+                                    <input class="billing-address-name" type="text" name="name" placeholder="Họ và tên"
                                         required="">
+                                </div>
+                                <div class="controls">
+                                    <input type="text" placeholder="Email" name="city">
                                 </div>
                                 <div class="w3_agileits_card_number_grids">
                                     <div class="w3_agileits_card_number_grid_left">
                                         <div class="controls">
-                                            <input type="text" placeholder="Mobile Number" name="number" required="">
+                                            <input type="text" placeholder="Số điện thoại" name="number" required="">
                                         </div>
                                     </div>
                                     <div class="w3_agileits_card_number_grid_right">
                                         <div class="controls">
-                                            <input type="text" placeholder="Landmark" name="landmark" required="">
+                                            <input type="text" placeholder="Số nhà, tên đường, tỉnh/thành phố" name="landmark" required="">
                                         </div>
                                     </div>
                                     <div class="clear"> </div>
                                 </div>
-                                <div class="controls">
-                                    <input type="text" placeholder="Town/City" name="city" required="">
-                                </div>
-                                <div class="controls">
-                                    <select class="option-w3ls">
-                                        <option>Select Address type</option>
-                                        <option>Office</option>
-                                        <option>Home</option>
-                                        <option>Commercial</option>
 
-                                    </select>
-                                </div>
                             </div>
-                            <button class="submit check_out">Delivery to this Address</button>
+                            <button class="submit check_out">Giao hàng đến địa chỉ này</button>
                         </div>
                     </div>
                 </form>
                 @endif
 
                 <div class="checkout-right-basket">
-                    <a href="payment.html">Make a Payment
+                    <a href="payment.html">Thanh toán online
                         <span class="fa fa-hand-o-right" aria-hidden="true"></span>
                     </a>
                 </div>

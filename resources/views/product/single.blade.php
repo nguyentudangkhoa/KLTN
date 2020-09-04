@@ -153,7 +153,7 @@ Single
                 <div class="snipcart-details top_brand_home_details item_add single-item hvr-outline-out">
                     <form data-id="{{ $product->id }}" class="submit_form_product">
                         @csrf
-                        <input type="submit" name="submit" value="Add to cart" class="button" />
+                        <input type="submit" name="submit" value="Thêm vào giỏ hàng" class="button" />
                     </form>
                 </div>
 

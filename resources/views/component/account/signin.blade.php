@@ -11,11 +11,16 @@
                     <span class="fa fa-envelope-o" aria-hidden="true"></span>
                 </div>
                 <div class="modal_body_left modal_body_left1">
-                    <h3 class="agileinfo_sign">Sign In </h3>
+                    <h3 class="agileinfo_sign">Đăng nhập</h3>
                     <p>
-                        Sign In now, Let's start your Grocery Shopping. Don't have an account?
+                        Đăng ký nhanh để nhận ưu đãi nếu bạn chưa là thành viên của chúng tôi
                         <a href="#" data-toggle="modal" data-target="#myModal2">
-                            Sign Up Now</a>
+                            Đăng ký ngay</a>
+                    </p>
+                    <p>
+                        Nếu bạn quên tài khoản xin vui lòng click vào
+                        <a href="#" data-toggle="modal" data-target="#myModal2">
+                            Tìm mật khẩu</a>
                     </p>
                     <form id="form_sigin">
                         @csrf
