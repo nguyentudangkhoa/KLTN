@@ -44,8 +44,8 @@ class User extends Authenticatable
     {
         return $this->hasMany("App\User_address", "id_user", "id");
     }
-    public function Bill()
+    public function Customer()
     {
-        $this->hasMany("App\Bills", "id_user", "id");
+        return $this->hasMany("App\Customer", "id_user", "id");
     }
 }

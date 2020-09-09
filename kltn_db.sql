@@ -3,9 +3,9 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Aug 30, 2020 at 05:02 AM
--- Server version: 10.4.11-MariaDB
--- PHP Version: 7.4.5
+-- Generation Time: Sep 08, 2020 at 05:53 PM
+-- Server version: 10.4.14-MariaDB
+-- PHP Version: 7.4.9
 
 SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
 START TRANSACTION;
@@ -29,7 +29,6 @@ SET time_zone = "+00:00";
 
 CREATE TABLE `bills` (
   `id` int(10) UNSIGNED NOT NULL,
-  `id_user` int(10) UNSIGNED DEFAULT NULL,
   `id_customer` int(10) UNSIGNED DEFAULT NULL,
   `id_payment` int(10) UNSIGNED NOT NULL,
   `total` int(11) DEFAULT NULL,
@@ -84,6 +83,7 @@ CREATE TABLE `customer` (
   `gender` varchar(20) COLLATE utf8mb4_vietnamese_ci DEFAULT NULL,
   `address` varchar(200) COLLATE utf8mb4_vietnamese_ci NOT NULL,
   `phone_number` varchar(11) COLLATE utf8mb4_vietnamese_ci NOT NULL,
+  `id_user` int(10) UNSIGNED DEFAULT NULL,
   `created_at` timestamp NOT NULL DEFAULT current_timestamp(),
   `updated_at` timestamp NOT NULL DEFAULT current_timestamp()
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_vietnamese_ci;
@@ -389,7 +389,7 @@ CREATE TABLE `users` (
 
 INSERT INTO `users` (`id`, `name`, `email`, `password`, `id_role`, `status`, `gender`, `phone`, `login_time`, `logout_time`, `remember_token`, `created_at`, `updated_at`) VALUES
 (1, 'nguyentudangkhoa', 'nv_nguyentudangkhoa@gmail.com', '$2y$10$rvkDxSkpT.636joJ2c1OTOEgj.T96t2Kpr9Xj5htSopnuz1qtQYYm', 2, 1, 'nam', NULL, '2020-08-08 12:25:11', '2020-08-08 12:26:06', NULL, '2020-08-02 05:00:42', '2020-08-08 05:26:06'),
-(2, 'nguyentudangkhoa', 'nguyentudangkhoa@gmail.com', '$2y$10$ETT7p6CsL8xVm6rX7jdXj.aoXGx6HZO7UMfIWjn5TmNrd.tBg9co2', 1, 1, 'nam', '0389643555', '2020-08-27 20:29:57', '2020-08-27 20:31:16', 'ZKWHXW7s2JSSv9JLhU88bOq5ZzgHn8X2Duq2oxRkV9YGzNokZ3hMmneBcA71', '2020-08-03 03:32:02', '2020-08-27 13:31:16'),
+(2, 'nguyentudangkhoa', 'nguyentudangkhoa@gmail.com', '$2y$10$ETT7p6CsL8xVm6rX7jdXj.aoXGx6HZO7UMfIWjn5TmNrd.tBg9co2', 1, 1, 'nam', '0389643555', '2020-09-08 21:38:11', '2020-08-27 20:31:16', 'ZKWHXW7s2JSSv9JLhU88bOq5ZzgHn8X2Duq2oxRkV9YGzNokZ3hMmneBcA71', '2020-08-03 03:32:02', '2020-09-08 14:38:11'),
 (4, 'admin', 'admin@gmail.com', '$2y$10$ixKszR6DnemkVDNFOQPJ0uk7LLL45TPMgCzmXkfsFgAlK3ZSCz6YC', 3, 1, 'nam', NULL, NULL, NULL, NULL, '2020-08-03 13:33:46', '2020-08-03 13:33:46'),
 (5, 'nguyentudangkhoa', 'nguyentudangkhoa1997@gmail.com', '$2y$10$KkWkcwvc.EvKTMxK0VIPGen9J0mPzyiS/zeKT0ObJHMmvMCxRDtm.', 1, 1, 'nam', '0389643555', NULL, NULL, NULL, '2020-08-03 15:38:45', '2020-08-03 15:38:45'),
 (9, 'nguyentudangkhoa', 'khoakute1997@gmail.com', '$2y$10$KYUy4uCO79QN7MatZHe6G.jTTLiRVJF/UGraLKdlUAvKbt8fBshTq', 1, 1, 'nam', '0389643555', '2020-08-27 20:31:23', '2020-08-19 14:17:30', NULL, '2020-08-19 06:19:05', '2020-08-27 13:31:23');
@@ -409,6 +409,13 @@ CREATE TABLE `user_address` (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_vietnamese_ci;
 
 --
+-- Dumping data for table `user_address`
+--
+
+INSERT INTO `user_address` (`id`, `address`, `id_user`, `created_at`, `updated_at`) VALUES
+(1, '75 Võ Hữu, Phan Thiết, Bình Thuận', 2, '2020-09-08 07:27:36', '2020-09-08 07:27:36');
+
+--
 -- Indexes for dumped tables
 --
 
@@ -417,7 +424,6 @@ CREATE TABLE `user_address` (
 --
 ALTER TABLE `bills`
   ADD PRIMARY KEY (`id`),
-  ADD KEY `Fk_Bill_User` (`id_user`),
   ADD KEY `FK_Bill_payment` (`id_payment`),
   ADD KEY `FK_Bill_Customer` (`id_customer`);
 
@@ -440,7 +446,8 @@ ALTER TABLE `comments`
 -- Indexes for table `customer`
 --
 ALTER TABLE `customer`
-  ADD PRIMARY KEY (`id`);
+  ADD PRIMARY KEY (`id`),
+  ADD KEY `FK_Customer_User` (`id_user`);
 
 --
 -- Indexes for table `description_images`
@@ -597,7 +604,7 @@ ALTER TABLE `users`
 -- AUTO_INCREMENT for table `user_address`
 --
 ALTER TABLE `user_address`
-  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT;
+  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
 
 --
 -- Constraints for dumped tables
@@ -608,8 +615,7 @@ ALTER TABLE `user_address`
 --
 ALTER TABLE `bills`
   ADD CONSTRAINT `FK_Bill_Customer` FOREIGN KEY (`id_customer`) REFERENCES `customer` (`id`),
-  ADD CONSTRAINT `FK_Bill_payment` FOREIGN KEY (`id_payment`) REFERENCES `payment` (`id`),
-  ADD CONSTRAINT `Fk_Bill_User` FOREIGN KEY (`id_user`) REFERENCES `users` (`id`);
+  ADD CONSTRAINT `FK_Bill_payment` FOREIGN KEY (`id_payment`) REFERENCES `payment` (`id`);
 
 --
 -- Constraints for table `bill_detail`
@@ -624,6 +630,12 @@ ALTER TABLE `bill_detail`
 ALTER TABLE `comments`
   ADD CONSTRAINT `FK_Comment_Product` FOREIGN KEY (`id_product`) REFERENCES `product` (`id`),
   ADD CONSTRAINT `FK_Comment_User` FOREIGN KEY (`id_user`) REFERENCES `users` (`id`);
+
+--
+-- Constraints for table `customer`
+--
+ALTER TABLE `customer`
+  ADD CONSTRAINT `FK_Customer_User` FOREIGN KEY (`id_user`) REFERENCES `users` (`id`);
 
 --
 -- Constraints for table `description_images`

@@ -173,6 +173,12 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
     <!-- navigation -->
     @include('component.hf.header')
     <!-- //navigation -->
+    @if (Auth::check())
+    <!--modal city-->
+    @include('component.city.city')
+    <!--//modal city-->
+    @endif
+
     <!-- banner -->
     <div id="myCarousel" class="carousel slide" data-ride="carousel">
         <!-- Indicators-->

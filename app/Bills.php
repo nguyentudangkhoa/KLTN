@@ -14,9 +14,6 @@ class Bills extends Model
     public function Payment(){
         return $this->belongsTo("App\Payment","id_payment","id");
     }
-    public function User(){
-        $this->belongsTo("App\User","id_user","id");
-    }
     public function Customer(){
         $this->belongsTo("App\Customer","id_customer","id");
     }

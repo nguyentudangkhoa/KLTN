@@ -270,4 +270,8 @@ $(document).ready(function() {
             });
         }
     });
+    $('#city_obtion').on('change', function() {
+        $('#city_input').val($(this).val());
+        $('#modal_city').modal('hide');
+    });
 });
