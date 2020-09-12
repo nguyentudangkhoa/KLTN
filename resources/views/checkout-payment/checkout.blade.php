@@ -107,7 +107,7 @@ Xác nhận thanh toán
             <div class="address_form_agile">
                 <h4>Nhập thông tin địa chỉ giao hàng</h4>
                 @if (Auth::check())
-                <form action="payment.html" method="post" class="creditly-card-form agileinfo_form">
+                <form id="Checkout_form_submit" class="creditly-card-form agileinfo_form">
                     <div class="creditly-wrapper wthree, w3_agileits_wrapper">
                         <div class="information-wrapper">
                             <div class="first-row">
@@ -131,14 +131,20 @@ Xác nhận thanh toán
                                     </div>
                                     <div class="w3_agileits_card_number_grid_right">
                                         <div class="controls">
-                                            <button class="btn btn-primary" data-toggle="modal" data-target="#modal_city">Chọn địa chỉ sẵn có</button>
+
+                                            @if(count(Auth::user()->User_Address ) == 0)
+                                            <button class="submit check_out" id="btn-none-delivery">Chọn địa chỉ sẵn có</button>
+                                            @else
+                                            <button class="submit check_out" data-toggle="modal" data-target="#modal_city">Chọn địa chỉ sẵn có</button>
+                                            @endif
                                         </div>
                                     </div>
                                     <div class="clear"> </div>
                                 </div>
 
                             </div>
-                            <button class="submit check_out">Giao hàng đến địa chỉ này</button>
+                            <button type="submit" class="submit check_out" id="btn-delivery">Giao hàng đến địa chỉ này</button>
+                            
                         </div>
                     </div>
                 </form>
@@ -148,7 +154,7 @@ Xác nhận thanh toán
                     </a>
                 </div>
                 @else
-                <form action="payment.html" method="post" class="creditly-card-form agileinfo_form">
+                <form id="Checkout_form_submit" class="creditly-card-form agileinfo_form">
                     <div class="creditly-wrapper wthree, w3_agileits_wrapper">
                         <div class="information-wrapper">
                             <div class="first-row">
@@ -167,8 +173,7 @@ Xác nhận thanh toán
                                     </div>
                                     <div class="w3_agileits_card_number_grid_right">
                                         <div class="controls">
-                                            <input type="text" placeholder="Số nhà, tên đường, tỉnh/thành phố" name="landmark" required="">
-
+                                            <input type="text" placeholder="Số nhà, tên đường, tỉnh/thành phố" id="city_input" name="landmark" required="">
                                         </div>
                                         <div class="controls">
 
@@ -178,7 +183,7 @@ Xác nhận thanh toán
                                 </div>
 
                             </div>
-                            <button class="submit check_out">Giao hàng đến địa chỉ này</button>
+                            <button class="submit check_out" id="btn-delivery">Giao hàng đến địa chỉ này</button>
                         </div>
                     </div>
                 </form>

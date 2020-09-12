@@ -274,4 +274,15 @@ $(document).ready(function() {
         $('#city_input').val($(this).val());
         $('#modal_city').modal('hide');
     });
+    $('#Checkout_form_submit').submit(function(e) {
+        e.preventDefault();
+        alert('hello');
+    });
+    $('#btn-none-delivery').on('click', function() {
+        $('#name_cart_product').text("Bạn Chưa có sẳn địa chỉ trong thông tin cá nhân vui lòng nhập địa chỉ của bạn trong thông tin giao hàng");
+        $('#add-to-cart-confirm').modal('show');
+        setTimeout(() => {
+            $('#add-to-cart-confirm').modal('hide');
+        }, 2000);
+    })
 });

@@ -13,8 +13,8 @@
                 <div class="modal_body_left modal_body_left1">
                     <h3 class="agileinfo_sign">Chọn thành phố của bạn</h3>
                     <select name="city_obtion" id="city_obtion">
+                        <option value="" disabled selected>Chọn địa chỉ của bạn</option>
                         @foreach (Auth::user()->User_Address as $user)
-                            <option value="" disabled selected>Chọn địa chỉ của bạn</option>
                             <option value="{{ $user->address }}">{{ $user->address }}</option>
                         @endforeach
 
