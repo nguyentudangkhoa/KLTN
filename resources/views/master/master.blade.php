@@ -173,6 +173,9 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
     <!-- navigation -->
     @include('component.hf.header')
     <!-- //navigation -->
+    <!-- loading -->
+    @include('component.cart.loading')
+    <!-- //loading -->
     @if (Auth::check())
     <!--modal city-->
     @include('component.city.city')

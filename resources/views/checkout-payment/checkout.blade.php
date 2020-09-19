@@ -108,6 +108,7 @@ Xác nhận thanh toán
                 <h4>Nhập thông tin địa chỉ giao hàng</h4>
                 @if (Auth::check())
                 <form id="Checkout_form_submit" class="creditly-card-form agileinfo_form">
+                    @csrf
                     <div class="creditly-wrapper wthree, w3_agileits_wrapper">
                         <div class="information-wrapper">
                             <div class="first-row">
@@ -122,7 +123,7 @@ Xác nhận thanh toán
                                         </div>
                                     </div>
                                     <div class="controls">
-                                        <input type="text" placeholder="Email" name="city" value="{{ Auth::user()->email }}">
+                                        <input type="text" placeholder="Email" name="email" value="{{ Auth::user()->email }}">
                                     </div>
                                     <div class="w3_agileits_card_number_grid_right">
                                         <div class="controls">
@@ -144,7 +145,7 @@ Xác nhận thanh toán
 
                             </div>
                             <button type="submit" class="submit check_out" id="btn-delivery">Giao hàng đến địa chỉ này</button>
-                            
+
                         </div>
                     </div>
                 </form>
@@ -155,6 +156,7 @@ Xác nhận thanh toán
                 </div>
                 @else
                 <form id="Checkout_form_submit" class="creditly-card-form agileinfo_form">
+                    @csrf
                     <div class="creditly-wrapper wthree, w3_agileits_wrapper">
                         <div class="information-wrapper">
                             <div class="first-row">
@@ -163,7 +165,7 @@ Xác nhận thanh toán
                                         required="">
                                 </div>
                                 <div class="controls">
-                                    <input type="text" placeholder="Email" name="city">
+                                    <input type="text" placeholder="Email" name="email">
                                 </div>
                                 <div class="w3_agileits_card_number_grids">
                                     <div class="w3_agileits_card_number_grid_left">

@@ -7,7 +7,7 @@ use Illuminate\Database\Eloquent\Model;
 class Customer extends Model
 {
     protected $table = "customer";
-    public $fillable = ['name', 'email', 'gender', 'address', 'phone_number'];
+    public $fillable = ['name', 'email', 'gender', 'address', 'phone_number','id_user'];
     public function Bill()
     {
         $this->hasMany("App\Bills", "id_customer", "id");

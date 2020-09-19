@@ -270,13 +270,64 @@ $(document).ready(function() {
             });
         }
     });
+    //choosing city
     $('#city_obtion').on('change', function() {
         $('#city_input').val($(this).val());
         $('#modal_city').modal('hide');
     });
-    $('#Checkout_form_submit').submit(function(e) {
+    //Buy with COD payment
+    $('#Checkout_form_submit').on('submit', function(e) {
         e.preventDefault();
-        alert('hello');
+        var formData = new FormData(this);
+        var _token = $('input[name="_token"]').val();
+        if (formData.get('name') == "") {
+            $('#name_cart_product').text("Bạn vui lòng nhập Họ tên của bạn");
+            $('#add-to-cart-confirm').modal('show');
+            setTimeout(() => {
+                $('#add-to-cart-confirm').modal('hide');
+            }, 2000);
+        } else if (formData.get('landmark') == "") {
+            $('#name_cart_product').text("Bạn vui lòng nhập địa chỉ giao hàng");
+            $('#add-to-cart-confirm').modal('show');
+            setTimeout(() => {
+                $('#add-to-cart-confirm').modal('hide');
+            }, 2000);
+        } else if (formData.get('number') == "") {
+            $('#name_cart_product').text("Bạn vui lòng nhập số điện thoại");
+            $('#add-to-cart-confirm').modal('show');
+            setTimeout(() => {
+                $('#add-to-cart-confirm').modal('hide');
+            }, 2000);
+        } else if (isNaN(formData.get('number'))) {
+            $('#name_cart_product').text("Số điện thoại của bạn phải là số");
+            $('#add-to-cart-confirm').modal('show');
+            setTimeout(() => {
+                $('#add-to-cart-confirm').modal('hide');
+            }, 2000);
+        } else {
+            $('#loading').modal('show');
+            $.ajax({
+                url: "pay-cod",
+                method: "POSt",
+                data: {
+                    name: formData.get('name'),
+                    phone_number: formData.get('number'),
+                    email: formData.get('email'),
+                    address: formData.get('landmark'),
+                    _token: _token
+                },
+                success: function(data) {
+                    $('#loading').modal('hide');
+                    $('#name_cart_product').text(data.report);
+                    $('#add-to-cart-confirm').modal('show');
+                    setTimeout(() => {
+                        $('#add-to-cart-confirm').modal('hide');
+                        window.location.replace(data.route);
+                    }, 700);
+                }
+            });
+        }
+
     });
     $('#btn-none-delivery').on('click', function() {
         $('#name_cart_product').text("Bạn Chưa có sẳn địa chỉ trong thông tin cá nhân vui lòng nhập địa chỉ của bạn trong thông tin giao hàng");
@@ -284,5 +335,6 @@ $(document).ready(function() {
         setTimeout(() => {
             $('#add-to-cart-confirm').modal('hide');
         }, 2000);
-    })
+    });
+
 });
