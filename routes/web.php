@@ -44,3 +44,6 @@ Route::post('plus-cart','CartController@PlusQuantity')->name('plus-cart');
 Route::post('change-quantity','CartController@ChangeQuantity')->name('change-quantity');
 //payment
 Route::post('pay-cod','PaymentController@MakeCODPayment')->name('pay-cod');
+
+//User
+Route::get('profile/{id}','ProfileController@ShowProfile')->name('profile')->middleware('check-login');

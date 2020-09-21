@@ -76,7 +76,7 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
                     </li>
                     @if(Auth::check())
                     <li>
-                        <a href="#">
+                        <a href="{{ route('profile',Auth::user()->id) }}">
                             <span class="fa fa-user" aria-hidden="true"></span> {{ Auth::user()->name }} </a>
                     </li>
                     <li>
@@ -478,6 +478,9 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
     <!--form submit-->
     <script src="assets/js/component/form.js"></script>
     <!--End Form-->
+    <!-- form user -->
+    <script src="assets/js/component/form-user.js"></script>
+    <!--End form-->
 
 
 </body>
