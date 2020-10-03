@@ -75,10 +75,18 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
                         <span class="fa fa-phone" aria-hidden="true"></span> 001 234 5678
                     </li>
                     @if(Auth::check())
+                    @if (Auth::user()->id_role == 3)
+                    <li>
+                        <a href="{{ route('admin-index') }}">
+                            <span class="fa fa-user" aria-hidden="true"></span> {{ Auth::user()->name }} </a>
+                    </li>
+                    @else
                     <li>
                         <a href="{{ route('profile',Auth::user()->id) }}">
                             <span class="fa fa-user" aria-hidden="true"></span> {{ Auth::user()->name }} </a>
                     </li>
+                    @endif
+
                     <li>
                         <a href="{{route('log-out')}}">
                             <span class="fa fa-sign-out " aria-hidden="true"></span> Đăng xuất </a>

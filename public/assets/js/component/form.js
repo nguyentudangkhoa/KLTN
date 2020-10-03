@@ -56,6 +56,7 @@ $(document).ready(function() {
                     if (data.report == "Thông tin đăng nhập sai hoặc tài khoản không tồn tại" || data.report == "Email không hợp lệ" || data.report == "Password phải trên 6 ký tự") {
                         alert(data.report);
                     } else {
+                        
                         alert(data.report);
                         $('#myModal1').modal('hide');
                         $('#info_user_login').css('display', 'none');
@@ -63,6 +64,9 @@ $(document).ready(function() {
                         $('#info_user_email').css('display', 'block');
                         $('#user_email_show').text(data.name);
                         $('#info_user_logout').css('display', 'block');
+                        if(data.route){
+                            window.location.replace(data.route);
+                        }
                     }
                 }
             });

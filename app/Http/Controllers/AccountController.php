@@ -26,7 +26,13 @@ class AccountController extends Controller
                 $user = User::where('email',$req->email)->first();
                 $user->login_time = date("Y-m-d H:i:s");//current time log in
                 $user->save();
-                return response()->json(['report'=>"Đã đăng nhập với tài khoản ".$req->email,'name'=>$user->name]);
+                if(Auth::user()->id_role == 3){
+                    return response()->json(['report'=>"Đã đăng nhập với tài khoản ".$req->email,'name'=>$user->name,'route'=>route('admin-index')]);
+                    
+                }else{
+                    return response()->json(['report'=>"Đã đăng nhập với tài khoản ".$req->email,'name'=>$user->name]);
+                }
+                
             } else {
                 return response()->json(['report'=>"Thông tin đăng nhập sai hoặc tài khoản không tồn tại"]);
             }

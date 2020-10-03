@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\AdminIndexController;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -47,3 +48,13 @@ Route::post('pay-cod','PaymentController@MakeCODPayment')->name('pay-cod');
 
 //User
 Route::get('profile/{id}','ProfileController@ShowProfile')->name('profile')->middleware('check-login');
+Route::put('change-profile','ProfileController@ChangeProfile')->name('change-profile');
+//Change avatar
+Route::put('/edit-avatar','ProfileController@EditAvatar')->name('edit-avatar');
+//Add address
+Route::post('/add-address','ProfileController@AddAddress')->name('add-address');
+//Admin index
+Route::prefix('admin')->middleware('check-admin')->group(function () {
+    Route::get('/admin-index','AdminIndexController@index')->name('admin-index');
+});
+
