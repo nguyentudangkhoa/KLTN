@@ -56,5 +56,7 @@ Route::post('/add-address','ProfileController@AddAddress')->name('add-address');
 //Admin index
 Route::prefix('admin')->middleware('check-admin')->group(function () {
     Route::get('/admin-index','AdminIndexController@index')->name('admin-index');
+    Route::get('/products','AdminProductsController@ShowProduct')->name('products');
+    Route::post('/add-products','AddProductCotroller@AddProduct')->name('add-products');
 });
 
