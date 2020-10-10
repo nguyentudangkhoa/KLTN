@@ -35,6 +35,42 @@ input[type="submit"] {
     -ms-transition: 0.5s all;
 }
 
+.ajax-list {
+    height: 300px;
+    width: 50%;
+    overflow-y: scroll;
+}
+
+.ajax-list .item {
+    width: 100%;
+    text-align: left;
+}
+
+.ajax-list::-webkit-scrollbar {
+    width: 10px;
+}
+
+
+/* Track */
+
+.ajax-list::-webkit-scrollbar-track {
+    background: #f1f1f1;
+}
+
+
+/* Handle */
+
+.ajax-list::-webkit-scrollbar-thumb {
+    background: #888;
+}
+
+
+/* Handle on hover */
+
+.ajax-list::-webkit-scrollbar-thumb:hover {
+    background: #555;
+}
+
 h1,
 h2,
 h3,

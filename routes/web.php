@@ -45,7 +45,9 @@ Route::post('plus-cart','CartController@PlusQuantity')->name('plus-cart');
 Route::post('change-quantity','CartController@ChangeQuantity')->name('change-quantity');
 //payment
 Route::post('pay-cod','PaymentController@MakeCODPayment')->name('pay-cod');
-
+//Search product by name
+Route::post('searchList','SearchController@fetch')->name('searchList');
+Route::get('search-product','SearchController@SearchProduct')->name('search-product');
 //User
 Route::get('profile/{id}','ProfileController@ShowProfile')->name('profile')->middleware('check-login');
 Route::put('change-profile','ProfileController@ChangeProfile')->name('change-profile');
@@ -55,8 +57,18 @@ Route::put('/edit-avatar','ProfileController@EditAvatar')->name('edit-avatar');
 Route::post('/add-address','ProfileController@AddAddress')->name('add-address');
 //Admin index
 Route::prefix('admin')->middleware('check-admin')->group(function () {
+    //admin index page
     Route::get('/admin-index','AdminIndexController@index')->name('admin-index');
+    //Product page
     Route::get('/products','AdminProductsController@ShowProduct')->name('products');
     Route::post('/add-products','AddProductCotroller@AddProduct')->name('add-products');
+    //category
+    Route::get('/categories','AdminCategoryController@ShowCategory')->name('categories');
+    //root category
+    Route::get('/root-categories','AdminRootCategoryController@ShowRootCategory')->name('root-categories');
+    //unit
+    Route::get('/units','AdminUnitController@ShowUnit')->name('units');
+    //User task
+    Route::get('/users','AdminUserController@ShowUser')->name('users');
 });
 

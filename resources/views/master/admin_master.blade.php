@@ -50,25 +50,9 @@
                     <a class="nav-link" data-widget="pushmenu" href="#" role="button"><i class="fas fa-bars"></i></a>
                 </li>
                 <li class="nav-item d-none d-sm-inline-block">
-                    <a href="index3.html" class="nav-link">Home</a>
-                </li>
-                <li class="nav-item d-none d-sm-inline-block">
-                    <a href="#" class="nav-link">Contact</a>
+                    <a href="{{ route('admin-index') }}" class="nav-link">Home</a>
                 </li>
             </ul>
-
-            <!-- SEARCH FORM -->
-            <form class="form-inline ml-3">
-                <div class="input-group input-group-sm">
-                    <input class="form-control form-control-navbar" type="search" placeholder="Search"
-                        aria-label="Search">
-                    <div class="input-group-append">
-                        <button class="btn btn-navbar" type="submit">
-                            <i class="fas fa-search"></i>
-                        </button>
-                    </div>
-                </div>
-            </form>
 
             <!-- Right navbar links -->
             <ul class="navbar-nav ml-auto">
@@ -189,15 +173,39 @@
                                     </a>
                                 </li>
                                 <li class="nav-item">
-                                    <a href="pages/tables/data.html" class="nav-link">
+                                    <a href="{{ route('categories') }}" class="nav-link">
                                         <i class="far fa-circle nav-icon"></i>
                                         <p>Danh mục sản phẩm</p>
                                     </a>
                                 </li>
                                 <li class="nav-item">
-                                    <a href="pages/tables/jsgrid.html" class="nav-link">
+                                    <a href="{{ route('root-categories') }}" class="nav-link">
                                         <i class="far fa-circle nav-icon"></i>
                                         <p>Danh mục tổng</p>
+                                    </a>
+                                </li>
+                                <li class="nav-item">
+                                    <a href="{{ route('units') }}" class="nav-link">
+                                        <i class="far fa-circle nav-icon"></i>
+                                        <p>Đơn vị tính</p>
+                                    </a>
+                                </li>
+                                <li class="nav-item">
+                                    <a href="pages/tables/jsgrid.html" class="nav-link">
+                                        <i class="far fa-circle nav-icon"></i>
+                                        <p>Hóa đơn</p>
+                                    </a>
+                                </li>
+                                <li class="nav-item">
+                                    <a href="{{ route('users') }}" class="nav-link">
+                                        <i class="far fa-circle nav-icon"></i>
+                                        <p>Thành viên</p>
+                                    </a>
+                                </li>
+                                <li class="nav-item">
+                                    <a href="pages/tables/jsgrid.html" class="nav-link">
+                                        <i class="far fa-circle nav-icon"></i>
+                                        <p>Đánh giá</p>
                                     </a>
                                 </li>
                             </ul>
@@ -273,8 +281,13 @@
     <script>
         $(function () {
       $("#example1").DataTable({
-        "responsive": true,
-        "autoWidth": false,
+        "responsive": false,
+        "autoWidth": true,
+        "paging": true,
+        "lengthChange": true,
+        "searching": true,
+        "ordering": true,
+        "info": true,
       });
       $('#example2').DataTable({
         "paging": true,
@@ -293,7 +306,9 @@
 <script src="assets/AdminLTE/plugins/bs-custom-file-input/bs-custom-file-input.min.js"></script>
 
 <!--Add product-->
-<script src="assets/js/admin/add-product.js"></script>
+<script src="assets/js/admin/product/add-product.js"></script>
+<!--Update product-->
+<script src="assets/js/admin/product/update-product.js"></script>
 <!-- SweetAlert2 -->
 <script src="assets/AdminLTE/plugins/sweetalert2/sweetalert2.min.js"></script>
 <!-- Toastr -->

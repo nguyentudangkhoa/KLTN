@@ -149,11 +149,6 @@ Xác nhận thanh toán
                         </div>
                     </div>
                 </form>
-                <div class="checkout-right-basket">
-                    <a href="payment.html">Thanh toán online
-                        <span class="fa fa-hand-o-right" aria-hidden="true"></span>
-                    </a>
-                </div>
                 @else
                 <form id="Checkout_form_submit" class="creditly-card-form agileinfo_form">
                     @csrf
@@ -189,11 +184,6 @@ Xác nhận thanh toán
                         </div>
                     </div>
                 </form>
-                <div class="checkout-right-basket">
-                    <a href="payment.html">Thanh toán online
-                        <span class="fa fa-hand-o-right" aria-hidden="true"></span>
-                    </a>
-                </div>
                 @endif
 
 

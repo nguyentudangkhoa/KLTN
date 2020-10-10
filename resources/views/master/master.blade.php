@@ -112,8 +112,12 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
                 <!-- //header lists -->
                 <!-- search -->
                 <div class="agileits_search">
-                    <form action="#" method="post">
-                        <input name="Search" type="search" placeholder="Search here..." required="">
+                    <form action="{{ route('search-product') }}" method="get">
+                        {{ csrf_field() }}
+                        <input name="search" id="search" type="search" placeholder="Tìm kiếm..." required="">
+                        <div id="foodList">
+                        </div>
+
                         <button type="submit" class="btn btn-default" aria-label="Left Align">
                             <span class="fa fa-search" aria-hidden="true"> </span>
                         </button>
@@ -486,10 +490,9 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
     <!--form submit-->
     <script src="assets/js/component/form.js"></script>
     <!--End Form-->
-    <!-- form user -->
-    <script src="assets/js/component/form-user.js"></script>
-    <!--End form-->
-
+    <!-- searcj ajax -->
+    <script src="assets/js/component/search.js"></script>
+    <!--End search-->
 
 </body>
 
