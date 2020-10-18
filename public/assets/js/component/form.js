@@ -22,7 +22,7 @@ $(document).ready(function() {
                 $('#add-to-cart-confirm').modal('show');
                 setTimeout(() => {
                     $('#add-to-cart-confirm').modal('hide');
-                }, 1000);
+                }, 3000);
                 $('#lbl_quantity').text('(' + data.quantity + ')');
                 $('#btn-cart-shopping').prop('title', 'Bạn hiện đang có ' + data.quantity + ' sản phẩm trong giỏ hàng')
             }
@@ -53,10 +53,10 @@ $(document).ready(function() {
                     _token: _token
                 },
                 success: function(data) {
-                    if (data.report == "Thông tin đăng nhập sai hoặc tài khoản không tồn tại" || data.report == "Email không hợp lệ" || data.report == "Password phải trên 6 ký tự") {
+                    if (data.report == "Thông tin đăng nhập sai hoặc tài khoản không tồn tại" || data.report == "Email không hợp lệ" || data.report == "Password phải trên 6 ký tự" || data.report == "Tài khoản của bạn đã bị vô hiệu hóa") {
                         alert(data.report);
                     } else {
-                        
+
                         alert(data.report);
                         $('#myModal1').modal('hide');
                         $('#info_user_login').css('display', 'none');
@@ -64,7 +64,7 @@ $(document).ready(function() {
                         $('#info_user_email').css('display', 'block');
                         $('#user_email_show').text(data.name);
                         $('#info_user_logout').css('display', 'block');
-                        if(data.route){
+                        if (data.route) {
                             window.location.replace(data.route);
                         }
                     }
@@ -231,6 +231,16 @@ $(document).ready(function() {
                 _token: $(this).data('token')
             },
             success: function(data) {
+                if (data.report) {
+                    alert(id)
+                    $('#quantity' + id).val(data.produt_quantity);
+                    $('#name_cart_product').text(data.report);
+                    $('#add-to-cart-confirm').modal('show');
+
+                    setTimeout(() => {
+                        $('#add-to-cart-confirm').modal('hide');
+                    }, 2000);
+                }
                 $('#lbl_quantity').text('(' + data.quantity + ')');
                 $('#quantity' + id).val(data.produt_quantity);
                 $('#lbl-quantity-info').text(data.quantity);
@@ -254,6 +264,13 @@ $(document).ready(function() {
             setTimeout(() => {
                 $('#add-to-cart-confirm').modal('hide');
             }, 2000);
+        } else if (isNaN(quantity)) {
+            $('#name_cart_product').text("Số lượng sản phẩm phải là số");
+            $('#add-to-cart-confirm').modal('show');
+            $('#quantity' + id).val(1);
+            setTimeout(() => {
+                $('#add-to-cart-confirm').modal('hide');
+            }, 2000);
         } else {
             $.ajax({
                 url: "change-quantity",
@@ -264,6 +281,14 @@ $(document).ready(function() {
                     _token: $(this).data('token')
                 },
                 success: function(data) {
+                    if (data.report) {
+                        $('#name_cart_product').text(data.report);
+                        $('#add-to-cart-confirm').modal('show');
+                        $('#quantity' + id).val(data.produt_quantity);
+                        setTimeout(() => {
+                            $('#add-to-cart-confirm').modal('hide');
+                        }, 2000);
+                    }
                     $('#lbl_quantity').text('(' + data.quantity + ')');
                     $('#quantity' + id).val(data.produt_quantity);
                     $('#lbl-quantity-info').text(data.quantity);
@@ -327,7 +352,7 @@ $(document).ready(function() {
                     setTimeout(() => {
                         $('#add-to-cart-confirm').modal('hide');
                         window.location.replace(data.route);
-                    }, 700);
+                    }, 3000);
                 }
             });
         }

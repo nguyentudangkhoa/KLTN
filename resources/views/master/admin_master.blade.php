@@ -191,7 +191,7 @@
                                     </a>
                                 </li>
                                 <li class="nav-item">
-                                    <a href="pages/tables/jsgrid.html" class="nav-link">
+                                    <a href="{{ route('bills') }}" class="nav-link">
                                         <i class="far fa-circle nav-icon"></i>
                                         <p>Hóa đơn</p>
                                     </a>
@@ -281,8 +281,8 @@
     <script>
         $(function () {
       $("#example1").DataTable({
-        "responsive": false,
-        "autoWidth": true,
+        "responsive": true,
+        "autoWidth": false,
         "paging": true,
         "lengthChange": true,
         "searching": true,
@@ -309,11 +309,18 @@
 <script src="assets/js/admin/product/add-product.js"></script>
 <!--Update product-->
 <script src="assets/js/admin/product/update-product.js"></script>
+<!--Report-->
+<script src="assets/js/admin/product/disable.js"></script>
+<script src="assets/js/admin/product/delete.js"></script>
+<script src="assets/js/admin/product/enable.js"></script>
 <!-- SweetAlert2 -->
 <script src="assets/AdminLTE/plugins/sweetalert2/sweetalert2.min.js"></script>
 <!-- Toastr -->
 <script src="assets/AdminLTE/plugins/toastr/toastr.min.js"></script>
+<script src="assets/js/admin/redirect-bil.js"></script>
 <!--End form-->
+<!--Dialog button component-->
+
 <script type="text/javascript">
     $(document).ready(function () {
       bsCustomFileInput.init();

@@ -62,13 +62,29 @@ Route::prefix('admin')->middleware('check-admin')->group(function () {
     //Product page
     Route::get('/products','AdminProductsController@ShowProduct')->name('products');
     Route::post('/add-products','AddProductCotroller@AddProduct')->name('add-products');
+    Route::put('/update-products','UpdateProductController@UpdateProduct')->name('update-products');
+    Route::put('/en-product','EnableController@EnableProduct')->name('en-product');
     //category
+    Route::put('/en-category','EnableController@EnableCategory')->name('en-category');
     Route::get('/categories','AdminCategoryController@ShowCategory')->name('categories');
     //root category
+    Route::put('/en-root','EnableController@EnableRoot')->name('en-root');
     Route::get('/root-categories','AdminRootCategoryController@ShowRootCategory')->name('root-categories');
     //unit
     Route::get('/units','AdminUnitController@ShowUnit')->name('units');
+    Route::put('/disable-unit','DisableController@DisableUnit')->name('disable-unit');
     //User task
     Route::get('/users','AdminUserController@ShowUser')->name('users');
+    Route::put('/disable-user','DisableController@DisableUser')->name('disable-user');
+    Route::put('/en-user','EnableController@EnableUser')->name('en-user');
+    //Bill
+    Route::get('/bills','AdminBillController@ShowBill')->name('bills');
+    Route::get('/show-bill/{id}','AdminBillController@ShowBillDetails')->name('show-bill');
+    //disable
+    Route::put('/disable','DisableController@Disable')->name('disable');
+    Route::put('/disable-type','DisableController@DisableType')->name('disable-type');
+    Route::put('/disable-group','DisableController@DisableGroup')->name('disable-group');
+    //print PDF
+    Route::get('/print-bills/{id}','AdminPDFController@PrintPDF')->name('print-bills');
 });
 

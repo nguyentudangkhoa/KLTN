@@ -45,6 +45,7 @@
                                         <th>Tổng số lần mua</th>
                                         <th>Thời gian đăng nhập</th>
                                         <th>Thời gian đăng xuất</th>
+                                        <th>Tình trạng</th>
                                         <th>Thời gian tạo tài khoản</th>
                                         <th>Thời gian cập nhật</th>
                                         <th>Chức năng</th>
@@ -74,17 +75,32 @@
                                         <td>{{ $user->total_buy }}</td>
                                         <td>{{ $user->login_time }}</td>
                                         <td>{{ $user->logout_time }}</td>
-
+                                        <td>{{ $user->status }}</td>
 
 
                                         <td>{{ $user->created_at }}</td>
                                         <td>{{ $user->updated_at }}</td>
                                         <td>
-                                            <div class="btn-group">
-                                                <button type="button" data-id = "{{ $user->id }}" class="btn-update btn btn-info">Cập nhật</button>
-                                                <button type="button" data-id = "{{ $user->id }}" class="btn btn-warning">Vô hiệu</button>
-                                                <button type="button" data-id = "{{ $user->id }}" class="btn btn-info">Xóa</button>
+                                            @if ($user->status == 1 )
+                                                <div class="btn-group" id="user-enable{{ $user->id }}">
+                                                <button type="button" data-id = "{{ $user->id }}" data-name="{{ $user->name }}" data-toggle="modal" data-target="#modal-user-update" class="btn-update btn btn-info">Cập nhật</button>
+                                                <button type="button" data-id = "{{ $user->id }}" data-name="{{ $user->name }}" data-toggle="modal" data-target="#modal-sm-report" class="btn btn-disable btn-warning">Vô hiệu</button>
+                                                <button type="button" data-id = "{{ $user->id }}" data-name="{{ $user->name }}" data-toggle="modal" data-target="#modal-sm-delete" class="btn btn-delete btn-info">Xóa</button>
                                               </div>
+                                              <div class="btn-group" id="user-disable{{ $user->id }}" style="display: none">
+                                                <button type="button"  data-toggle="modal" data-target="#modal-un-diss" data-id = "{{ $user->id }}" data-name ="{{ $user->name }}" data-table="Product" class="btn btn-un-dis btn-danger">Kích hoạt</button>
+                                              </div>
+                                            @else
+                                            <div class="btn-group" id="user-enable{{ $user->id }}" style="display: none">
+                                                <button type="button" data-id = "{{ $user->id }}" data-name="{{ $user->name }}" data-toggle="modal" data-target="#modal-user-update" class="btn-update btn btn-info">Cập nhật</button>
+                                                <button type="button" data-id = "{{ $user->id }}" data-name="{{ $user->name }}" data-toggle="modal" data-target="#modal-sm-report" class="btn btn-disable btn-warning">Vô hiệu</button>
+                                                <button type="button" data-id = "{{ $user->id }}" data-name="{{ $user->name }}" data-toggle="modal" data-target="#modal-sm-delete" class="btn btn-delete btn-info">Xóa</button>
+                                              </div>
+                                              <div class="btn-group" id="user-disable{{ $user->id }}" >
+                                                <button type="button"  data-toggle="modal" data-target="#modal-un-diss" data-id = "{{ $user->id }}" data-name ="{{ $user->name }}" data-table="Product" class="btn btn-un-dis btn-danger">Kích hoạt</button>
+                                              </div>
+                                            @endif
+
                                         </td>
                                     </tr>
                                     @endforeach
@@ -106,4 +122,7 @@
 </div>
 <!-- /.content-wrapper -->
 <!--Model-->
+@include('component.admin.update_user')
+@include('component.admin.disable_user')
+@include('component.admin.un-dis-user')
 @endsection

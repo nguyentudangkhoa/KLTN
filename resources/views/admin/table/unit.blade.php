@@ -29,15 +29,15 @@
                     <div class="card">
                         <div class="card-header">
                             <h3 class="card-title">Dữ liệu đơn vị sản phẩm gốc</h3><br>
-                            <button type="button" class="btn btn-success" data-toggle="modal" data-target="#modal-default">Thêm đơn vị sản phẩm</button>
+                            <button type="button" class="btn btn-success" data-toggle="modal" data-target="#modal-unit">Thêm đơn vị sản phẩm</button>
                         </div>
                         <!-- /.card-header -->
                         <div class="card-body">
                             <table id="example1" class="table table-bordered table-striped">
                                 <thead>
                                     <tr>
-                                        <th>Mã đơn vịc</th>
-                                        <th>Tên đơn vịc</th>
+                                        <th>Mã đơn vị</th>
+                                        <th>Tên đơn vị</th>
                                         <th>Thời gian nhập</th>
                                         <th>Thời gian cập nhật</th>
                                         <th>Chức năng</th>
@@ -45,7 +45,8 @@
                                 </thead>
                                 <tbody>
                                     @foreach ($units as $unit)
-                                    <tr>
+                                    @if($unit->status == 1)
+                                    <tr id="tr{{ $unit->id }}">
                                         <td>{{ $unit->id }}</td>
                                         <td>{{ $unit->name }}</td>
 
@@ -53,12 +54,12 @@
                                         <td>{{ $unit->updated_at }}</td>
                                         <td>
                                             <div class="btn-group">
-                                                <button type="button" data-id = "{{ $unit->id }}" class="btn-update btn btn-info">Cập nhật</button>
-                                                <button type="button" data-id = "{{ $unit->id }}" class="btn btn-warning">Vô hiệu</button>
-                                                <button type="button" data-id = "{{ $unit->id }}" class="btn btn-info">Xóa</button>
+                                                <button type="button" data-id = "{{ $unit->id }}" data-toggle="modal" data-target="#modal-update-unit"  data-name ="{{ $unit->name }}" class="btn-update btn btn-info">Cập nhật</button>
+                                                <button type="button" data-toggle="modal" data-target="#modal-sm-report" data-id = "{{ $unit->id }}" data-name = "{{ $unit->name }}" class="btn btn-delete btn-danger">Xóa</button>
                                               </div>
                                         </td>
                                     </tr>
+                                    @endif
                                     @endforeach
 
                                 </tbody>
@@ -78,4 +79,7 @@
 </div>
 <!-- /.content-wrapper -->
 <!--Model-->
+@include('component.admin.add_unit')
+@include('component.admin.update_unit')
+@include('component.admin.disable_unit')
 @endsection

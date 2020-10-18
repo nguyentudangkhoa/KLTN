@@ -29,7 +29,7 @@
                     <div class="card">
                         <div class="card-header">
                             <h3 class="card-title">Dữ liệu danh mục sản phẩm gốc</h3><br>
-                            <button type="button" class="btn btn-success" data-toggle="modal" data-target="#modal-default">Thêm danh mục gốc</button>
+                            <button type="button" class="btn btn-success" data-toggle="modal" data-target="#modal-total-category">Thêm danh mục gốc</button>
                         </div>
                         <!-- /.card-header -->
                         <div class="card-body">
@@ -45,18 +45,33 @@
                                 </thead>
                                 <tbody>
                                     @foreach ($rootCategories as $rootCategory)
-                                    <tr>
+                                    <tr id="tb-group{{ $rootCategory->id }}">
                                         <td>{{ $rootCategory->id }}</td>
                                         <td>{{ $rootCategory->name }}</td>
 
                                         <td>{{ $rootCategory->created_at }}</td>
                                         <td>{{ $rootCategory->updated_at }}</td>
                                         <td>
-                                            <div class="btn-group">
-                                                <button type="button" data-id = "{{ $rootCategory->id }}" class="btn-update btn btn-info">Cập nhật</button>
-                                                <button type="button" data-id = "{{ $rootCategory->id }}" class="btn btn-warning">Vô hiệu</button>
-                                                <button type="button" data-id = "{{ $rootCategory->id }}" class="btn btn-info">Xóa</button>
+                                            @if ($rootCategory->status == 1)
+                                                <div class="btn-group" id="root-enable{{ $rootCategory->id }}">
+                                                <button type="button" data-id = "{{ $rootCategory->id }}" data-name="{{ $rootCategory->name }}" data-toggle="modal" data-target="#modal-update-total-category" class="btn-update btn btn-info">Cập nhật</button>
+                                                <button type="button" data-id = "{{ $rootCategory->id }}" data-name="{{ $rootCategory->name }}" data-toggle="modal" data-target="#modal-dis-group" class="btn btn-disable btn-warning">Vô hiệu</button>
+                                                <button type="button" data-id = "{{ $rootCategory->id }}" data-name="{{ $rootCategory->name }}" data-toggle="modal" data-target="#modal-sm-delete" class="btn btn-delete btn-info">Xóa</button>
                                               </div>
+                                              <div class="btn-group" id="root-disable{{ $rootCategory->id }}" style="display: none">
+                                                <button type="button"  data-toggle="modal" data-target="#modal-un-diss" data-id = "{{ $rootCategory->id }}" data-name ="{{ $rootCategory->name }}" data-table="Product" class="btn btn-un-dis btn-danger">Kích hoạt</button>
+                                              </div>
+                                            @else
+                                            <div class="btn-group" id="root-enable{{ $rootCategory->id }}" style="display: none">
+                                                <button type="button" data-id = "{{ $rootCategory->id }}" data-name="{{ $rootCategory->name }}" data-toggle="modal" data-target="#modal-update-total-category" class="btn-update btn btn-info">Cập nhật</button>
+                                                <button type="button" data-id = "{{ $rootCategory->id }}" data-name="{{ $rootCategory->name }}" data-toggle="modal" data-target="#modal-dis-group" class="btn btn-disable btn-warning">Vô hiệu</button>
+                                                <button type="button" data-id = "{{ $rootCategory->id }}" data-name="{{ $rootCategory->name }}" data-toggle="modal" data-target="#modal-sm-delete" class="btn btn-delete btn-info">Xóa</button>
+                                              </div>
+                                              <div class="btn-group" id="root-disable{{ $rootCategory->id }}" >
+                                                <button type="button"  data-toggle="modal" data-target="#modal-un-diss" data-id = "{{ $rootCategory->id }}" data-name ="{{ $rootCategory->name }}" data-table="Product" class="btn btn-un-dis btn-danger">Kích hoạt</button>
+                                              </div>
+                                            @endif
+
                                         </td>
                                     </tr>
                                     @endforeach
@@ -78,4 +93,8 @@
 </div>
 <!-- /.content-wrapper -->
 <!--Model-->
+@include('component.admin.add_groupType')
+@include('component.admin.update_groupType')
+@include('component.admin.disable-group')
+@include('component.admin.un_dis_root_cate')
 @endsection

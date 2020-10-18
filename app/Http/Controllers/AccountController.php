@@ -15,12 +15,15 @@ class AccountController extends Controller
 {
     //Login function
     public function SignIn(Request $req){
-
+        $user = User::where('email',$req->email)->first();
+        // dd($user);
         $credentials = $req->only('email', 'password');
         if(!filter_var($req->email, FILTER_VALIDATE_EMAIL)){
             return response()->json(['report'=>"Email không hợp lệ"]);
         }else if(strlen($req->password) <= 6){
             return response()->json(['report'=>"Password phải trên 6 ký tự"]);
+        }else if($user->status == 0){
+            return response()->json(['report'=>'Tài khoản của bạn đã bị vô hiệu hóa vui lòng liện hệ adminTài khoản của bạn đã bị vô hiệu hóa']);
         }else{
             if (Auth::attempt($credentials,$req->remember)) { //Check Existing user
                 $user = User::where('email',$req->email)->first();
@@ -28,11 +31,11 @@ class AccountController extends Controller
                 $user->save();
                 if(Auth::user()->id_role == 3){
                     return response()->json(['report'=>"Đã đăng nhập với tài khoản ".$req->email,'name'=>$user->name,'route'=>route('admin-index')]);
-                    
+
                 }else{
-                    return response()->json(['report'=>"Đã đăng nhập với tài khoản ".$req->email,'name'=>$user->name]);
+                    return response()->json(['report'=>"Đã đăng nhập với tài khoản ".$req->email,'name'=>$user->name,'route'=>route('profile',Auth::user()->id)]);
                 }
-                
+
             } else {
                 return response()->json(['report'=>"Thông tin đăng nhập sai hoặc tài khoản không tồn tại"]);
             }

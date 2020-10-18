@@ -57,7 +57,7 @@
                                 </thead>
                                 <tbody>
                                     @foreach ($products as $product)
-                                    <tr>
+                                    <tr id="tb-product{{ $product->id }}">
                                         <td>{{ $product->id }}</td>
                                         <td>{{ $product->name }}</td>
                                         <td>{{ number_format($product->price) }} VND</td>
@@ -77,11 +77,24 @@
                                         <td>{{ $product->created_at }}</td>
                                         <td>{{ $product->updated_at }}</td>
                                         <td>
-                                            <div class="btn-group">
-                                                <button type="button" data-id = "{{ $product->id }}" class="btn-update btn btn-info">Cập nhật</button>
-                                                <button type="button" data-id = "{{ $product->id }}" class="btn btn-warning">Vô hiệu</button>
-                                                <button type="button" data-id = "{{ $product->id }}" class="btn btn-info">Xóa</button>
+                                            @if ($product->status == 1)
+                                                <div class="btn-group" id="product-enable{{ $product->id }}">
+                                                <button type="button" class="btn btn-update btn-success" data-toggle="modal" data-target="#modal-update-default" data-id = "{{ $product->id }}" data-name ="{{ $product->name }}" data-price="{{ $product->price }}" data-quantity="{{ $product->quantity }}" data-description="{{ $product->description }}">Cập nhật</button>
+                                                <button type="button" data-id = "{{ $product->id }}" data-toggle="modal" data-target="#modal-sm-report"  data-name ="{{ $product->name }}" data-table="Product" class="btn btn-disable btn-danger">Xóa</button>
                                               </div>
+                                              <div class="btn-group" id="product-disable{{ $product->id }}" style="display: none">
+                                                <button type="button"  data-toggle="modal" data-target="#modal-un-diss" data-id = "{{ $product->id }}" data-name ="{{ $product->name }}" data-table="Product" class="btn btn-un-dis btn-danger">Kích hoạt</button>
+                                              </div>
+                                            @else
+                                            <div class="btn-group" id="product-enable{{ $product->id }}" style="display: none">
+                                                <button type="button" class="btn btn-update btn-success" data-toggle="modal" data-target="#modal-update-default" data-id = "{{ $product->id }}" data-name ="{{ $product->name }}" data-price="{{ $product->price }}" data-quantity="{{ $product->quantity }}" data-description="{{ $product->description }}">Cập nhật</button>
+                                                <button type="button" data-id = "{{ $product->id }}" data-toggle="modal" data-target="#modal-sm-report"  data-name ="{{ $product->name }}" data-table="Product" class="btn btn-disable btn-danger">Xóa</button>
+                                              </div>
+                                            <div class="btn-group" id="product-disable{{ $product->id }}" >
+                                                <button type="button"  data-toggle="modal" data-target="#modal-un-diss" data-id = "{{ $product->id }}" data-name ="{{ $product->name }}" data-table="Product" class="btn btn-un-dis btn-danger">Kích hoạt</button>
+                                              </div>
+                                            @endif
+
                                         </td>
                                     </tr>
                                     @endforeach
@@ -103,5 +116,10 @@
 </div>
 <!-- /.content-wrapper -->
 <!--Model-->
+@include('component.admin.report')
+@include('component.admin.delete')
 @include('component.admin.add_product')
+@include('component.admin.update_product')
+@include('component.admin.un_dis_pro')
+
 @endsection

@@ -11,7 +11,7 @@ use Illuminate\Http\Request;
 class AdminProductsController extends Controller
 {
     public function ShowProduct(Request $req){
-        $products = Product::get();
+        $products = Product::where('status',1)->get();
         $units = Unit::get();
         $productTypes = Product_type::get();
         return view('admin.table.products',compact('products','units','productTypes'));

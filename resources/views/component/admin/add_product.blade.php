@@ -2,7 +2,7 @@
     <div class="modal-dialog">
         <div class="modal-content">
             <div class="modal-header">
-                <h4 class="modal-title">Thêm sản phẩm</h4>
+                <h4 class="modal-title">Thêm danh mục</h4>
                 <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                     <span aria-hidden="true">&times;</span>
                 </button>
@@ -12,7 +12,7 @@
                 <!-- /.card-header -->
                 <!-- form start -->
                 <form id="form-add-product" method="POST" role="form" enctype="multipart/form-data">
-@csrf
+                @csrf
                     <div class="card-body">
                         <div class="form-group">
                             <label for="name">Tên sản phẩm</label>
@@ -66,7 +66,7 @@
                         </div>
                     </div>
                     <div class="modal-footer justify-content-between">
-                        <button type="submit" class="btn btn-primary">Add sản phẩm</button>
+                        <button type="submit" class="btn btn-primary">Thêm sản phẩm</button>
                     </div>
                 </form>
 
@@ -76,3 +76,4 @@
         <!-- /.modal-dialog -->
     </div>
     <!-- /.modal -->
+</div>

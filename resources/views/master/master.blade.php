@@ -82,7 +82,7 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
                     </li>
                     @else
                     <li>
-                        <a href="{{ route('profile',Auth::user()->id) }}">
+                        <a id="links-profile" href="{{ route('profile',Auth::user()->id) }}">
                             <span class="fa fa-user" aria-hidden="true"></span> {{ Auth::user()->name }} </a>
                     </li>
                     @endif

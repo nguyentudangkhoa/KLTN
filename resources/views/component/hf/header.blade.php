@@ -22,14 +22,15 @@
                                     <span class="sr-only">(current)</span>
                                 </a>
                             </li>
-                            <li class="dropdown">
+                            @foreach ($option_kitchen as $type_group)
+                                <li class="dropdown">
                                 <a href="#" class="dropdown-toggle nav-stylehead" data-toggle="dropdown" role="button"
-                                    aria-haspopup="true" aria-expanded="false">Thực phẩm
+                                    aria-haspopup="true" aria-expanded="false">{{ $type_group->name }}
                                     <span class="caret"></span>
                                 </a>
                                 <ul class="dropdown-menu multi-column columns-3">
                                     <div class="agile_inner_drop_nav_info">
-                                        @foreach($option_kitchen->chunk(8) as $kitchen_items)
+                                        @foreach($type_group->Product_Type->chunk(8) as $kitchen_items)
                                         <div class="col-sm-6 multi-gd-img">
                                             <ul class="multi-column-dropdown">
                                                 @foreach ($kitchen_items as $kitchen)
@@ -45,29 +46,9 @@
                                     </div>
                                 </ul>
                             </li>
-                            <li class="dropdown">
-                                <a href="#" class="dropdown-toggle nav-stylehead" data-toggle="dropdown" role="button"
-                                    aria-haspopup="true" aria-expanded="false">Vật dụng gia đình
-                                    <span class="caret"></span>
-                                </a>
-                                <ul class="dropdown-menu multi-column columns-3">
-                                    <div class="agile_inner_drop_nav_info">
-                                        @foreach($option_household->chunk(8) as $household_items)
-                                        <div class="col-sm-6 multi-gd-img">
-                                            <ul class="multi-column-dropdown">
-                                                @foreach ($household_items as $household)
-                                                <li>
-                                                    <a
-                                                        href="{{ route('product','product_type='.$household->name) }}">{{ $household->name }}</a>
-                                                </li>
-                                                @endforeach
-                                            </ul>
-                                        </div>
-                                        @endforeach
-                                        <div class="clearfix"></div>
-                                    </div>
-                                </ul>
-                            </li>
+                            @endforeach
+
+
                             <li class="">
                                 <a class="nav-stylehead" href="{{ route('about') }}">Về chúng tôi</a>
                             </li>

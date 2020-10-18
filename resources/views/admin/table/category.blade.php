@@ -29,7 +29,7 @@
                     <div class="card">
                         <div class="card-header">
                             <h3 class="card-title">Dữ liệu danh mục sản phẩm</h3><br>
-                            <button type="button" class="btn btn-success" data-toggle="modal" data-target="#modal-default">Thêm danh mục</button>
+                            <button type="button" class="btn btn-success" data-toggle="modal" data-target="#modal-default-category">Thêm danh mục</button>
                         </div>
                         <!-- /.card-header -->
                         <div class="card-body">
@@ -46,7 +46,7 @@
                                 </thead>
                                 <tbody>
                                     @foreach ($categories as $category)
-                                    <tr>
+                                    <tr id="tb-cate{{ $category->id }}">
                                         <td>{{ $category->id }}</td>
                                         <td>{{ $category->name }}</td>
                                         <td>{{$category->Group_Type->name }}</td>
@@ -54,11 +54,24 @@
                                         <td>{{ $category->created_at }}</td>
                                         <td>{{ $category->updated_at }}</td>
                                         <td>
-                                            <div class="btn-group">
-                                                <button type="button" data-id = "{{ $category->id }}" class="btn-update btn btn-info">Cập nhật</button>
-                                                <button type="button" data-id = "{{ $category->id }}" class="btn btn-warning">Vô hiệu</button>
-                                                <button type="button" data-id = "{{ $category->id }}" class="btn btn-info">Xóa</button>
+                                            @if ($category->status == 1 )
+                                                <div class="btn-group" id="category-enable{{ $category->id }}">
+                                                <button type="button" data-id = "{{ $category->id }}" data-name ="{{ $category->name }}" data-toggle="modal" data-target="#modal-update-category" class="btn-update btn btn-info">Cập nhật</button>
+                                                <button type="button" data-id = "{{ $category->id }}" data-name ="{{ $category->name }}" class="btn btn-disable btn-danger" data-toggle="modal" data-target="#modal-sm-report">Xóa</button>
                                               </div>
+                                              <div class="btn-group" id="category-disable{{ $category->id }}" style="display: none">
+                                                <button type="button"  data-toggle="modal" data-target="#modal-un-diss" data-id = "{{ $category->id }}" data-name ="{{ $category->name }}" data-table="Product" class="btn btn-un-dis btn-danger">Kích hoạt</button>
+                                              </div>
+                                            @else
+                                            <div class="btn-group" id="category-enable{{ $category->id }}" style="display: none">
+                                                <button type="button" data-id = "{{ $category->id }}" data-name ="{{ $category->name }}" data-toggle="modal" data-target="#modal-update-category" class="btn-update btn btn-info">Cập nhật</button>
+                                                <button type="button" data-id = "{{ $category->id }}" data-name ="{{ $category->name }}" class="btn btn-disable btn-danger" data-toggle="modal" data-target="#modal-sm-report">Xóa</button>
+                                              </div>
+                                              <div class="btn-group" id="category-disable{{ $category->id }}" >
+                                                <button type="button"  data-toggle="modal" data-target="#modal-un-diss" data-id = "{{ $category->id }}" data-name ="{{ $category->name }}" data-table="Product" class="btn btn-un-dis btn-danger">Kích hoạt</button>
+                                              </div>
+                                            @endif
+
                                         </td>
                                     </tr>
                                     @endforeach
@@ -80,4 +93,9 @@
 </div>
 <!-- /.content-wrapper -->
 <!--Model-->
+@include('component.admin.add_category')
+@include('component.admin.update_category')
+@include('component.admin.disable_type')
+@include('component.admin.delete')
+@include('component.admin.un_dis_cate')
 @endsection

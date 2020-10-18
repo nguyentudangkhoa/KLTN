@@ -93,16 +93,12 @@ Single
                 <span class="item_price"  id="price{{ $product->id }}">{{ number_format($product->price) }}VND</span>
                 <del></del>
                 @endif
-                <label>Free delivery</label>
-            </p>
-            <p>
-
             </p>
             <div class="single-infoagile">
                 <ul>
                     <li><strong>Số lượng:</strong>
                         @if($product->quantity > 0)
-                        {{ $product->quantity." ".$product->Unit->name }}
+                        {{ $product->quantity }}
                         @else
                         <p style="color: #e0243e">Hết hàng</p>
                         @endif
@@ -129,21 +125,11 @@ Single
                 <p>
                     <i class="fa fa-hand-o-right" aria-hidden="true"></i>Sản phẩm theo mục
                     <label>{{ $product->Product_Type->name }}</label></p>
-                <ul>
-                    <li>
-                        Best for Biryani and Pulao.
-                    </li>
-                    <li>
-                        After cooking, Zeeba Basmati rice grains attain an extra ordinary length of upto 2.4 cm/~1 inch.
-                    </li>
-                    <li>
-                        Zeeba Basmati rice adheres to the highest food afety standards as your health is paramount to
-                        us.
-                    </li>
-                    <li>
-                        Contains only the best and purest grade of basmati rice grain of Export quality.
-                    </li>
-                </ul>
+                <p>
+
+                        {{ $product->description }}
+
+                </p>
                 <p>
                     <i class="fa fa-refresh" aria-hidden="true"></i>Tất cả {{ $product->Product_Type->Group_Type->name }}
                     <label>Có thể đổi trả trong ngày</label>

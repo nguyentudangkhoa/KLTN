@@ -21,6 +21,8 @@ class CheckLogin
             return abort(404);
         }else if(!Auth::check()){
             return abort(404);
+        }else if( Auth::user()->status == 0){
+            return abort(404);
         }else if( Auth::user()->id != $request->id){
             return abort(404);
         }

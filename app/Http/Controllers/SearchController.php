@@ -14,8 +14,7 @@ class SearchController extends Controller
     {
         if ($request->get('query')) {
             $query = $request->get('query');
-            $data = Product::where('name', 'LIKE', "%{$query}%")
-                ->get();
+            $data = Product::where('name', 'LIKE', "%{$query}%")->where('status',1)->get();
             $output = '<ul class="dropdown-menu ajax-list" style="display:block; position:absolute ">';
             foreach ($data as $row) {
                 $output .= '

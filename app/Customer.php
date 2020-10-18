@@ -10,7 +10,7 @@ class Customer extends Model
     public $fillable = ['name', 'email', 'gender', 'address', 'phone_number','id_user'];
     public function Bill()
     {
-        $this->hasMany("App\Bills", "id_customer", "id");
+        return $this->hasMany("App\Bills", "id_customer", "id");
     }
     public function User()
     {
