@@ -6,6 +6,7 @@ use App\Group_type;
 use App\Http\Controllers\Controller;
 use App\Product;
 use App\Product_type;
+use App\Unit;
 use App\User;
 use Illuminate\Http\Request;
 
@@ -33,6 +34,12 @@ class EnableController extends Controller
     public function EnableUser(Request $req){
         $id = $req->id;
         User::where('id',$id)->update(['status' => 1]);
+        return response()->json(['success'=>'Kích hoạt thành công']);
+    }
+    //Enable unit
+    public function EnableUnit(Request $req){
+        $id = $req->id;
+        Unit::where('id',$id)->update(['status' => 1]);
         return response()->json(['success'=>'Kích hoạt thành công']);
     }
 }

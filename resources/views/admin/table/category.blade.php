@@ -46,6 +46,8 @@
                                 </thead>
                                 <tbody>
                                     @foreach ($categories as $category)
+                                    @if ($category->status != 0)
+
                                     <tr id="tb-cate{{ $category->id }}">
                                         <td>{{ $category->id }}</td>
                                         <td>{{ $category->name }}</td>
@@ -54,26 +56,29 @@
                                         <td>{{ $category->created_at }}</td>
                                         <td>{{ $category->updated_at }}</td>
                                         <td>
-                                            @if ($category->status == 1 )
-                                                <div class="btn-group" id="category-enable{{ $category->id }}">
+                                            @if ($category->status == 1 && $category->status != 2)
+                                                <div class="btn-group" id="enable{{ $category->id }}">
                                                 <button type="button" data-id = "{{ $category->id }}" data-name ="{{ $category->name }}" data-toggle="modal" data-target="#modal-update-category" class="btn-update btn btn-info">Cập nhật</button>
+                                                <button type="button"  data-toggle="modal" data-target="#modal-sm-dissall" data-id = "{{ $category->id }}" data-name ="{{ $category->name }}" data-table="Product_type" class="btn btn-un-dis btn-warning">Vô hiệu hóa</button>
                                                 <button type="button" data-id = "{{ $category->id }}" data-name ="{{ $category->name }}" class="btn btn-disable btn-danger" data-toggle="modal" data-target="#modal-sm-report">Xóa</button>
                                               </div>
-                                              <div class="btn-group" id="category-disable{{ $category->id }}" style="display: none">
+                                              <div class="btn-group" id="disable{{ $category->id }}" style="display: none">
                                                 <button type="button"  data-toggle="modal" data-target="#modal-un-diss" data-id = "{{ $category->id }}" data-name ="{{ $category->name }}" data-table="Product" class="btn btn-un-dis btn-danger">Kích hoạt</button>
                                               </div>
                                             @else
-                                            <div class="btn-group" id="category-enable{{ $category->id }}" style="display: none">
+                                            <div class="btn-group" id="enable{{ $category->id }}" style="display: none">
                                                 <button type="button" data-id = "{{ $category->id }}" data-name ="{{ $category->name }}" data-toggle="modal" data-target="#modal-update-category" class="btn-update btn btn-info">Cập nhật</button>
+                                                <button type="button"  data-toggle="modal" data-target="#modal-sm-dissall" data-id = "{{ $category->id }}" data-name ="{{ $category->name }}" data-table="Product_type" class="btn btn-un-dis btn-warning">Vô hiệu hóa</button>
                                                 <button type="button" data-id = "{{ $category->id }}" data-name ="{{ $category->name }}" class="btn btn-disable btn-danger" data-toggle="modal" data-target="#modal-sm-report">Xóa</button>
                                               </div>
-                                              <div class="btn-group" id="category-disable{{ $category->id }}" >
+                                              <div class="btn-group" id="disable{{ $category->id }}" >
                                                 <button type="button"  data-toggle="modal" data-target="#modal-un-diss" data-id = "{{ $category->id }}" data-name ="{{ $category->name }}" data-table="Product" class="btn btn-un-dis btn-danger">Kích hoạt</button>
                                               </div>
                                             @endif
 
                                         </td>
                                     </tr>
+                                    @endif
                                     @endforeach
 
                                 </tbody>

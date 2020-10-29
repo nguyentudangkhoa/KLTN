@@ -11,8 +11,9 @@
                 <!-- general form elements -->
                 <!-- /.card-header -->
                 <!-- form start -->
-                <form id="form-add-category" method="POST" role="form">
+                <form id="form-update-unit" method="POST" role="form">
 @csrf
+                    <input type="hidden" name="id_unit" id="id-unit">
                     <div class="card-body">
                         <div class="form-group">
                             <label for="name">Tên đơn vị tính</label>

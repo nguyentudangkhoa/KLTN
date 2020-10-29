@@ -8,6 +8,7 @@ $(document).ready(function() {
         var description = button.data('description');
 
         $('#id_product').val(id);
+        $('#id_pro').val(id);
         $('#update-name').val(name);
         $('#update-price').val(price);
         $('#update-quantity').val(quantity);

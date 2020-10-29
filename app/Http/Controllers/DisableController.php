@@ -24,7 +24,7 @@ class DisableController extends Controller
      */
     public function Disable(Request $req){
         Product::where('id',$req->id)->update(['status'=>0]);
-        return response()->json(['success'=>'Vô hiệu hóa thành công']);
+        return response()->json(['success'=>'Xóa sản phẩm thành công']);
     }
 
     /**
@@ -35,7 +35,7 @@ class DisableController extends Controller
      */
     public function DisableType(Request $req){
         Product_type::where('id',$req->id)->update(['status'=>0]);
-        return response()->json(['success'=>'Vô hiệu hóa thành công']);
+        return response()->json(['success'=>'Xóa danh mục thành công']);
     }
 
     /**
@@ -46,7 +46,7 @@ class DisableController extends Controller
      */
     public function DisableGroup(Request $req){
         Group_type::where('id',$req->id)->update(['status'=>0]);
-        return response()->json(['success'=>'Vô hiệu hóa thành công']);
+        return response()->json(['success'=>'Xóa danh mục tổng thành công']);
     }
 
     /**
@@ -72,6 +72,6 @@ class DisableController extends Controller
         foreach($units as $unit){
             Product::where('id_unit',$unit->id)->update(['unit'=>""]);
         }
-        return response()->json(['success'=>'Vô hiệu hóa thành công']);
+        return response()->json(['success'=>'Xóa đơn vị thành công']);
     }
 }

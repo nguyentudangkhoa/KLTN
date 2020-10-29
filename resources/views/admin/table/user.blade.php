@@ -28,7 +28,7 @@
                 <div class="col-12">
                     <div class="card">
                         <div class="card-header">
-                            <h3 class="card-title">Dữ liệu danh mục sản phẩm</h3><br>
+                            <h3 class="card-title">Dữ liệu người dùng</h3><br>
                         </div>
                         <!-- /.card-header -->
                         <div class="card-body">
@@ -53,7 +53,7 @@
                                 </thead>
                                 <tbody>
                                     @foreach ($users as $user)
-                                    <tr>
+                                    <tr id="tb-user{{ $user->id }}">
                                         <td>{{ $user->id }}</td>
                                         <td>{{ $user->name }}</td>
                                         <td>{{ $user->email }}</td>
@@ -83,16 +83,16 @@
                                         <td>
                                             @if ($user->status == 1 )
                                                 <div class="btn-group" id="user-enable{{ $user->id }}">
-                                                <button type="button" data-id = "{{ $user->id }}" data-name="{{ $user->name }}" data-toggle="modal" data-target="#modal-user-update" class="btn-update btn btn-info">Cập nhật</button>
+                                                <button type="button" data-id = "{{ $user->id }}" data-name="{{ $user->name }}" data-phone="{{ $user->phone }}" data-toggle="modal" data-target="#modal-user-update" class="btn-update btn btn-info">Cập nhật</button>
                                                 <button type="button" data-id = "{{ $user->id }}" data-name="{{ $user->name }}" data-toggle="modal" data-target="#modal-sm-report" class="btn btn-disable btn-warning">Vô hiệu</button>
-                                                <button type="button" data-id = "{{ $user->id }}" data-name="{{ $user->name }}" data-toggle="modal" data-target="#modal-sm-delete" class="btn btn-delete btn-info">Xóa</button>
+                                                <button type="button" data-id = "{{ $user->id }}" data-name="{{ $user->name }}" data-toggle="modal" data-target="#modal-user-delete" class="btn btn-delete btn-info">Xóa</button>
                                               </div>
                                               <div class="btn-group" id="user-disable{{ $user->id }}" style="display: none">
                                                 <button type="button"  data-toggle="modal" data-target="#modal-un-diss" data-id = "{{ $user->id }}" data-name ="{{ $user->name }}" data-table="Product" class="btn btn-un-dis btn-danger">Kích hoạt</button>
                                               </div>
                                             @else
                                             <div class="btn-group" id="user-enable{{ $user->id }}" style="display: none">
-                                                <button type="button" data-id = "{{ $user->id }}" data-name="{{ $user->name }}" data-toggle="modal" data-target="#modal-user-update" class="btn-update btn btn-info">Cập nhật</button>
+                                                <button type="button" data-id = "{{ $user->id }}" data-name="{{ $user->name }}" data-phone="{{ $user->phone }}" data-toggle="modal" data-target="#modal-user-update" class="btn-update btn btn-info">Cập nhật</button>
                                                 <button type="button" data-id = "{{ $user->id }}" data-name="{{ $user->name }}" data-toggle="modal" data-target="#modal-sm-report" class="btn btn-disable btn-warning">Vô hiệu</button>
                                                 <button type="button" data-id = "{{ $user->id }}" data-name="{{ $user->name }}" data-toggle="modal" data-target="#modal-sm-delete" class="btn btn-delete btn-info">Xóa</button>
                                               </div>
@@ -125,4 +125,5 @@
 @include('component.admin.update_user')
 @include('component.admin.disable_user')
 @include('component.admin.un-dis-user')
+@include('component.admin.delete_user');
 @endsection

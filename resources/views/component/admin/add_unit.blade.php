@@ -11,12 +11,13 @@
                 <!-- general form elements -->
                 <!-- /.card-header -->
                 <!-- form start -->
-                <form id="form-add-category" method="POST" role="form">
+                <form id="form-add-unit" method="POST" role="form">
                      @csrf
+                     <input type="hidden" name="id" id="id-add-unit">
                     <div class="card-body">
                         <div class="form-group">
                             <label for="name">Tên đơn vị tính</label>
-                            <input type="text" class="form-control" id="name" name="name" placeholder="Tên đơn vị tính">
+                            <input type="text" class="form-control" id="unit_add_name" name="name" placeholder="Tên đơn vị tính">
                         </div>
                     </div>
                     <div class="modal-footer justify-content-between">

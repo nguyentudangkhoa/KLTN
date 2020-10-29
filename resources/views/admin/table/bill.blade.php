@@ -10,12 +10,12 @@
         <div class="container-fluid">
             <div class="row mb-2">
                 <div class="col-sm-6">
-                    <h1>Người dùng</h1>
+                    <h1>Hóa đơn</h1>
                 </div>
                 <div class="col-sm-6">
                     <ol class="breadcrumb float-sm-right">
                         <li class="breadcrumb-item"><a href="#">Home</a></li>
-                        <li class="breadcrumb-item active">Người dùng</li>
+                        <li class="breadcrumb-item active">Hóa đơn</li>
                     </ol>
                 </div>
             </div>
@@ -28,7 +28,7 @@
                 <div class="col-12">
                     <div class="card">
                         <div class="card-header">
-                            <h3 class="card-title">Dữ liệu danh mục sản phẩm</h3><br>
+                            <h3 class="card-title">Dữ liệu hóa đơn</h3><br>
                         </div>
                         <!-- /.card-header -->
                         <div class="card-body">
@@ -40,6 +40,7 @@
                                         <th>Tổng tiền</th>
                                         <th>Hình thức thanh toán</th>
                                         <th>Ngày đặt hàng</th>
+                                        <th>Tình trạng đơn hàng</th>
                                         <th>Thời gian tạo</th>
                                         <th>Thời gian cập nhật</th>
                                         <th>Chức năng</th>
@@ -47,24 +48,38 @@
                                 </thead>
                                 <tbody>
                                     @foreach ($bills as $bill)
-                                    <tr>
+                                    @if($bill->status != 5)
+                                    <tr id="tb-bill{{ $bill->id }}">
                                         <td>{{ $bill->id }}</td>
                                         <td>{{ $bill->Customer->name }}</td>
                                         <td>{{ $bill->total}}</td>
                                         <td>{{ $bill->Payment->name  }}</td>
                                         <td>{{ $bill->order_date }}</td>
-
+                                        @if($bill->status == 0)
+                                        <td>Đơn hàng bị hủy</td>
+                                        @elseif($bill->status == 1)
+                                        <td>Đơn hàng đang chờ xác nhận</td>
+                                        @elseif($bill->status == 2)
+                                        <td>Đã xác nhận đơn hàng</td>
+                                        @elseif($bill->status == 3)
+                                        <td>Đơn hàng đang giao</td>
+                                        @elseif($bill->status == 4)
+                                        <td>Đơn hàng giao thành công</td>
+                                        @endif
 
                                         <td>{{ $bill->created_at }}</td>
                                         <td>{{ $bill->updated_at }}</td>
                                         <td>
                                             <div class="btn-group">
                                                 <button type="button"  data-id = "{{ $bill->id }}" data-route="{{ route('show-bill',$bill->id) }}"  class="redirect-bill btn-update btn btn-info">Xem thông tin</button>
-                                                <button type="button" data-id = "{{ $bill->id }}"  class="btn btn-disable btn-warning">Xác nhận thanh toán</button>
-                                                <button type="button" data-id = "{{ $bill->id }}" data-name = "Hóa đơn số {{ $bill->id }}" data-toggle="modal" data-target="#modal-sm-delete" class="btn btn-delete btn-info">Xóa</button>
+                                                @if($bill->status != 0   || $bill->status != 3)
+                                                <button type="button" data-id = "{{ $bill->id }}" data-toggle="modal" data-target="#modal-update-bills"  class="btn btn-bill-status btn-warning">Cập nhật đơn hàng</button>
+                                                @endif
+                                                <button type="button" data-id = "{{ $bill->id }}" data-name = "Hóa đơn số {{ $bill->id }}" data-toggle="modal" data-target="#modal-sm-delete-bill" class="btn btn-delete btn-info">Xóa</button>
                                               </div>
                                         </td>
                                     </tr>
+                                    @endif
                                     @endforeach
 
                                 </tbody>
@@ -84,5 +99,5 @@
 </div>
 <!-- /.content-wrapper -->
 <!--Model-->
-
+@include('component.admin.delete-bill')
 @endsection

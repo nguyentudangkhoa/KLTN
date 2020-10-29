@@ -11,17 +11,13 @@
                 <!-- general form elements -->
                 <!-- /.card-header -->
                 <!-- form start -->
-                <form id="form-add-user" method="POST" role="form" enctype="multipart/form-data">
+                <form id="form-update-user" method="POST" role="form" enctype="multipart/form-data">
                 @csrf
+                    <input type="hidden" name="id" id="id_update_user">
                     <div class="card-body">
                         <div class="form-group">
-                            <label for="name">Tên người dùng</label>
+                            <label for="name">Tên người dùng(*)</label>
                             <input type="text" class="form-control" id="update-name" name="name" placeholder="Tên người dùng">
-                        </div>
-                        <div class="form-group">
-                            <label for="price">Email</label>
-                            <input type="text" class="form-control" id="email" name="email"
-                                placeholder="Email">
                         </div>
                         <div class="form-group">
                             <label>Quyền đăng nhập</label>
@@ -35,15 +31,15 @@
                         </div>
                         <div class="form-group">
                             <label>Loại sản phẩm</label>
-                            <select name="category" id="category" class="form-control">
+                            <select name="gender" id="gender" class="form-control">
                                 <option selected disabled>Chọn giới tính</option>
                                     <option value="nam">Nam</option>
                                     <option value="nam">Nữ</option>
                             </select>
                         </div>
                         <div class="form-group">
-                            <label for="price">Số điện thoại</label>
-                            <input type="text" class="form-control" id="phone" name="phone"
+                            <label for="price">Số điện thoại(*)</label>
+                            <input type="text" class="form-control" id="update-phone" name="phone"
                                 placeholder="Số điện thoại">
                         </div>
                     </div>

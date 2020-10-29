@@ -53,21 +53,21 @@
                                         <td>{{ $rootCategory->updated_at }}</td>
                                         <td>
                                             @if ($rootCategory->status == 1)
-                                                <div class="btn-group" id="root-enable{{ $rootCategory->id }}">
+                                                <div class="btn-group" id="enable{{ $rootCategory->id }}">
                                                 <button type="button" data-id = "{{ $rootCategory->id }}" data-name="{{ $rootCategory->name }}" data-toggle="modal" data-target="#modal-update-total-category" class="btn-update btn btn-info">Cập nhật</button>
-                                                <button type="button" data-id = "{{ $rootCategory->id }}" data-name="{{ $rootCategory->name }}" data-toggle="modal" data-target="#modal-dis-group" class="btn btn-disable btn-warning">Vô hiệu</button>
-                                                <button type="button" data-id = "{{ $rootCategory->id }}" data-name="{{ $rootCategory->name }}" data-toggle="modal" data-target="#modal-sm-delete" class="btn btn-delete btn-info">Xóa</button>
+                                                <button type="button"  data-toggle="modal" data-target="#modal-sm-dissall" data-id = "{{ $rootCategory->id }}" data-name ="{{ $rootCategory->name }}" data-table="Group_type" class="btn btn-un-dis btn-warning">Vô hiệu hóa</button>
+                                                <button type="button" data-id = "{{ $rootCategory->id }}" data-name="{{ $rootCategory->name }}" data-toggle="modal" data-target="#modal-dis-group" class="btn btn-disable btn-danger">Xóa</button>
                                               </div>
-                                              <div class="btn-group" id="root-disable{{ $rootCategory->id }}" style="display: none">
+                                              <div class="btn-group" id="disable{{ $rootCategory->id }}" style="display: none">
                                                 <button type="button"  data-toggle="modal" data-target="#modal-un-diss" data-id = "{{ $rootCategory->id }}" data-name ="{{ $rootCategory->name }}" data-table="Product" class="btn btn-un-dis btn-danger">Kích hoạt</button>
                                               </div>
                                             @else
-                                            <div class="btn-group" id="root-enable{{ $rootCategory->id }}" style="display: none">
+                                            <div class="btn-group" id="enable{{ $rootCategory->id }}" style="display: none">
                                                 <button type="button" data-id = "{{ $rootCategory->id }}" data-name="{{ $rootCategory->name }}" data-toggle="modal" data-target="#modal-update-total-category" class="btn-update btn btn-info">Cập nhật</button>
-                                                <button type="button" data-id = "{{ $rootCategory->id }}" data-name="{{ $rootCategory->name }}" data-toggle="modal" data-target="#modal-dis-group" class="btn btn-disable btn-warning">Vô hiệu</button>
-                                                <button type="button" data-id = "{{ $rootCategory->id }}" data-name="{{ $rootCategory->name }}" data-toggle="modal" data-target="#modal-sm-delete" class="btn btn-delete btn-info">Xóa</button>
+                                                <button type="button"  data-toggle="modal" data-target="#modal-sm-dissall" data-id = "{{ $rootCategory->id }}" data-name ="{{ $rootCategory->name }}" data-table="Group_type" class="btn btn-un-dis btn-warning">Vô hiệu hóa</button>
+                                                <button type="button" data-id = "{{ $rootCategory->id }}" data-name="{{ $rootCategory->name }}" data-toggle="modal" data-target="#modal-dis-group" class="btn btn-disable btn-danger">Xóa</button>
                                               </div>
-                                              <div class="btn-group" id="root-disable{{ $rootCategory->id }}" >
+                                              <div class="btn-group" id="disable{{ $rootCategory->id }}" >
                                                 <button type="button"  data-toggle="modal" data-target="#modal-un-diss" data-id = "{{ $rootCategory->id }}" data-name ="{{ $rootCategory->name }}" data-table="Product" class="btn btn-un-dis btn-danger">Kích hoạt</button>
                                               </div>
                                             @endif

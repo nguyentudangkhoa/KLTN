@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Sep 08, 2020 at 05:53 PM
+-- Generation Time: Oct 19, 2020 at 07:05 PM
 -- Server version: 10.4.14-MariaDB
 -- PHP Version: 7.4.9
 
@@ -32,12 +32,30 @@ CREATE TABLE `bills` (
   `id_customer` int(10) UNSIGNED DEFAULT NULL,
   `id_payment` int(10) UNSIGNED NOT NULL,
   `total` int(11) DEFAULT NULL,
+  `quantity` int(10) DEFAULT NULL,
   `order_date` datetime NOT NULL,
   `status` int(10) NOT NULL,
   `note` varchar(500) COLLATE utf8mb4_vietnamese_ci DEFAULT NULL,
   `created_at` timestamp NOT NULL DEFAULT current_timestamp(),
   `updated_at` timestamp NOT NULL DEFAULT current_timestamp()
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_vietnamese_ci;
+
+--
+-- Dumping data for table `bills`
+--
+
+INSERT INTO `bills` (`id`, `id_customer`, `id_payment`, `total`, `quantity`, `order_date`, `status`, `note`, `created_at`, `updated_at`) VALUES
+(27, 30, 1, 200000, 2, '2020-09-13 16:01:33', 1, NULL, '2020-09-13 09:01:33', '2020-10-19 16:16:59'),
+(28, 31, 1, 200000, 100, '2020-09-13 16:01:52', 1, NULL, '2020-09-13 09:01:52', '2020-09-13 09:01:52'),
+(29, 32, 1, 320000, 1, '2020-09-13 16:07:33', 1, NULL, '2020-09-13 09:07:33', '2020-09-13 09:07:33'),
+(30, 33, 1, 120000, 2, '2020-09-13 16:10:01', 1, NULL, '2020-09-13 09:10:01', '2020-09-13 09:10:01'),
+(31, 34, 1, 200000, 3, '2020-09-13 16:11:03', 1, NULL, '2020-09-13 09:11:03', '2020-09-13 09:11:03'),
+(32, 35, 1, 200000, 10, '2020-09-13 16:12:24', 1, NULL, '2020-09-13 09:12:24', '2020-09-13 09:12:24'),
+(33, 36, 1, 2720000, 14, '2020-10-17 14:36:12', 1, NULL, '2020-10-17 07:36:12', '2020-10-17 07:36:12'),
+(39, 44, 1, 200000, 1, '2020-10-18 15:20:08', 1, NULL, '2020-10-18 08:20:08', '2020-10-18 08:20:08'),
+(40, 45, 1, 200000, 1, '2020-10-19 09:17:25', 1, NULL, '2020-10-19 02:17:25', '2020-10-19 02:17:25'),
+(41, 46, 1, 200000, 1, '2020-10-19 09:19:31', 1, NULL, '2020-10-19 02:19:31', '2020-10-19 02:19:31'),
+(42, 47, 1, 35000, 1, '2020-10-19 15:33:24', 1, NULL, '2020-10-19 08:33:24', '2020-10-19 08:33:24');
 
 -- --------------------------------------------------------
 
@@ -46,6 +64,7 @@ CREATE TABLE `bills` (
 --
 
 CREATE TABLE `bill_detail` (
+  `id` int(10) UNSIGNED NOT NULL,
   `id_bill` int(10) UNSIGNED NOT NULL,
   `id_product` int(10) UNSIGNED NOT NULL,
   `price` int(11) NOT NULL,
@@ -53,6 +72,25 @@ CREATE TABLE `bill_detail` (
   `created_at` timestamp NOT NULL DEFAULT current_timestamp(),
   `updated_at` timestamp NOT NULL DEFAULT current_timestamp()
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_vietnamese_ci;
+
+--
+-- Dumping data for table `bill_detail`
+--
+
+INSERT INTO `bill_detail` (`id`, `id_bill`, `id_product`, `price`, `quantity`, `created_at`, `updated_at`) VALUES
+(17, 27, 31, 200000, 1, '2020-09-13 09:01:33', '2020-09-13 09:01:33'),
+(18, 28, 31, 200000, 1, '2020-09-13 09:01:52', '2020-09-13 09:01:52'),
+(19, 29, 31, 200000, 1, '2020-09-13 09:07:33', '2020-09-13 09:07:33'),
+(20, 29, 30, 120000, 1, '2020-09-13 09:07:33', '2020-09-13 09:07:33'),
+(21, 30, 30, 120000, 1, '2020-09-13 09:10:01', '2020-09-13 09:10:01'),
+(22, 31, 31, 200000, 1, '2020-09-13 09:11:03', '2020-09-13 09:11:03'),
+(23, 32, 31, 200000, 1, '2020-09-13 09:12:24', '2020-09-13 09:12:24'),
+(24, 33, 31, 2600000, 13, '2020-10-17 07:36:12', '2020-10-17 07:36:12'),
+(25, 33, 30, 120000, 1, '2020-10-17 07:36:12', '2020-10-17 07:36:12'),
+(31, 39, 31, 200000, 1, '2020-10-18 08:20:08', '2020-10-18 08:20:08'),
+(32, 40, 31, 200000, 1, '2020-10-19 02:17:25', '2020-10-19 02:17:25'),
+(33, 41, 31, 200000, 1, '2020-10-19 02:19:31', '2020-10-19 02:19:31'),
+(34, 42, 1, 35000, 1, '2020-10-19 08:33:24', '2020-10-19 08:33:24');
 
 -- --------------------------------------------------------
 
@@ -79,7 +117,7 @@ CREATE TABLE `comments` (
 CREATE TABLE `customer` (
   `id` int(10) UNSIGNED NOT NULL,
   `name` varchar(100) COLLATE utf8mb4_vietnamese_ci NOT NULL,
-  `email` varchar(100) COLLATE utf8mb4_vietnamese_ci NOT NULL,
+  `email` varchar(100) COLLATE utf8mb4_vietnamese_ci DEFAULT NULL,
   `gender` varchar(20) COLLATE utf8mb4_vietnamese_ci DEFAULT NULL,
   `address` varchar(200) COLLATE utf8mb4_vietnamese_ci NOT NULL,
   `phone_number` varchar(11) COLLATE utf8mb4_vietnamese_ci NOT NULL,
@@ -87,6 +125,30 @@ CREATE TABLE `customer` (
   `created_at` timestamp NOT NULL DEFAULT current_timestamp(),
   `updated_at` timestamp NOT NULL DEFAULT current_timestamp()
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_vietnamese_ci;
+
+--
+-- Dumping data for table `customer`
+--
+
+INSERT INTO `customer` (`id`, `name`, `email`, `gender`, `address`, `phone_number`, `id_user`, `created_at`, `updated_at`) VALUES
+(30, 'nguyentudangkhoa', NULL, NULL, '75 Võ Hữu, Phan Thiết, Bình Thuận', '0389643555', NULL, '2020-09-13 09:01:32', '2020-09-13 09:01:32'),
+(31, 'nguyentudangkhoa', 'nguyentudangkhoa@gmail.com', NULL, '75 Võ Hữu, Phan Thiết, Bình Thuận', '0389643555', NULL, '2020-09-13 09:01:52', '2020-09-13 09:01:52'),
+(32, 'nguyentudangkhoa', 'nguyentudangkhoa@gmail.com', NULL, '75 Võ Hữu, Phan Thiết, Bình Thuận', '0389643555', NULL, '2020-09-13 09:07:33', '2020-09-13 09:07:33'),
+(33, 'nguyentudangkhoa', 'nguyentudangkhoa@gmail.com', NULL, '75 Võ Hữu, Phan Thiết, Bình Thuận', '0389643555', NULL, '2020-09-13 09:10:01', '2020-09-13 09:10:01'),
+(34, 'nguyentudangkhoa', 'nguyentudangkhoa@gmail.com', NULL, '75 Võ Hữu, Phan Thiết, Bình Thuận', '0389643555', NULL, '2020-09-13 09:11:03', '2020-09-13 09:11:03'),
+(35, 'nguyentudangkhoa', 'khoakute1997@gmail.com', NULL, '75 Võ Hữu, Phan Thiết, Bình Thuận', '0389643555', NULL, '2020-09-13 09:12:24', '2020-09-13 09:12:24'),
+(36, 'nguyentudangkhoa', 'khoakute1997@gmail.com', NULL, 'asdasdasd', '0389643555', 9, '2020-10-17 07:36:12', '2020-10-17 07:36:12'),
+(37, 'nguyentudangkhoa', 'khoakute1997@gmail.com', NULL, 'adasda', '0389643555', 9, '2020-10-17 07:36:38', '2020-10-17 07:36:38'),
+(38, 'nguyentudangkhoa', 'khoakute1997@gmail.com', NULL, 'adasda', '0389643555', 9, '2020-10-17 07:36:41', '2020-10-17 07:36:41'),
+(39, 'admin', 'nguyentudangkhoa@gmail.com', NULL, '75 Võ Hữu, Phan Thiết, Bình Thuận', '0389643555', 4, '2020-10-17 17:09:16', '2020-10-17 17:09:16'),
+(40, 'admin', 'nguyentudangkhoa@gmail.com', NULL, '75 Võ Hữu, Phan Thiết, Bình Thuận', '0389643555', 4, '2020-10-17 17:12:20', '2020-10-17 17:12:20'),
+(41, 'admin', 'khoakute1997@gmail.com', NULL, '75 Võ Hữu, Phan Thiết, Bình Thuận', '0389643555', 4, '2020-10-17 17:15:54', '2020-10-17 17:15:54'),
+(42, 'admin', 'admin@gmail.com', NULL, '75 Võ Hữu, Phan Thiết, Bình Thuận', '0389643555', 4, '2020-10-17 17:16:44', '2020-10-17 17:16:44'),
+(43, 'admin', 'nguyentudangkhoa@gmail.com', NULL, '75 Võ Hữu, Phan Thiết, Bình Thuận', '0389643555', 4, '2020-10-17 17:17:14', '2020-10-17 17:17:14'),
+(44, 'Thay Đăng', 'pvdang@ntt.edu.vn', NULL, '75 Võ Hữu, Phan Thiết, Bình Thuận', '0903648212', NULL, '2020-10-18 08:20:08', '2020-10-18 08:20:08'),
+(45, 'admin', 'nguyentudangkhoa@gmail.com', NULL, '75 Võ Hữu, Phan Thiết, Bình Thuận', '0389643555', 4, '2020-10-19 02:17:25', '2020-10-19 02:17:25'),
+(46, 'admin', 'nguyentudangkhoa@gmail.com', NULL, '75 Võ Hữu, Phan Thiết, Bình Thuận', '0389643555', 4, '2020-10-19 02:19:31', '2020-10-19 02:19:31'),
+(47, 'admin', 'nguyentudangkhoa@gmail.com', NULL, '75 Võ Hữu, Phan Thiết, Bình Thuận', '0389643555', 4, '2020-10-19 08:33:24', '2020-10-19 08:33:24');
 
 -- --------------------------------------------------------
 
@@ -158,7 +220,7 @@ CREATE TABLE `group_type` (
 --
 
 INSERT INTO `group_type` (`id`, `name`, `status`, `created_at`, `updated_at`) VALUES
-(1, 'Thực phẩm', 1, '2020-07-25 05:16:57', '2020-07-25 05:16:57'),
+(1, 'Thực phẩm', 1, '2020-07-25 05:16:57', '2020-10-17 14:42:45'),
 (2, 'Vật dụng gia đình', 1, '2020-07-25 05:17:16', '2020-07-25 05:17:16');
 
 -- --------------------------------------------------------
@@ -175,6 +237,13 @@ CREATE TABLE `payment` (
   `updated_at` timestamp NOT NULL DEFAULT current_timestamp()
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_vietnamese_ci;
 
+--
+-- Dumping data for table `payment`
+--
+
+INSERT INTO `payment` (`id`, `name`, `status`, `created_at`, `updated_at`) VALUES
+(1, 'COD', 1, '2020-09-13 06:49:32', '2020-09-13 06:49:32');
+
 -- --------------------------------------------------------
 
 --
@@ -189,7 +258,7 @@ CREATE TABLE `product` (
   `quantity` int(11) DEFAULT 0,
   `status` int(11) NOT NULL DEFAULT 1,
   `description` varchar(1000) COLLATE utf8mb4_vietnamese_ci DEFAULT NULL,
-  `id_unit` int(10) UNSIGNED NOT NULL,
+  `id_unit` int(10) UNSIGNED DEFAULT NULL,
   `id_type` int(10) UNSIGNED NOT NULL,
   `created_at` timestamp NOT NULL DEFAULT current_timestamp(),
   `updated_at` timestamp NOT NULL DEFAULT current_timestamp()
@@ -200,8 +269,8 @@ CREATE TABLE `product` (
 --
 
 INSERT INTO `product` (`id`, `name`, `price`, `images`, `quantity`, `status`, `description`, `id_unit`, `id_type`, `created_at`, `updated_at`) VALUES
-(1, 'Nước rửa chén Vim', 35000, 'a1.jpg', 100, 1, NULL, 6, 16, '2020-07-25 06:05:01', '2020-07-25 06:05:01'),
-(2, 'Nước tẩy rửa bồn cầu Harpic', 40000, 'a2.jpg', 100, 1, NULL, 6, 16, '2020-07-25 06:05:52', '2020-07-25 06:05:52'),
+(1, 'Nước rửa chén Vim', 35000, 'a1.jpg', 99, 1, NULL, 6, 16, '2020-07-25 06:05:01', '2020-10-19 08:33:24'),
+(2, 'Nước tẩy rửa bồn cầu Harpic', 40000, 'a2.jpg', 10, 1, NULL, 6, 17, '2020-07-25 06:05:52', '2020-10-17 07:12:49'),
 (3, 'Nước xả vải Comfort', 70000, 'a3.jpg', 100, 1, NULL, 6, 23, '2020-07-25 06:06:40', '2020-07-25 06:06:40'),
 (4, 'Sáp thơm Odonil', 49000, 'a4.jpg', 100, 1, NULL, 1, 19, '2020-07-25 06:07:30', '2020-07-25 06:07:30'),
 (5, 'Bột giặt Suft exel matic', 60000, 'a5.jpg', 100, 1, NULL, 1, 23, '2020-07-25 06:12:16', '2020-07-25 06:12:16'),
@@ -229,7 +298,7 @@ INSERT INTO `product` (`id`, `name`, `price`, `images`, `quantity`, `status`, `d
 (29, 'Hạt hạnh nhân', 250000, 'm1.jpg', 100, 1, NULL, 2, 28, '2020-07-25 08:04:53', '2020-07-25 08:04:53'),
 (30, 'Hạt điều', 120000, 'm2.jpg', 100, 1, NULL, 2, 28, '2020-07-25 08:06:12', '2020-07-25 08:06:12'),
 (31, 'Hạt dẽ', 200000, 'm3.jpg', 100, 1, NULL, 2, 28, '2020-07-25 08:07:20', '2020-07-25 08:07:20'),
-(32, 'Dầu thực vật Fortune', 45000, 'mk6.jpg', 0, 1, NULL, 6, 13, '2020-07-25 08:08:23', '2020-07-25 08:08:23'),
+(32, 'Dầu thực vật Fortune', 45000, 'mk6.jpg', 100, 1, NULL, 6, 13, '2020-07-25 08:08:23', '2020-07-25 08:08:23'),
 (33, 'Mì YiPPee', 30000, 'mk7.jpg', 100, 1, NULL, 5, 4, '2020-07-25 08:09:26', '2020-07-25 08:09:26'),
 (34, 'Nui', 45000, 'mk8.jpg', 100, 1, NULL, 5, 4, '2020-07-25 08:12:37', '2020-07-25 08:12:37'),
 (35, 'Bột Aashirvaad', 60000, 's1.jpg', 100, 1, NULL, 3, 10, '2020-07-25 08:18:32', '2020-07-25 08:18:32'),
@@ -244,7 +313,14 @@ INSERT INTO `product` (`id`, `name`, `price`, `images`, `quantity`, `status`, `d
 (44, 'Xịt khử mùi phòng amipur', 100000, 'se1.jpg', 200, 1, NULL, 6, 19, '2020-07-25 08:30:23', '2020-07-25 08:30:23'),
 (45, 'Dầu ăn Freedom', 20000, 'mk4.jpg', 100, 1, NULL, 5, 13, '2020-07-25 09:14:15', '2020-07-25 09:14:15'),
 (46, 'Dầu ăn Saffoia', 120000, 'mk5.jpg', 100, 1, NULL, 5, 13, '2020-07-25 09:15:12', '2020-07-25 09:15:12'),
-(47, 'Mì knorr', 120000, 'mk9.jpg', 100, 1, NULL, 5, 4, '2020-07-25 10:10:05', '2020-07-25 10:10:05');
+(47, 'Mì knorr', 120000, 'mk9.jpg', 100, 1, NULL, 5, 4, '2020-07-25 10:10:05', '2020-07-25 10:10:05'),
+(48, 'Dove', 320000, 'download.jpg', 100, 1, NULL, 6, 25, '2020-10-03 16:28:10', '2020-10-03 16:28:10'),
+(49, 'Tresemme', 320000, 'download (1).jpg', 100, 1, NULL, 6, 25, '2020-10-03 17:02:24', '2020-10-03 17:02:24'),
+(50, 'Gel rửa tay Gross', 160000, 'download (2).jpg', 100, 1, NULL, 6, 25, '2020-10-03 17:37:50', '2020-10-03 17:37:50'),
+(51, 'Gel rửa tay lifeboy', 320000, 'download (3).jpg', 100, 1, NULL, 6, 25, '2020-10-03 17:40:51', '2020-10-03 17:40:51'),
+(52, 'Bộ giặt omo', 180000, 'download (4).jpg', 100, 1, NULL, 5, 23, '2020-10-04 06:50:03', '2020-10-04 06:50:03'),
+(53, 'Bột giặt Surf', 160000, 'download (5).jpg', 12, 1, NULL, 5, 23, '2020-10-04 06:53:35', '2020-10-04 06:53:35'),
+(54, 'Cafe G7', 160000, 'cafe.jpg', 100, 1, NULL, 1, 3, '2020-10-10 14:33:22', '2020-10-10 14:33:22');
 
 -- --------------------------------------------------------
 
@@ -266,8 +342,8 @@ CREATE TABLE `product_type` (
 --
 
 INSERT INTO `product_type` (`id`, `name`, `id_group_type`, `status`, `created_at`, `updated_at`) VALUES
-(1, 'Bánh', 1, 1, '2020-07-25 05:25:57', '2020-07-25 05:25:57'),
-(2, 'Nguyên liệu làm bánh', 1, 1, '2020-07-25 05:27:18', '2020-07-25 05:27:18'),
+(1, 'Bánh', 1, 1, '2020-07-25 05:25:57', '2020-10-18 15:28:03'),
+(2, 'Nguyên liệu làm bánh', 1, 1, '2020-07-25 05:27:18', '2020-10-18 15:28:34'),
 (3, 'Cà phê, trà và thức uống khác', 1, 1, '2020-07-25 05:27:56', '2020-07-25 05:27:56'),
 (4, 'Mì, Pasta', 1, 1, '2020-07-25 05:28:37', '2020-07-25 05:28:37'),
 (5, 'Đồ ngọt, socola', 1, 1, '2020-07-25 05:29:33', '2020-07-25 05:29:33'),
@@ -292,7 +368,8 @@ INSERT INTO `product_type` (`id`, `name`, `id_group_type`, `status`, `created_at
 (26, 'Diệt côn trùng', 2, 1, '2020-07-25 06:26:05', '2020-07-25 06:26:05'),
 (27, 'Vật dụng khác...', 2, 1, '2020-07-25 06:29:22', '2020-07-25 06:29:22'),
 (28, 'Các loại hạt', 1, 1, '2020-07-25 06:29:34', '2020-07-25 06:29:34'),
-(29, 'Thực phẩm khác...', 1, 1, '2020-07-25 08:10:38', '2020-07-25 08:10:38');
+(29, 'Thực phẩm khác...', 1, 1, '2020-07-25 08:10:38', '2020-07-25 08:10:38'),
+(32, 'Hạt', 1, 1, '2020-10-18 02:19:14', '2020-10-18 02:19:14');
 
 -- --------------------------------------------------------
 
@@ -372,10 +449,12 @@ CREATE TABLE `users` (
   `name` varchar(200) COLLATE utf8mb4_vietnamese_ci NOT NULL,
   `email` varchar(200) COLLATE utf8mb4_vietnamese_ci NOT NULL,
   `password` varchar(100) COLLATE utf8mb4_vietnamese_ci NOT NULL,
+  `image` varchar(200) COLLATE utf8mb4_vietnamese_ci DEFAULT NULL,
   `id_role` int(10) UNSIGNED DEFAULT 1,
   `status` int(11) NOT NULL DEFAULT 1,
   `gender` varchar(10) COLLATE utf8mb4_vietnamese_ci NOT NULL,
   `phone` varchar(11) COLLATE utf8mb4_vietnamese_ci DEFAULT NULL,
+  `total_buy` int(10) NOT NULL DEFAULT 0,
   `login_time` datetime DEFAULT NULL,
   `logout_time` datetime DEFAULT NULL,
   `remember_token` varchar(100) COLLATE utf8mb4_vietnamese_ci DEFAULT NULL,
@@ -387,12 +466,11 @@ CREATE TABLE `users` (
 -- Dumping data for table `users`
 --
 
-INSERT INTO `users` (`id`, `name`, `email`, `password`, `id_role`, `status`, `gender`, `phone`, `login_time`, `logout_time`, `remember_token`, `created_at`, `updated_at`) VALUES
-(1, 'nguyentudangkhoa', 'nv_nguyentudangkhoa@gmail.com', '$2y$10$rvkDxSkpT.636joJ2c1OTOEgj.T96t2Kpr9Xj5htSopnuz1qtQYYm', 2, 1, 'nam', NULL, '2020-08-08 12:25:11', '2020-08-08 12:26:06', NULL, '2020-08-02 05:00:42', '2020-08-08 05:26:06'),
-(2, 'nguyentudangkhoa', 'nguyentudangkhoa@gmail.com', '$2y$10$ETT7p6CsL8xVm6rX7jdXj.aoXGx6HZO7UMfIWjn5TmNrd.tBg9co2', 1, 1, 'nam', '0389643555', '2020-09-08 21:38:11', '2020-08-27 20:31:16', 'ZKWHXW7s2JSSv9JLhU88bOq5ZzgHn8X2Duq2oxRkV9YGzNokZ3hMmneBcA71', '2020-08-03 03:32:02', '2020-09-08 14:38:11'),
-(4, 'admin', 'admin@gmail.com', '$2y$10$ixKszR6DnemkVDNFOQPJ0uk7LLL45TPMgCzmXkfsFgAlK3ZSCz6YC', 3, 1, 'nam', NULL, NULL, NULL, NULL, '2020-08-03 13:33:46', '2020-08-03 13:33:46'),
-(5, 'nguyentudangkhoa', 'nguyentudangkhoa1997@gmail.com', '$2y$10$KkWkcwvc.EvKTMxK0VIPGen9J0mPzyiS/zeKT0ObJHMmvMCxRDtm.', 1, 1, 'nam', '0389643555', NULL, NULL, NULL, '2020-08-03 15:38:45', '2020-08-03 15:38:45'),
-(9, 'nguyentudangkhoa', 'khoakute1997@gmail.com', '$2y$10$KYUy4uCO79QN7MatZHe6G.jTTLiRVJF/UGraLKdlUAvKbt8fBshTq', 1, 1, 'nam', '0389643555', '2020-08-27 20:31:23', '2020-08-19 14:17:30', NULL, '2020-08-19 06:19:05', '2020-08-27 13:31:23');
+INSERT INTO `users` (`id`, `name`, `email`, `password`, `image`, `id_role`, `status`, `gender`, `phone`, `total_buy`, `login_time`, `logout_time`, `remember_token`, `created_at`, `updated_at`) VALUES
+(2, 'Nguyễn Từ Đăng Khoa', 'nguyentudangkhoa@gmail.com', '$2y$10$ETT7p6CsL8xVm6rX7jdXj.aoXGx6HZO7UMfIWjn5TmNrd.tBg9co2', 'avatar.png', 1, 1, 'nam', '0389643555', 0, '2020-10-19 09:33:06', '2020-10-19 09:42:14', 'WxTjjG6G1cHKR6PFsAqMktnqyFN4Mksyj1U9ek8Eslw8lI5P5FjfMNS3uRWu', '2020-08-03 03:32:02', '2020-10-19 02:42:14'),
+(4, 'admin', 'admin@gmail.com', '$2y$10$ixKszR6DnemkVDNFOQPJ0uk7LLL45TPMgCzmXkfsFgAlK3ZSCz6YC', NULL, 3, 1, 'nam', NULL, 8, '2020-10-19 15:25:52', '2020-10-19 09:27:35', 'Fv5Hlhoq2pZrUGvLsNPtYab7jNcVSs23Ldx1gcNrG1iNj5y8i80tKeaxDEyT', '2020-08-03 13:33:46', '2020-10-19 08:33:24'),
+(5, 'nguyentudangkhoa', 'nguyentudangkhoa1997@gmail.com', '$2y$10$KkWkcwvc.EvKTMxK0VIPGen9J0mPzyiS/zeKT0ObJHMmvMCxRDtm.', NULL, 1, 1, 'nam', '0389643555', 0, '2020-09-12 12:30:19', NULL, NULL, '2020-08-03 15:38:45', '2020-09-12 05:30:19'),
+(9, 'nguyentudangkhoa', 'khoakute1997@gmail.com', '$2y$10$KYUy4uCO79QN7MatZHe6G.jTTLiRVJF/UGraLKdlUAvKbt8fBshTq', NULL, 1, 1, 'nam', '0389643555', 3, '2020-10-17 14:37:53', '2020-10-17 14:39:33', 'ePNEPyXKhw7Qz63fUSqMN6goPmX4LzUzbg3oONz9mdkk4DHoAD05K4jhivBP', '2020-08-19 06:19:05', '2020-10-17 07:39:33');
 
 -- --------------------------------------------------------
 
@@ -413,7 +491,9 @@ CREATE TABLE `user_address` (
 --
 
 INSERT INTO `user_address` (`id`, `address`, `id_user`, `created_at`, `updated_at`) VALUES
-(1, '75 Võ Hữu, Phan Thiết, Bình Thuận', 2, '2020-09-08 07:27:36', '2020-09-08 07:27:36');
+(1, '75 Võ Hữu, Phan Thiết, Bình Thuận', 2, '2020-09-08 07:27:36', '2020-09-08 07:27:36'),
+(2, '164/10/24 Thanh Loc 09, Ho Chi Minh', 2, '2020-09-22 15:17:01', '2020-09-22 15:17:01'),
+(3, 'Phan thiết, Bình thuận', 2, '2020-10-10 10:34:13', '2020-10-10 10:34:13');
 
 --
 -- Indexes for dumped tables
@@ -431,6 +511,7 @@ ALTER TABLE `bills`
 -- Indexes for table `bill_detail`
 --
 ALTER TABLE `bill_detail`
+  ADD PRIMARY KEY (`id`),
   ADD KEY `FK_Bill_detail_Bills` (`id_bill`),
   ADD KEY `FK_Bill_details_Product` (`id_product`);
 
@@ -529,6 +610,18 @@ ALTER TABLE `user_address`
 --
 
 --
+-- AUTO_INCREMENT for table `bills`
+--
+ALTER TABLE `bills`
+  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=43;
+
+--
+-- AUTO_INCREMENT for table `bill_detail`
+--
+ALTER TABLE `bill_detail`
+  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=35;
+
+--
 -- AUTO_INCREMENT for table `comments`
 --
 ALTER TABLE `comments`
@@ -538,7 +631,7 @@ ALTER TABLE `comments`
 -- AUTO_INCREMENT for table `customer`
 --
 ALTER TABLE `customer`
-  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT;
+  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=48;
 
 --
 -- AUTO_INCREMENT for table `description_images`
@@ -562,19 +655,19 @@ ALTER TABLE `group_type`
 -- AUTO_INCREMENT for table `payment`
 --
 ALTER TABLE `payment`
-  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT;
+  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
 
 --
 -- AUTO_INCREMENT for table `product`
 --
 ALTER TABLE `product`
-  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=48;
+  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=55;
 
 --
 -- AUTO_INCREMENT for table `product_type`
 --
 ALTER TABLE `product_type`
-  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=32;
+  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=35;
 
 --
 -- AUTO_INCREMENT for table `rating`
@@ -604,7 +697,7 @@ ALTER TABLE `users`
 -- AUTO_INCREMENT for table `user_address`
 --
 ALTER TABLE `user_address`
-  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
+  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
 
 --
 -- Constraints for dumped tables
@@ -621,7 +714,7 @@ ALTER TABLE `bills`
 -- Constraints for table `bill_detail`
 --
 ALTER TABLE `bill_detail`
-  ADD CONSTRAINT `FK_Bill_detail_Bills` FOREIGN KEY (`id_bill`) REFERENCES `bills` (`id`),
+  ADD CONSTRAINT `FK_Bill_Billdetails` FOREIGN KEY (`id_bill`) REFERENCES `bills` (`id`),
   ADD CONSTRAINT `FK_Bill_details_Product` FOREIGN KEY (`id_product`) REFERENCES `product` (`id`);
 
 --

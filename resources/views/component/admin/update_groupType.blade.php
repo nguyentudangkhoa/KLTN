@@ -11,8 +11,9 @@
                 <!-- general form elements -->
                 <!-- /.card-header -->
                 <!-- form start -->
-                <form id="form-update-category" method="POST" role="form">
+                <form id="form-update-root-category" method="POST" role="form">
 @csrf
+                    <input type="hidden" name="id_root" id="id_root">
                     <div class="card-body">
                         <div class="form-group">
                             <label for="name">Tên danh mục tổng</label>

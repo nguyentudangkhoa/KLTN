@@ -46,7 +46,7 @@ class AddProductCotroller extends Controller
                 }
 
             }else{
-
+                return response()->json(['report'=>"Bạn vui nhập ảnh."]);
             }
 
 

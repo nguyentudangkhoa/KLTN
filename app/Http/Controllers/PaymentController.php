@@ -12,6 +12,7 @@ use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Session;
 use Mail;
 use \App\Mail\SendMail;
+use App\Product;
 
 /**
  * Undocumented class
@@ -67,6 +68,9 @@ class PaymentController extends Controller
                             'price' => $value['price'],
                             'quantity' => $value['qty']
                         ]);
+                        $product =  Product::find($key);
+                        $product->quantity -= $value['qty'];
+                        $product->save();
                     }
                     $details = [
                         'title' => 'Cảm ơn đã mua hàng tại Grocery shop',
@@ -101,6 +105,9 @@ class PaymentController extends Controller
                             'price' => $value['price'],
                             'quantity' => $value['qty']
                         ]);
+                        $product =  Product::find($key);
+                        $product->quantity -= $value['qty'];
+                        $product->save();
                     }
                     if ($email != null) {
                         $details = [
@@ -116,7 +123,7 @@ class PaymentController extends Controller
                     return response()->json(['report' => "Đặt hàng thành công", 'route' => route('index')]);
                 }
             }
-        }else{
+        } else {
             return response()->json(['report' => "Đã xãy ra lỗi khi mua hàng có thể dơn hàng của bạn đã được thanh toán.", 'route' => route('index')]);
         }
     }

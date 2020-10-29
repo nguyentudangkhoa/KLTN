@@ -21,11 +21,11 @@
             </div>
         </div><!-- /.container-fluid -->
     </section>
-    @if(Session::has('report'))
-        <div class="alert alert-danger">{{Session::get('report')}}</div>
+    @if(Session::has('Update-Images-Product-ff'))
+        <div class="alert alert-danger">{{Session::get('Update-Images-Product-ff')}}</div>
     @endif
-    @if(Session::has('success'))
-        <div class="alert alert-success">{{Session::get('success')}}</div>
+    @if(Session::has('Update-Images-Product-ss'))
+        <div class="alert alert-success">{{Session::get('Update-Images-Product-ss')}}</div>
     @endif
     <!-- Main content -->
     <section class="content">
@@ -77,20 +77,22 @@
                                         <td>{{ $product->created_at }}</td>
                                         <td>{{ $product->updated_at }}</td>
                                         <td>
-                                            @if ($product->status == 1)
-                                                <div class="btn-group" id="product-enable{{ $product->id }}">
+                                            @if ($product->status == 1 && $product->status != 2)
+                                             <div class="btn-group" id="enable{{ $product->id }}">
                                                 <button type="button" class="btn btn-update btn-success" data-toggle="modal" data-target="#modal-update-default" data-id = "{{ $product->id }}" data-name ="{{ $product->name }}" data-price="{{ $product->price }}" data-quantity="{{ $product->quantity }}" data-description="{{ $product->description }}">Cập nhật</button>
+                                                <button type="button"  data-toggle="modal" data-target="#modal-sm-dissall" data-id = "{{ $product->id }}" data-name ="{{ $product->name }}" data-table="Product" class="btn btn-un-dis btn-warning">Vô hiệu hóa</button>
                                                 <button type="button" data-id = "{{ $product->id }}" data-toggle="modal" data-target="#modal-sm-report"  data-name ="{{ $product->name }}" data-table="Product" class="btn btn-disable btn-danger">Xóa</button>
                                               </div>
-                                              <div class="btn-group" id="product-disable{{ $product->id }}" style="display: none">
+                                              <div class="btn-group" id="disable{{ $product->id }}" style="display: none">
                                                 <button type="button"  data-toggle="modal" data-target="#modal-un-diss" data-id = "{{ $product->id }}" data-name ="{{ $product->name }}" data-table="Product" class="btn btn-un-dis btn-danger">Kích hoạt</button>
                                               </div>
                                             @else
-                                            <div class="btn-group" id="product-enable{{ $product->id }}" style="display: none">
+                                            <div class="btn-group" id="enable{{ $product->id }}" style="display: none">
                                                 <button type="button" class="btn btn-update btn-success" data-toggle="modal" data-target="#modal-update-default" data-id = "{{ $product->id }}" data-name ="{{ $product->name }}" data-price="{{ $product->price }}" data-quantity="{{ $product->quantity }}" data-description="{{ $product->description }}">Cập nhật</button>
+                                                <button type="button"  data-toggle="modal" data-target="#modal-sm-dissall" data-id = "{{ $product->id }}" data-name ="{{ $product->name }}" data-table="Product" class="btn btn-un-dis btn-warning">Vô hiệu hóa</button>
                                                 <button type="button" data-id = "{{ $product->id }}" data-toggle="modal" data-target="#modal-sm-report"  data-name ="{{ $product->name }}" data-table="Product" class="btn btn-disable btn-danger">Xóa</button>
                                               </div>
-                                            <div class="btn-group" id="product-disable{{ $product->id }}" >
+                                            <div class="btn-group" id="disable{{ $product->id }}" >
                                                 <button type="button"  data-toggle="modal" data-target="#modal-un-diss" data-id = "{{ $product->id }}" data-name ="{{ $product->name }}" data-table="Product" class="btn btn-un-dis btn-danger">Kích hoạt</button>
                                               </div>
                                             @endif

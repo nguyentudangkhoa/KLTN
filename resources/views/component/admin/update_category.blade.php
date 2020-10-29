@@ -13,6 +13,7 @@
                 <!-- form start -->
                 <form id="form-update-category" method="POST" role="form">
 @csrf
+<input type="hidden" name="id_product" id="id_product">
                     <div class="card-body">
                         <div class="form-group">
                             <label for="name">Tên danh mục sản phẩm</label>
@@ -30,7 +31,7 @@
                         </div>
                     </div>
                     <div class="modal-footer justify-content-between">
-                        <button type="submit" class="btn btn-primary">Thêm danh mục</button>
+                        <button type="submit" class="btn btn-primary">Cập nhật danh mục</button>
                     </div>
                 </form>
 

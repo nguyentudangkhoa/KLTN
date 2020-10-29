@@ -10,7 +10,7 @@ use Illuminate\Http\Request;
 class AdminCategoryController extends Controller
 {
     public function ShowCategory(Request $req){
-        $categories = Product_type::where('status',1)->get();
+        $categories = Product_type::get();
         $group_cagories = Group_type::get();
         return view('admin.table.category',compact('categories','group_cagories'));
     }

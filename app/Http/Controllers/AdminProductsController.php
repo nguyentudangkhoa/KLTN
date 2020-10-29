@@ -16,4 +16,10 @@ class AdminProductsController extends Controller
         $productTypes = Product_type::get();
         return view('admin.table.products',compact('products','units','productTypes'));
     }
+    public function ShowQuantity(){
+        $products = Product::where('status',1)->get();
+        $units = Unit::get();
+        $productTypes = Product_type::get();
+        return view('admin.table.quantity_product',compact('products','units','productTypes'));
+    }
 }

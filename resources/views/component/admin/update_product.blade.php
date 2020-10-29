@@ -62,7 +62,10 @@
                         <button type="submit" class="btn btn-primary">Sửa sản phẩm</button>
                     </div>
                 </form>
-                <form action="" method="post" enctype="multipart/form-data">
+                <form action="{{ route('update-image-product') }}" method="post" enctype="multipart/form-data">
+                    @method('put')
+                    @csrf
+                     <input type="hidden" name="id_pro" id="id_pro">
                     <div class="form-group">
                         <label for="update-exampleInputFile">Nhập hình ảnh</label>
                         <div class="input-group">

@@ -64,27 +64,44 @@ Route::prefix('admin')->middleware('check-admin')->group(function () {
     Route::post('/add-products','AddProductCotroller@AddProduct')->name('add-products');
     Route::put('/update-products','UpdateProductController@UpdateProduct')->name('update-products');
     Route::put('/en-product','EnableController@EnableProduct')->name('en-product');
-    //category
+    Route::put('/update-image-product','UpdateProductController@UpdateImagesProduct')->name('update-image-product');    //category
     Route::put('/en-category','EnableController@EnableCategory')->name('en-category');
     Route::get('/categories','AdminCategoryController@ShowCategory')->name('categories');
     //root category
     Route::put('/en-root','EnableController@EnableRoot')->name('en-root');
     Route::get('/root-categories','AdminRootCategoryController@ShowRootCategory')->name('root-categories');
+    Route::put('/update-root-category','UpdateRootController@UpdateRootCate')->name('update-root-categor');
     //unit
     Route::get('/units','AdminUnitController@ShowUnit')->name('units');
     Route::put('/disable-unit','DisableController@DisableUnit')->name('disable-unit');
+    Route::put('/en-unit','EnableController@EnableUnit')->name('en-unit');
+    Route::put('/update-unit','UpdateUnitController@UpdateUnit')->name('update-unit');
+    Route::post('/add-unit','AddUnitController@AddUnit')->name('add-unit');
     //User task
     Route::get('/users','AdminUserController@ShowUser')->name('users');
     Route::put('/disable-user','DisableController@DisableUser')->name('disable-user');
     Route::put('/en-user','EnableController@EnableUser')->name('en-user');
+    Route::delete('/delete-user','DeleteUserController@DeleteUser')->name('delete-user');
     //Bill
     Route::get('/bills','AdminBillController@ShowBill')->name('bills');
     Route::get('/show-bill/{id}','AdminBillController@ShowBillDetails')->name('show-bill');
+    Route::put('/update-bill','UpdateBillController@UpdateBill')->name('update-bill');
+    Route::put('/delete-bill','DeleteBillController@DeleteBill')->name('delete-bill');
     //disable
     Route::put('/disable','DisableController@Disable')->name('disable');
     Route::put('/disable-type','DisableController@DisableType')->name('disable-type');
-    Route::put('/disable-group','DisableController@DisableGroup')->name('disable-group');
+    Route::put('/disable-group','DisableController@DeleteBill')->name('disable-group');
     //print PDF
     Route::get('/print-bills/{id}','AdminPDFController@PrintPDF')->name('print-bills');
+    //category
+    Route::put('/update-category','UpdateCategoryController@UpdateCategory')->name('update-category');
+    Route::post('/add-category','AddCategoryController@AddCategory')->name('add-category');
+    //user
+    Route::put('/update-user','UpdateUserController@UpdateUser')->name('update-user');
+    //quantity product
+    Route::get('/quantity-product','AdminProductsController@ShowQuantity')->name('quantity-product');
+    Route::get('/sole-product','AdminBillController@ShowSoleProduct')->name('sole-product');
+    //dissable all
+    Route::put('/dissable-all','DissAllController@dissAll')->name('dissable-all');
 });
 

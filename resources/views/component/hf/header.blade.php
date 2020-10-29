@@ -34,10 +34,12 @@
                                         <div class="col-sm-6 multi-gd-img">
                                             <ul class="multi-column-dropdown">
                                                 @foreach ($kitchen_items as $kitchen)
+                                                @if($kitchen->status == 1)
                                                 <li>
                                                     <a
                                                         href="{{ route('product','product_type='.$kitchen->name) }}">{{ $kitchen->name }}</a>
                                                 </li>
+                                                @endif
                                                 @endforeach
                                             </ul>
                                         </div>

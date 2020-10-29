@@ -15,7 +15,7 @@
             </div>
             <div class="modal-footer justify-content-between">
                 <button type="button" class="btn btn-default" data-dismiss="modal">Đóng</button>
-                <button type="button" class="btn btn-dis-group btn-primary">Vô hiệu hóa</button>
+                <button type="button" class="btn btn-dis-group btn-primary">Xóa</button>
             </div>
         </div>
         <!-- /.modal-content -->

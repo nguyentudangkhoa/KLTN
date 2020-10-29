@@ -203,9 +203,15 @@
                                     </a>
                                 </li>
                                 <li class="nav-item">
-                                    <a href="pages/tables/jsgrid.html" class="nav-link">
+                                    <a href="{{ route('quantity-product') }}" class="nav-link">
                                         <i class="far fa-circle nav-icon"></i>
-                                        <p>Đánh giá</p>
+                                        <p>Quản lý tồn kho</p>
+                                    </a>
+                                </li>
+                                <li class="nav-item">
+                                    <a href="{{ route('sole-product') }}" class="nav-link">
+                                        <i class="far fa-circle nav-icon"></i>
+                                        <p>Quản lý xuất kho</p>
                                     </a>
                                 </li>
                             </ul>
@@ -305,22 +311,39 @@
 <!-- bs-custom-file-input -->
 <script src="assets/AdminLTE/plugins/bs-custom-file-input/bs-custom-file-input.min.js"></script>
 
+<!--disable all-->
+<script src="assets/js/admin/disable/disable-all.js"></script>
 <!--Add product-->
 <script src="assets/js/admin/product/add-product.js"></script>
 <!--Update product-->
 <script src="assets/js/admin/product/update-product.js"></script>
+<!--Update category-->
+<script src="assets/js/admin/category/update-category.js"></script>
+<script src="assets/js/admin/category/add-category.js"></script>
 <!--Report-->
 <script src="assets/js/admin/product/disable.js"></script>
 <script src="assets/js/admin/product/delete.js"></script>
 <script src="assets/js/admin/product/enable.js"></script>
+<!--bill-->
+<script src="assets/js/admin/bill/update-bill.js"></script>
+<script src="assets/js/admin/bill/delete-bill.js"></script>
+<!--unit-->
+<script src="assets/js/admin/unit/update-unit.js"></script>
+<script src="assets/js/admin/unit/add-unit.js"></script>
+<!--user-->
+<script src="assets/js/admin/user/update-user.js"></script>
+<script src="assets/js/admin/user/delete-user.js"></script>
+<!--root category-->
+<script src="assets/js/admin/rootcategory/update-root-category.js"></script>
 <!-- SweetAlert2 -->
 <script src="assets/AdminLTE/plugins/sweetalert2/sweetalert2.min.js"></script>
 <!-- Toastr -->
 <script src="assets/AdminLTE/plugins/toastr/toastr.min.js"></script>
 <script src="assets/js/admin/redirect-bil.js"></script>
 <!--End form-->
-<!--Dialog button component-->
 
+<!--Dialog button component-->
+@include('component.admin.dis_all')
 <script type="text/javascript">
     $(document).ready(function () {
       bsCustomFileInput.init();
