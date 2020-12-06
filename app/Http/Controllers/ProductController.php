@@ -7,6 +7,7 @@ use App\Discount_info;
 use App\Group_type;
 use App\Product;
 use App\Product_type;
+use App\Rating;
 use Illuminate\Http\Request;
 
 class ProductController extends Controller
@@ -32,7 +33,7 @@ class ProductController extends Controller
     public function Single(Request $req)
     {
         //Product info
-        $product = Product::select('product.id', 'product.name', 'product.images', 'product.id_type', 'product.price','product.quantity', 'discount_info.promotion_price', 'discount_info.end_at', 'discount_info.status', 'product.created_at')
+        $product = Product::select('product.id', 'product.name', 'product.images','product.description', 'product.id_type', 'product.price','product.quantity', 'discount_info.promotion_price', 'discount_info.end_at', 'discount_info.status', 'product.created_at')
             ->leftJoin('discount_info', 'discount_info.id_product', '=', 'product.id')
             ->where('product.name', 'like', '%' . $req->product_name . '%')
             ->where('product.status', 1)
@@ -47,7 +48,20 @@ class ProductController extends Controller
             ->inRandomOrder()
             ->limit(10)
             ->get();
+        $rating = Rating::where('id_product',$product->id)->get();
+        $average=0;
+        $star=0;
+        $i=0;
+        foreach($rating as $rate){
+            $star+=$rate->star_point;
+            $i++;
+        }
+        if($i==0){
+            $average=0;
+        }else{
+            $average = (int)($star/$i);
+        }
         $images = Description_images::where('id_product', $product->id)->get();
-        return view('product.single', compact('product', 'same_type_products', 'images'));
+        return view('product.single', compact('product', 'same_type_products', 'images','average'));
     }
 }

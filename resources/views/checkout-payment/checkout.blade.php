@@ -127,7 +127,16 @@ Xác nhận thanh toán
                                     </div>
                                     <div class="w3_agileits_card_number_grid_right">
                                         <div class="controls">
+                                            @if (isset(Auth::user()->User_Address->first()->address))
+                                            @if(Auth::user()->User_Address->first()->address)
+                                            <input type="text" placeholder="Số nhà, tên đường, tỉnh/thành phố" id="city_input" name="landmark" value="{{ Auth::user()->User_Address->first()->address }}" required="">
+                                            @else
                                             <input type="text" placeholder="Số nhà, tên đường, tỉnh/thành phố" id="city_input" name="landmark" required="">
+                                            @endif
+                                            @else
+                                            <input type="text" placeholder="Số nhà, tên đường, tỉnh/thành phố" id="city_input" name="landmark" required="">
+                                            @endif
+
                                         </div>
                                     </div>
                                     <div class="w3_agileits_card_number_grid_right">

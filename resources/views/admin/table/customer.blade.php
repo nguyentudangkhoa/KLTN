@@ -10,12 +10,12 @@
         <div class="container-fluid">
             <div class="row mb-2">
                 <div class="col-sm-6">
-                    <h1>Quản lý nhập kho</h1>
+                    <h1>Khách hàng</h1>
                 </div>
                 <div class="col-sm-6">
                     <ol class="breadcrumb float-sm-right">
                         <li class="breadcrumb-item"><a href="{{ route('admin-index') }}">Trang chủ</a></li>
-                        <li class="breadcrumb-item active">Quản lý nhập kho</li>
+                        <li class="breadcrumb-item active">Khách hàng</li>
                     </ol>
                 </div>
             </div>
@@ -41,19 +41,21 @@
                             <table id="example1" class="table table-bordered table-striped">
                                 <thead>
                                     <tr>
-                                        <th>Mã sản phẩm</th>
-                                        <th>Tên sản phẩm</th>
-                                        <th>Hình ảnh</th>
-                                        <th>Số lượng</th>
+                                        <th>Tên khách hàng</th>
+                                        <th>Email</th>
+                                        <th>Giới tính</th>
+                                        <th>Địa chỉ</th>
+                                        <th>Số điện thoại</th>
                                     </tr>
                                 </thead>
                                 <tbody>
-                                    @foreach ($products as $product)
-                                    <tr id="tb-product{{ $product->id }}">
-                                        <td>{{ $product->id }}</td>
-                                        <td>{{ $product->name }}</td>
-                                        <td> <img src="assets/images/{{ $product->images }}" height="50px" width="50px" alt=""></td>
-                                        <td>{{ $product->quantity }}</td>
+                                    @foreach ($customers as $customer)
+                                    <tr id="tb-product{{ $customer->id }}">
+                                        <td>{{ $customer->name }}</td>
+                                        <td>{{ $customer->email }}</td>
+                                        <td>{{ $customer->gender }}</td>
+                                        <td>{{ $customer->address }}</td>
+                                        <td>{{ $customer->phone_number }}</td>
                                     </tr>
                                     @endforeach
 

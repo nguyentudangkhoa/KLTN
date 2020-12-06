@@ -37,7 +37,7 @@
                                                 @if($kitchen->status == 1)
                                                 <li>
                                                     <a
-                                                        href="{{ route('product','product_type='.$kitchen->name) }}">{{ $kitchen->name }}</a>
+                                                        href="{{ route('product',$kitchen->name) }}">{{ $kitchen->name }}</a>
                                                 </li>
                                                 @endif
                                                 @endforeach

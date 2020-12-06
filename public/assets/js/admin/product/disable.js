@@ -15,13 +15,11 @@ $(document).ready(function() {
     $('.btn-dis').on('click', function() {
         var id = $('#id-tem').val();
         var _token = $('input[name="_token"]').val();
-        var table = $('#table').val();
         $.ajax({
             url: "admin/disable",
             method: "put",
             data: {
                 id: id,
-                table: table,
                 _token: _token
             },
             success: function(data) {

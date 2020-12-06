@@ -100,4 +100,5 @@
 <!-- /.content-wrapper -->
 <!--Model-->
 @include('component.admin.delete-bill')
+@include('component.admin.update_bill')
 @endsection

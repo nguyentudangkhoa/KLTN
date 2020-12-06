@@ -80,7 +80,7 @@ $(document).ready(function() {
                             icon: 'success',
                             title: data.success
                         });
-                        $('#example1 > tbody').append("<td>" + data.id + "</td><td>" + formData.get('name') + "</td><td>" + formData.get('price') + "</td><td>0</td><td><img src='assets/images/" + data.img + "' width='50px' height='50px'/></td><td>" + formData.get('quantity') + "</td><td>" + formData.get('unit') + "</td><td>" + formData.get('category') + "</td><td>" + datetime() + "</td><td>" + datetime() + "</td><td><div class='btn-group'><button type='button' class='btn btn-info'>Cập nhật</button><button type='button' class='btn btn-warning'>Vô hiệu</button><button type='button' class='btn btn-info'>Xóa</button></div></td>")
+                        $('#example1 > tbody').append("<tr><td>" + data.id + "</td><td>" + formData.get('name') + "</td><td>" + formData.get('price') + "</td><td>0</td><td><img src='assets/images/" + data.img + "' width='50px' height='50px'/></td><td>" + formData.get('quantity') + "</td><td>" + formData.get('unit') + "</td><td>" + formData.get('category') + "</td><td>" + datetime() + "</td><td>" + datetime() + "</td><td><div class='btn-group'><button type='button' class='btn btn-info'>Cập nhật</button><button type='button' class='btn btn-warning'>Vô hiệu</button><button type='button' class='btn btn-info'>Xóa</button></div></td></tr>")
                     }
                 }
             });

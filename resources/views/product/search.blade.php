@@ -52,7 +52,7 @@ Product
                                 <div class="men-cart-pro">
                                     <div class="inner-men-cart-pro">
                                         <a href="{{ route('product_details','product_name='.$product->name) }}"
-                                            class="link-product-add-cart">Quick View</a>
+                                            class="link-product-add-cart">Xem chi tiết</a>
                                     </div>
                                 </div>
                                 @if(((strtotime(date("Y-m-d"))-strtotime($product->created_at))/(60*60*24))<=3) <span

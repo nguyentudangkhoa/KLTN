@@ -40,7 +40,7 @@ Grocery Shoppy an Ecommerce Categoryme|Home
                                 <div class="men-cart-pro">
                                     <div class="inner-men-cart-pro">
                                         <a href="{{ route('product_details','product_name='.$nut->name) }}"
-                                            class="link-product-add-cart">Quick View</a>
+                                            class="link-product-add-cart">Xem chi tiết</a>
                                     </div>
                                 </div>
                                 @if(((strtotime(date("Y-m-d"))-strtotime($nut->created_at))/(60*60*24))<=3) <span
@@ -86,9 +86,9 @@ Grocery Shoppy an Ecommerce Categoryme|Home
                 <!-- second section (nuts special) -->
                 <div class="product-sec1 product-sec2">
                     <div class="col-xs-7 effect-bg">
-                        <h3 class="">Pure Energy</h3>
-                        <h6>Enjoy our all healthy Products</h6>
-                        <p>Get Extra 10% Off</p>
+                        <h3 class="">Năng lượng thuấn túy</h3>
+                        <h6>Vui vẻ với thức ăn có lợi cho sức khỏe</h6>
+                        <p>Nhận ngay 10% giảm giá khi mua hàng</p>
                     </div>
                     <h3 class="w3l-nut-middle">Nuts & Dry Fruits</h3>
                     <div class="col-xs-5 bg-right-nut">
@@ -113,7 +113,7 @@ Grocery Shoppy an Ecommerce Categoryme|Home
                                 <div class="men-cart-pro">
                                     <div class="inner-men-cart-pro">
                                         <a href="{{ route('product_details','product_name='.$oil->name) }}"
-                                            class="link-product-add-cart">Quick View</a>
+                                            class="link-product-add-cart">Xem chi tiết</a>
                                     </div>
                                 </div>
                                 @if(((strtotime(date("Y-m-d"))-strtotime($oil->created_at))/(60*60*24))<=3) <span
@@ -171,7 +171,7 @@ Grocery Shoppy an Ecommerce Categoryme|Home
                                 <div class="men-cart-pro">
                                     <div class="inner-men-cart-pro">
                                         <a href="{{ route('product_details','product_name='.$noodle->name) }}"
-                                            class="link-product-add-cart">Quick View</a>
+                                            class="link-product-add-cart">Xem chi tiết</a>
                                     </div>
                                 </div>
                                 @if(((strtotime(date("Y-m-d"))-strtotime($noodle->created_at))/(60*60*24))<=3) <span

@@ -17,4 +17,7 @@ class Bills extends Model
     public function Customer(){
         return $this->belongsTo("App\Customer","id_customer","id");
     }
+    public function Rating(){
+        return $this->hasMany("App\Rating","id_bill","id");
+    }
 }

@@ -20,7 +20,7 @@
                         </div>
                     </div>
                     <div class="modal-footer justify-content-between">
-                        <button type="submit" class="btn btn-primary">Thêm danh mục tổng</button>
+                        <button type="submit" class="btn btn-add-root btn-primary">Thêm danh mục tổng</button>
                     </div>
                 </form>
 

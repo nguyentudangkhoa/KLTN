@@ -73,16 +73,73 @@ Single
             <h3>{{ $product->name }}</h3>
             <div class="rating1">
                 <span class="starRating">
-                    <input id="rating5" type="radio" name="rating" value="5">
-                    <label for="rating5">5</label>
-                    <input id="rating4" type="radio" name="rating" value="4">
-                    <label for="rating4">4</label>
-                    <input id="rating3" type="radio" name="rating" value="3" checked="">
-                    <label for="rating3">3</label>
-                    <input id="rating2" type="radio" name="rating" value="2">
-                    <label for="rating2">2</label>
-                    <input id="rating1" type="radio" name="rating" value="1">
-                    <label for="rating1">1</label>
+                    @if($average==5)
+                            <input id="rating5" type="radio" name="rating" value="5" checked="">
+                            <label for="rating5">5</label>
+                            <input id="rating4" type="radio" name="rating" value="4">
+                            <label for="rating4">4</label>
+                            <input id="rating3" type="radio" name="rating" value="3">
+                            <label for="rating3">3</label>
+                            <input id="rating2" type="radio" name="rating" value="2">
+                            <label for="rating2">2</label>
+                            <input id="rating1" type="radio" name="rating" value="1">
+                            <label for="rating1">1</label>
+                            @elseif($average==4)
+                            <input id="rating5" type="radio" name="rating" value="5">
+                            <label for="rating5">5</label>
+                            <input id="rating4" type="radio" name="rating" value="4" checked="">
+                            <label for="rating4">4</label>
+                            <input id="rating3" type="radio" name="rating" value="3">
+                            <label for="rating3">3</label>
+                            <input id="rating2" type="radio" name="rating" value="2">
+                            <label for="rating2">2</label>
+                            <input id="rating1" type="radio" name="rating" value="1">
+                            <label for="rating1">1</label>
+                            @elseif($average==3)
+                            <input id="rating5" type="radio" name="rating" value="5">
+                            <label for="rating5">5</label>
+                            <input id="rating4" type="radio" name="rating" value="4">
+                            <label for="rating4">4</label>
+                            <input id="rating3" type="radio" name="rating" value="3" checked="">
+                            <label for="rating3">3</label>
+                            <input id="rating2" type="radio" name="rating" value="2">
+                            <label for="rating2">2</label>
+                            <input id="rating1" type="radio" name="rating" value="1">
+                            <label for="rating1">1</label>
+                            @elseif($average==2)
+                            <input id="rating5" type="radio" name="rating" value="5">
+                            <label for="rating5">5</label>
+                            <input id="rating4" type="radio" name="rating" value="4">
+                            <label for="rating4">4</label>
+                            <input id="rating3" type="radio" name="rating" value="3">
+                            <label for="rating3">3</label>
+                            <input id="rating2" type="radio" name="rating" value="2" checked="">
+                            <label for="rating2">2</label>
+                            <input id="rating1" type="radio" name="rating" value="1">
+                            <label for="rating1">1</label>
+                            @elseif($average==1)
+                            <input id="rating5" type="radio" name="rating" value="5">
+                            <label for="rating5">5</label>
+                            <input id="rating4" type="radio" name="rating" value="4">
+                            <label for="rating4">4</label>
+                            <input id="rating3" type="radio" name="rating" value="3">
+                            <label for="rating3">3</label>
+                            <input id="rating2" type="radio" name="rating" value="2">
+                            <label for="rating2">2</label>
+                            <input id="rating1" type="radio" name="rating" value="1" checked="">
+                            <label for="rating1">1</label>
+                            @else
+                            <input id="rating5" type="radio" name="rating" value="5">
+                            <label for="rating5">5</label>
+                            <input id="rating4" type="radio" name="rating" value="4">
+                            <label for="rating4">4</label>
+                            <input id="rating3" type="radio" name="rating" value="3">
+                            <label for="rating3">3</label>
+                            <input id="rating2" type="radio" name="rating" value="2">
+                            <label for="rating2">2</label>
+                            <input id="rating1" type="radio" name="rating" value="1">
+                            <label for="rating1">1</label>
+                            @endif
                 </span>
             </div>
             <p>
@@ -126,8 +183,9 @@ Single
                     <i class="fa fa-hand-o-right" aria-hidden="true"></i>Sản phẩm theo mục
                     <label>{{ $product->Product_Type->name }}</label></p>
                 <p>
+                    <i class="fa fa-hand-o-right" aria-hidden="true"></i>Thông tin mô tả:
+                    <label>{{ $product->description }}</label>
 
-                        {{ $product->description }}
 
                 </p>
                 <p>

@@ -18,7 +18,11 @@ Route::get('/', 'HomeController@Index');
 //Index page
 Route::get('/Index', 'HomeController@Index')->name('index');
 //Product page
-Route::get('/product', 'ProductController@Product')->name('product');
+Route::get('/product/{product_type}', 'ProductController@Product')->name('product');
+//Product page sort price
+Route::get('/product-price/{price}', 'SortPriceController@SortPrice')->name('product-price');
+//History
+Route::get('/history/{id?}', 'HistoryDetailController@ShowHistory')->name('history');
 //Single page
 Route::get('/product-details', 'ProductController@Single')->name('product_details');
 //Faqs page
@@ -55,6 +59,8 @@ Route::put('change-profile','ProfileController@ChangeProfile')->name('change-pro
 Route::put('/edit-avatar','ProfileController@EditAvatar')->name('edit-avatar');
 //Add address
 Route::post('/add-address','ProfileController@AddAddress')->name('add-address');
+//rating
+Route::post('/rating','HistoryDetailController@Rating')->name('rating');
 //Admin index
 Route::prefix('admin')->middleware('check-admin')->group(function () {
     //admin index page
@@ -71,6 +77,8 @@ Route::prefix('admin')->middleware('check-admin')->group(function () {
     Route::put('/en-root','EnableController@EnableRoot')->name('en-root');
     Route::get('/root-categories','AdminRootCategoryController@ShowRootCategory')->name('root-categories');
     Route::put('/update-root-category','UpdateRootController@UpdateRootCate')->name('update-root-categor');
+    Route::post('/add-root','AddCategoryController@AddRoot')->name('add-root');
+    Route::put('/delete-root','DeleteRootController@DelRoot')->name('delete-root');
     //unit
     Route::get('/units','AdminUnitController@ShowUnit')->name('units');
     Route::put('/disable-unit','DisableController@DisableUnit')->name('disable-unit');
@@ -103,5 +111,7 @@ Route::prefix('admin')->middleware('check-admin')->group(function () {
     Route::get('/sole-product','AdminBillController@ShowSoleProduct')->name('sole-product');
     //dissable all
     Route::put('/dissable-all','DissAllController@dissAll')->name('dissable-all');
+    //customer
+    Route::get('/customer','CustomerController@Customer')->name('customer');
 });
 

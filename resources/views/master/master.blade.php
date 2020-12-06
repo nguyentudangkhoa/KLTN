@@ -44,7 +44,7 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
 <body>
     <!-- top-header -->
     <div class="header-most-top">
-        <p>Grocery Offer Zone Top Deals & Discounts</p>
+        <p>Ưu đãi & Giảm giá hàng đầu của Khu vực Cửa hàng</p>
     </div>
     <!-- //top-header -->
     <!-- header-bot-->
@@ -207,49 +207,49 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
             <div class="item active">
                 <div class="container">
                     <div class="carousel-caption">
-                        <h3>Big
-                            <span>Save</span>
+                        <h3>Khuyến mãi
+                            <span>Lớn</span>
                         </h3>
-                        <p>Get flat
-                            <span>10%</span> Cashback</p>
-                        <a class="button2" href="product.html">Shop Now </a>
+                        <p>Giảm giá
+                            <span>10%</span> Tiền mặt</p>
+                        <a class="button2" href="{{ route('product',1) }}">Mua hàng ngay </a>
                     </div>
                 </div>
             </div>
             <div class="item item2">
                 <div class="container">
                     <div class="carousel-caption">
-                        <h3>Healthy
-                            <span>Saving</span>
+                        <h3>Tiết kiệm
+                            <span>Lên tới</span>
                         </h3>
-                        <p>Get Upto
-                            <span>30%</span> Off</p>
-                        <a class="button2" href="product.html">Shop Now </a>
+                        <p>có thể lên tới
+                            <span>30%</span> Giảm giá</p>
+                        <a class="button2" href="{{ route('product',2) }}">Mua hàng ngay </a>
                     </div>
                 </div>
             </div>
             <div class="item item3">
                 <div class="container">
                     <div class="carousel-caption">
-                        <h3>Big
-                            <span>Deal</span>
+                        <h3>Ưu đãi
+                            <span>Lớn</span>
                         </h3>
-                        <p>Get Best Offer Upto
+                        <p>Có thể giảm giá
                             <span>20%</span>
                         </p>
-                        <a class="button2" href="product.html">Shop Now </a>
+                        <a class="button2" href="product.html">Mua hàng ngay </a>
                     </div>
                 </div>
             </div>
             <div class="item item4">
                 <div class="container">
                     <div class="carousel-caption">
-                        <h3>Today
-                            <span>Discount</span>
+                        <h3>Giảm giá
+                            <span>Hôm nay</span>
                         </h3>
-                        <p>Get Now
-                            <span>40%</span> Discount</p>
-                        <a class="button2" href="product.html">Shop Now </a>
+                        <p>Đến
+                            <span>40%</span> Giảm giá</p>
+                        <a class="button2" href="product.html">Mua hàng ngay </a>
                     </div>
                 </div>
             </div>
@@ -271,8 +271,8 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
     <div class="footer-top">
         <div class="container-fluid">
             <div class="col-xs-8 agile-leftmk">
-                <h2>Get your Groceries delivered from local stores</h2>
-                <p>Free Delivery on your first order!</p>
+                <h2>Để chúng tôi giao hàng đến nhà bạn</h2>
+                <p>Miễn phí giao hàng lần đầu!</p>
                 <form action="#" method="post">
                     <input type="email" placeholder="E-mail" name="email" required="">
                     <input type="submit" value="Subscribe">

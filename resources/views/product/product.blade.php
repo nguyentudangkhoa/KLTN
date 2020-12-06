@@ -12,7 +12,11 @@ Product
                     <a href="{{ route('index') }}">Home</a>
                     <i>|</i>
                 </li>
+                @if( isset($group))
                 <li>{{ $group->name }}</li>
+                @else
+                <li>Danh sách sản phẩm</li>
+                @endif
             </ul>
         </div>
     </div>
@@ -22,7 +26,11 @@ Product
 <div class="ads-grid">
     <div class="container">
         <!-- tittle heading -->
-        <h3 class="tittle-w3l">{{ $group->name }}
+        <h3 class="tittle-w3l">@if(isset($group))
+            {{ $group->name }}
+            @else
+            Danh sách sản phẩm
+            @endif
             <span class="heading-style">
                 <i></i>
                 <i></i>
@@ -52,7 +60,7 @@ Product
                                 <div class="men-cart-pro">
                                     <div class="inner-men-cart-pro">
                                         <a href="{{ route('product_details','product_name='.$product->name) }}"
-                                            class="link-product-add-cart">Quick View</a>
+                                            class="link-product-add-cart">Xem chi tiết</a>
                                     </div>
                                 </div>
                                 @if(((strtotime(date("Y-m-d"))-strtotime($product->created_at))/(60*60*24))<=3) <span

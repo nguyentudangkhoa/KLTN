@@ -1,7 +1,7 @@
 <div class="search-hotel">
-    <h3 class="agileits-sear-head">Search here..</h3>
-    <form action="#" method="post">
-        <input type="search" placeholder="Product name...." name="search" required="">
+    <h3 class="agileits-sear-head">Tìm kiếm ở đây</h3>
+    <form action="{{ route('search-product') }}" method="get">
+        <input type="search" placeholder="Tên sản phẩm" name="search" required="">
         <input type="submit" value=" ">
     </form>
 </div>
@@ -9,206 +9,17 @@
 <!-- //price range -->
 <!-- food preference -->
 <div class="left-side">
-    <h3 class="agileits-sear-head">Food Preference</h3>
-    <ul>
-        <li>
-            <input type="checkbox" class="checked">
-            <span class="span">Vegetarian</span>
-        </li>
-        <li>
-            <input type="checkbox" class="checked">
-            <span class="span">Non-Vegetarian</span>
-        </li>
-    </ul>
+    <h3 class="agileits-sear-head">Tìm theo giá</h3>
+    <div class="styled-input">
+        <ul>
+            <li><a href="{{ route('product-price',1) }}">Từ 0 VND đến 10,000 VND</a></li>
+            <li><a href="{{ route('product-price',2) }}">Từ 11,000 VND đến 20,000 VND</a></li>
+            <li><a href="{{ route('product-price',3) }}">Từ 21,000 VND đến 30,000 VND</a></li>
+            <li><a href="{{ route('product-price',4) }}">Từ 31,000 VND đến 50,000 VND</a></li>
+            <li><a href="{{ route('product-price',5) }}">Lớn hơn 51,000 VND</a></li>
+        </ul>
+        <p id="txt_user_cof_gender" style="display:none; color:#FF3333"></p>
+    </div>
 </div>
 <!-- //food preference -->
-<!-- discounts -->
-<div class="left-side">
-    <h3 class="agileits-sear-head">Discount</h3>
-    <ul>
-        <li>
-            <input type="checkbox" class="checked">
-            <span class="span">5% or More</span>
-        </li>
-        <li>
-            <input type="checkbox" class="checked">
-            <span class="span">10% or More</span>
-        </li>
-        <li>
-            <input type="checkbox" class="checked">
-            <span class="span">20% or More</span>
-        </li>
-        <li>
-            <input type="checkbox" class="checked">
-            <span class="span">30% or More</span>
-        </li>
-        <li>
-            <input type="checkbox" class="checked">
-            <span class="span">50% or More</span>
-        </li>
-        <li>
-            <input type="checkbox" class="checked">
-            <span class="span">60% or More</span>
-        </li>
-    </ul>
-</div>
-<!-- //discounts -->
-<!-- reviews -->
-<div class="customer-rev left-side">
-    <h3 class="agileits-sear-head">Customer Review</h3>
-    <ul>
-        <li>
-            <a href="#">
-                <i class="fa fa-star" aria-hidden="true"></i>
-                <i class="fa fa-star" aria-hidden="true"></i>
-                <i class="fa fa-star" aria-hidden="true"></i>
-                <i class="fa fa-star" aria-hidden="true"></i>
-                <i class="fa fa-star" aria-hidden="true"></i>
-                <span>5.0</span>
-            </a>
-        </li>
-        <li>
-            <a href="#">
-                <i class="fa fa-star" aria-hidden="true"></i>
-                <i class="fa fa-star" aria-hidden="true"></i>
-                <i class="fa fa-star" aria-hidden="true"></i>
-                <i class="fa fa-star" aria-hidden="true"></i>
-                <i class="fa fa-star-o" aria-hidden="true"></i>
-                <span>4.0</span>
-            </a>
-        </li>
-        <li>
-            <a href="#">
-                <i class="fa fa-star" aria-hidden="true"></i>
-                <i class="fa fa-star" aria-hidden="true"></i>
-                <i class="fa fa-star" aria-hidden="true"></i>
-                <i class="fa fa-star-half-o" aria-hidden="true"></i>
-                <i class="fa fa-star-o" aria-hidden="true"></i>
-                <span>3.5</span>
-            </a>
-        </li>
-        <li>
-            <a href="#">
-                <i class="fa fa-star" aria-hidden="true"></i>
-                <i class="fa fa-star" aria-hidden="true"></i>
-                <i class="fa fa-star" aria-hidden="true"></i>
-                <i class="fa fa-star-o" aria-hidden="true"></i>
-                <i class="fa fa-star-o" aria-hidden="true"></i>
-                <span>3.0</span>
-            </a>
-        </li>
-        <li>
-            <a href="#">
-                <i class="fa fa-star" aria-hidden="true"></i>
-                <i class="fa fa-star" aria-hidden="true"></i>
-                <i class="fa fa-star-half-o" aria-hidden="true"></i>
-                <i class="fa fa-star-o" aria-hidden="true"></i>
-                <i class="fa fa-star-o" aria-hidden="true"></i>
-                <span>2.5</span>
-            </a>
-        </li>
-    </ul>
-</div>
-<!-- //reviews -->
-<!-- cuisine -->
-<div class="left-side">
-    <h3 class="agileits-sear-head">Cuisine</h3>
-    <ul>
-        <li>
-            <input type="checkbox" class="checked">
-            <span class="span">South American</span>
-        </li>
-        <li>
-            <input type="checkbox" class="checked">
-            <span class="span">French</span>
-        </li>
-        <li>
-            <input type="checkbox" class="checked">
-            <span class="span">Greek</span>
-        </li>
-        <li>
-            <input type="checkbox" class="checked">
-            <span class="span">Chinese</span>
-        </li>
-        <li>
-            <input type="checkbox" class="checked">
-            <span class="span">Japanese</span>
-        </li>
-        <li>
-            <input type="checkbox" class="checked">
-            <span class="span">Italian</span>
-        </li>
-        <li>
-            <input type="checkbox" class="checked">
-            <span class="span">Mexican</span>
-        </li>
-        <li>
-            <input type="checkbox" class="checked">
-            <span class="span">Thai</span>
-        </li>
-        <li>
-            <input type="checkbox" class="checked">
-            <span class="span">Indian</span>
-        </li>
-        <li>
-            <input type="checkbox" class="checked">
-            <span class="span"> Spanish </span>
-        </li>
-    </ul>
-</div>
-<!-- //cuisine -->
-<!-- deals -->
-<div class="deal-leftmk left-side">
-    <h3 class="agileits-sear-head">Special Deals</h3>
-    <div class="special-sec1">
-        <div class="col-xs-4 img-deals">
-            <img src="assets/images/d2.jpg" alt="">
-        </div>
-        <div class="col-xs-8 img-deal1">
-            <h3>Lay's Potato Chips</h3>
-            <a href="single.html">$18.00</a>
-        </div>
-        <div class="clearfix"></div>
-    </div>
-    <div class="special-sec1">
-        <div class="col-xs-4 img-deals">
-            <img src="assets/images/d1.jpg" alt="">
-        </div>
-        <div class="col-xs-8 img-deal1">
-            <h3>Bingo Mad Angles</h3>
-            <a href="single.html">$9.00</a>
-        </div>
-        <div class="clearfix"></div>
-    </div>
-    <div class="special-sec1">
-        <div class="col-xs-4 img-deals">
-            <img src="assets/images/d4.jpg" alt="">
-        </div>
-        <div class="col-xs-8 img-deal1">
-            <h3>Tata Salt</h3>
-            <a href="single.html">$15.00</a>
-        </div>
-        <div class="clearfix"></div>
-    </div>
-    <div class="special-sec1">
-        <div class="col-xs-4 img-deals">
-            <img src="assets/images/d5.jpg" alt="">
-        </div>
-        <div class="col-xs-8 img-deal1">
-            <h3>Gujarat Dry Fruit</h3>
-            <a href="single.html">$525.00</a>
-        </div>
-        <div class="clearfix"></div>
-    </div>
-    <div class="special-sec1">
-        <div class="col-xs-4 img-deals">
-            <img src="assets/images/d3.jpg" alt="">
-        </div>
-        <div class="col-xs-8 img-deal1">
-            <h3>Cadbury Dairy Milk</h3>
-            <a href="single.html">$149.00</a>
-        </div>
-        <div class="clearfix"></div>
-    </div>
-</div>
-<!-- //deals -->
+

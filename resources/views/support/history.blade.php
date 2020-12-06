@@ -98,7 +98,7 @@
                 <div class="container-fluid">
                     <div class="row mb-2">
                         <div class="col-sm-6">
-                            <h1>Thông tin cá nhân</h1>
+                            <h1>Chi tiết và đánh giá</h1>
                         </div>
                         <div class="col-sm-6">
                             <ol class="breadcrumb float-sm-right">
@@ -224,111 +224,34 @@
                         <div class="col-md-9">
                             <div class="card">
                                 <div class="card-header p-2">
-                                    <ul class="nav nav-pills">
+                                    <table id="example1" class="table table-bordered table-striped">
+                                        <thead>
+                                            <tr>
+                                                <th>Sản phẩm</th>
+                                                <th>Đơn giá</th>
+                                                <th>Số lượng</th>
+                                                <th>Đánh giá</th>
+                                            </tr>
+                                        </thead>
+                                        <tbody>
+                                            @foreach ($billDetails as $bill)
+                                            <tr >
+                                                <td>{{ $bill->Product->name}}</td>
+                                                <td>{{ $bill->price }}</td>
 
-                                        <li class="nav-item"><a class="nav-link" href="#timeline" data-toggle="tab">Lịch
-                                                sử mua hàng</a></li>
-                                        <li class="nav-item"><a class="nav-link" href="#settings"
-                                                data-toggle="tab">Chỉnh sửa thông tin cá nhân</a></li>
-                                    </ul>
+                                                <td>{{ $bill->quantity }}</td>
+                                                <td>
+                                                    <div class="btn-group">
+                                                        <button type="button"  data-id = "{{ $bill->Bill->id }}" data-idproduct="{{ $bill->Product->id }}" data-toggle="modal" data-target="#modal-default-rating" class="btn-rating btn btn-info">Đánh giá</button>
+                                                    </div>
+                                                </td>
+                                            </tr>
+                                            @endforeach
+
+                                        </tbody>
+                                    </table>
                                 </div><!-- /.card-header -->
-                                <div class="card-body">
-                                    <div class="tab-content">
-                                        <!-- /.tab-pane -->
-                                        <div class="Active tab-pane" id="timeline">
-                                            @if(!isset($bill))
-                                            <table id="example1" class="table table-bordered table-striped">
-                                                <thead>
-                                                    <tr>
-                                                        <th>Mã hóa đơn</th>
-                                                        <th>Tổng tiền</th>
-                                                        <th>Ngày đặt hàng</th>
-                                                        <th>Tình trạng đơn hàng</th>
-                                                        <th>Thời gian tạo</th>
-                                                        <th>Thời gian cập nhật</th>
-                                                        <th>Chức năng</th>
-                                                    </tr>
-                                                </thead>
-                                                <tbody>
-                                                    @foreach ($bills as $bill)
-                                                    @if($bill->status == 4)
-                                                    <tr id="tb-bill{{ $bill->id }}">
-                                                        <td>{{ $bill->id }}</td>
-                                                        <td>{{ $bill->total}}</td>
-                                                        <td>{{ $bill->order_date }}</td>
-                                                        @if($bill->status == 0)
-                                                        <td>Đơn hàng bị hủy</td>
-                                                        @elseif($bill->status == 1)
-                                                        <td>Đơn hàng đang chờ xác nhận</td>
-                                                        @elseif($bill->status == 2)
-                                                        <td>Đã xác nhận đơn hàng</td>
-                                                        @elseif($bill->status == 3)
-                                                        <td>Đơn hàng đang giao</td>
-                                                        @elseif($bill->status == 4)
-                                                        <td>Đơn hàng giao thành công</td>
-                                                        @endif
 
-                                                        <td>{{ $bill->created_at }}</td>
-                                                        <td>{{ $bill->updated_at }}</td>
-                                                        <td>
-                                                            <form action="{{ route('history',$bill->id) }}" method="get">
-                                                            <div class="btn-group">
-                                                                <button type="submit" data-route="{{ route('show-bill',$bill->id) }}"  class="redirect-bill btn-update btn btn-info">Xem thông tin</button>
-                                                              </div>
-                                                            </form>
-                                                        </td>
-                                                    </tr>
-                                                    @endif
-                                                    @endforeach
-
-                                                </tbody>
-                                            </table>
-                                            @endif
-                                        </div>
-                                        <!-- /.tab-pane -->
-
-                                        <div class="tab-pane" id="settings">
-                                            <form class="form-horizontal" id="form-user" data-id="{{ $user->id }}">
-                                                @csrf
-                                                <div class="form-group row">
-                                                    <label for="inputName" class="col-sm-2 col-form-label">Tên</label>
-                                                    <div class="col-sm-10">
-                                                        <input type="name" class="form-control" name="inputName"
-                                                            id="inputName" placeholder="Nhập tên">
-                                                    </div>
-                                                </div>
-                                                <div class="form-group row">
-                                                    <label for="gender" class="col-sm-2 col-form-label">Giới
-                                                        tính</label>
-                                                    <div class="col-sm-10">
-                                                        <select name="gender" class="form-control" id="">
-                                                            <option selected disabled>Vui lòng chọn giới tính của bạn
-                                                            </option>
-                                                            <option value="nam">Nam</option>
-                                                            <option value="nữ">Nữ</option>
-                                                        </select>
-                                                    </div>
-                                                </div>
-
-                                                <div class="form-group row">
-                                                    <label for="inputPhone" class="col-sm-2 col-form-label">Số điện
-                                                        thoại</label>
-                                                    <div class="col-sm-10">
-                                                        <input type="text" class="form-control" id="inputPhone"
-                                                            name="inputPhone" placeholder="Nhập số điện thoại">
-                                                    </div>
-                                                </div>
-                                                <div class="form-group row">
-                                                    <div class="offset-sm-2 col-sm-10">
-                                                        <button type="submit" class="btn btn-danger">Thay đổi</button>
-                                                    </div>
-                                                </div>
-                                            </form>
-                                        </div>
-                                        <!-- /.tab-pane -->
-                                    </div>
-                                    <!-- /.tab-content -->
-                                </div><!-- /.card-body -->
                             </div>
                             <!-- /.nav-tabs-custom -->
                         </div>
@@ -356,6 +279,8 @@
     </div>
     <!-- ./wrapper -->
 
+    @include('profile.rating')
+
     <!-- jQuery -->
     <script src="assets/AdminLTE/plugins/jquery/jquery.min.js"></script>
     <!-- Bootstrap 4 -->
@@ -371,7 +296,7 @@
     <!--End form-->
     <!-- form user -->
     <script src="assets/js/component/form-user.js"></script>
-
+    <script src="assets/js/component/form-rating.js"></script>
     <!-- DataTables -->
     <script src="assets/AdminLTE/plugins/datatables/jquery.dataTables.min.js"></script>
     <script src="assets/AdminLTE/plugins/datatables-bs4/js/dataTables.bootstrap4.min.js"></script>

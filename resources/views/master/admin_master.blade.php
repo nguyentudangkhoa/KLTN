@@ -50,7 +50,7 @@
                     <a class="nav-link" data-widget="pushmenu" href="#" role="button"><i class="fas fa-bars"></i></a>
                 </li>
                 <li class="nav-item d-none d-sm-inline-block">
-                    <a href="{{ route('admin-index') }}" class="nav-link">Home</a>
+                    <a href="{{ route('admin-index') }}" class="nav-link">Trang chủ</a>
                 </li>
             </ul>
 
@@ -70,8 +70,8 @@
                                         Brad Diesel
                                         <span class="float-right text-sm text-danger"><i class="fas fa-star"></i></span>
                                     </h3>
-                                    <p class="text-sm">Call me whenever you can...</p>
-                                    <p class="text-sm text-muted"><i class="far fa-clock mr-1"></i> 4 Hours Ago</p>
+                                    <p class="text-sm">Gọi bất cứ khi nào bạn có thể .....</p>
+                                    <p class="text-sm text-muted"><i class="far fa-clock mr-1"></i> 4 Giờ trước</p>
                                 </div>
                             </div>
                             <!-- Message End -->
@@ -214,6 +214,12 @@
                                         <p>Quản lý xuất kho</p>
                                     </a>
                                 </li>
+                                <li class="nav-item">
+                                    <a href="{{ route('customer') }}" class="nav-link">
+                                        <i class="far fa-circle nav-icon"></i>
+                                        <p>Show khách hàng</p>
+                                    </a>
+                                </li>
                             </ul>
                         </li>
                     </ul>
@@ -335,6 +341,8 @@
 <script src="assets/js/admin/user/delete-user.js"></script>
 <!--root category-->
 <script src="assets/js/admin/rootcategory/update-root-category.js"></script>
+<script src="assets/js/admin/rootcategory/add-root.js"></script>
+<script src="assets/js/admin/rootcategory/delete_root.js"></script>
 <!-- SweetAlert2 -->
 <script src="assets/AdminLTE/plugins/sweetalert2/sweetalert2.min.js"></script>
 <!-- Toastr -->

@@ -2,6 +2,8 @@
 
 namespace App\Http\Controllers;
 
+use App\Bills;
+use App\Customer;
 use App\Http\Controllers\Controller;
 use App\User;
 use App\User_address;
@@ -13,7 +15,11 @@ class ProfileController extends Controller
 {
     public function ShowProfile(Request $req){
         $user = User::find($req->id);
-        //dd($user->User_Address );
+        $customer = Customer::where('id_user',$user->id)->first();
+        if($customer){
+            $bills = Bills::where('id_customer',$customer->id)->get();
+            return view('profile.profile-user',compact('user','bills'));
+        }
         return view('profile.profile-user',compact('user'));
     }
     //change profile
