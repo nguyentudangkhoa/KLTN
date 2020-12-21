@@ -39,7 +39,7 @@ Grocery Shoppy an Ecommerce Categoryme|Home
                                 <img src="assets/images/{{ $nut->images }}" style="width:126px;height:150px" alt="">
                                 <div class="men-cart-pro">
                                     <div class="inner-men-cart-pro">
-                                        <a href="{{ route('product_details','product_name='.$nut->name) }}"
+                                        <a href="{{ route('product_details',$nut->id) }}"
                                             class="link-product-add-cart">Xem chi tiết</a>
                                     </div>
                                 </div>
@@ -50,7 +50,7 @@ Grocery Shoppy an Ecommerce Categoryme|Home
                             <div class="item-info-product ">
                                 <h4>
                                     <a
-                                        href="{{ route('product_details','product_name='.$nut->name) }}">{{ strlen($nut->name) > 18 ? (substr($nut->name, 0, 17) . '...') : $nut->name  }}</a>
+                                        href="{{ route('product_details',$nut->id) }}">{{ strlen($nut->name) > 18 ? (substr($nut->name, 0, 17) . '...') : $nut->name  }}</a>
                                 </h4>
                                 <div class="info-product-price">
 
@@ -112,7 +112,7 @@ Grocery Shoppy an Ecommerce Categoryme|Home
                                 <img src="assets/images/{{ $oil->images }}" style="width:126px;height:150px" alt="">
                                 <div class="men-cart-pro">
                                     <div class="inner-men-cart-pro">
-                                        <a href="{{ route('product_details','product_name='.$oil->name) }}"
+                                        <a href="{{ route('product_details',$oil->id) }}"
                                             class="link-product-add-cart">Xem chi tiết</a>
                                     </div>
                                 </div>
@@ -123,7 +123,7 @@ Grocery Shoppy an Ecommerce Categoryme|Home
                             <div class="item-info-product ">
                                 <h4>
                                     <a
-                                        href="{{ route('product_details','product_name='.$oil->name) }}">{{ strlen($oil->name) > 18 ? (substr($oil->name, 0, 17) . '...') : $oil->name  }}</a>
+                                        href="{{ route('product_details',$oil->id) }}">{{ strlen($oil->name) > 18 ? (substr($oil->name, 0, 17) . '...') : $oil->name  }}</a>
                                 </h4>
                                 <div class="info-product-price">
                                     @if($oil->promotion_price > 0 && $oil->status == 1 &&
@@ -170,7 +170,7 @@ Grocery Shoppy an Ecommerce Categoryme|Home
                                 <img src="assets/images/{{ $noodle->images }}" style="width:126px;height:150px" alt="">
                                 <div class="men-cart-pro">
                                     <div class="inner-men-cart-pro">
-                                        <a href="{{ route('product_details','product_name='.$noodle->name) }}"
+                                        <a href="{{ route('product_details',$noodle->id) }}"
                                             class="link-product-add-cart">Xem chi tiết</a>
                                     </div>
                                 </div>
@@ -181,7 +181,7 @@ Grocery Shoppy an Ecommerce Categoryme|Home
                             <div class="item-info-product ">
                                 <h4>
                                     <a
-                                        href="{{ route('product_details','product_name='.$noodle->name) }}">{{strlen($noodle->name) > 18 ? (substr($noodle->name, 0, 17) . '...') : $noodle->name }}</a>
+                                        href="{{ route('product_details',$noodle->id) }}">{{strlen($noodle->name) > 18 ? (substr($noodle->name, 0, 17) . '...') : $noodle->name }}</a>
                                 </h4>
                                 <div class="info-product-price">
                                     @if($noodle->promotion_price > 0 && $noodle->status == 1 &&
@@ -240,14 +240,14 @@ strtotime($discount->end_at) > strtotime(date("Y-m-d"))))
                 <li>
                     <div class="w3l-specilamk">
                         <div class="speioffer-agile">
-                            <a href="{{ route('product_details','product_name='.$discount->Product->name) }}">
+                            <a href="{{ route('product_details',$discount->Product->id) }}">
                                 <img src="assets/images/{{ $discount->Product->images }}"
                                     style="width:126px;height:150px" alt="">
                             </a>
                         </div>
                         <div class="product-name-w3l">
                             <h4>
-                                <a href="{{ route('product_details','product_name='.$discount->Product->name) }}">{{strlen($discount->Product->name) > 18 ? (substr($discount->Product->name, 0, 17) . '...') : $discount->Product->name  }}
+                                <a href="{{ route('product_details',$discount->Product->id) }}">{{strlen($discount->Product->name) > 18 ? (substr($discount->Product->name, 0, 17) . '...') : $discount->Product->name  }}
                                 </a>
                             </h4>
                             <div class="w3l-pricehkj">

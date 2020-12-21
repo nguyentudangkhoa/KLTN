@@ -16,7 +16,7 @@ class ProductController extends Controller
     public function Product(Request $req)
     {
         //Show product by product type
-        $type = Product_type::where('name', 'like', '%' . $req->product_type . '%')->where('status',1)->first();
+        $type = Product_type::where('id', 'like',$req->product_type)->where('status',1)->first();
         $group = Group_type::where('id', $type->id_group_type)->where('status',1)->first();
         $product_arrays = Product::select('product.id', 'product.name', 'product.images', 'product.price', 'discount_info.promotion_price', 'discount_info.end_at', 'discount_info.status', 'product.created_at')
             ->leftJoin('discount_info', 'discount_info.id_product', '=', 'product.id')
@@ -35,12 +35,12 @@ class ProductController extends Controller
         //Product info
         $product = Product::select('product.id', 'product.name', 'product.images','product.description', 'product.id_type', 'product.price','product.quantity', 'discount_info.promotion_price', 'discount_info.end_at', 'discount_info.status', 'product.created_at')
             ->leftJoin('discount_info', 'discount_info.id_product', '=', 'product.id')
-            ->where('product.name', 'like', '%' . $req->product_name . '%')
+            ->where('product.id', $req->id)
             ->where('product.status', 1)
             ->orderBy('product.created_at', 'DESC')
             ->first();
         //Same type product
-        $same_type_products = Product::leftJoin('discount_info', 'discount_info.id_product', '=', 'product.id')
+        $same_type_products = Product::select('product.id', 'product.name', 'product.images','product.description', 'product.id_type', 'product.price','product.quantity', 'discount_info.promotion_price', 'discount_info.end_at', 'discount_info.status', 'product.created_at')->leftJoin('discount_info', 'discount_info.id_product', '=', 'product.id')
             ->where('product.id_type', $product->id_type)
             ->where('product.status', 1)
             ->where('product.id', '!=', $product->id)
@@ -48,6 +48,7 @@ class ProductController extends Controller
             ->inRandomOrder()
             ->limit(10)
             ->get();
+        //dd($same_type_products);
         $rating = Rating::where('id_product',$product->id)->get();
         $average=0;
         $star=0;

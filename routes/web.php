@@ -24,7 +24,7 @@ Route::get('/product-price/{price}', 'SortPriceController@SortPrice')->name('pro
 //History
 Route::get('/history/{id?}', 'HistoryDetailController@ShowHistory')->name('history');
 //Single page
-Route::get('/product-details', 'ProductController@Single')->name('product_details');
+Route::get('/product-details/{id}', 'ProductController@Single')->name('product_details');
 //Faqs page
 Route::get('/fast-answer-question', 'SupportController@Faqs')->name('faqs');
 //About us page

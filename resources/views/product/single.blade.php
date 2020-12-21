@@ -226,14 +226,14 @@ Single
                 <li>
                     <div class="w3l-specilamk">
                         <div class="speioffer-agile">
-                            <a href="{{ route('product_details','product_name='.$type_product->name) }}">
+                            <a href="{{ route('product_details',$type_product->id) }}">
                                 <img src="assets/images/{{ $type_product->images }}" style="width:126px;height:150px" alt="">
                             </a>
                         </div>
                         <div class="product-name-w3l">
                             <h4>
                                 <a
-                                    href="{{ route('product_details','product_name='.$type_product->name) }}">{{ $type_product->name }}</a>
+                                    href="{{ route('product_details',$type_product->id) }}">{{ $type_product->name }}</a>
                             </h4>
                             <div class="w3l-pricehkj">
                                 @if($type_product->promotion_price > 0 || $type_product->status == 1 || strtotime($type_product->end_at) > strtotime(date("Y-m-d")))

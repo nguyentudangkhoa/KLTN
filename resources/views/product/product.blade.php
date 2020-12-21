@@ -59,7 +59,7 @@ Product
                                 <img src="assets/images/{{ $product->images }}" style="width:126px;height:150px" alt="">
                                 <div class="men-cart-pro">
                                     <div class="inner-men-cart-pro">
-                                        <a href="{{ route('product_details','product_name='.$product->name) }}"
+                                        <a href="{{ route('product_details', $product->id) }}"
                                             class="link-product-add-cart">Xem chi tiết</a>
                                     </div>
                                 </div>
@@ -70,7 +70,7 @@ Product
                             <div class="item-info-product ">
                                 <h4>
                                     <a
-                                        href="{{ route('product_details','product_name='.$product->name) }}">{{strlen( $product->name) > 20 ? (substr( $product->name, 0, 18) . '...') :  $product->name }}</a>
+                                        href="{{ route('product_details',$product->id) }}">{{strlen( $product->name) > 20 ? (substr( $product->name, 0, 18) . '...') :  $product->name }}</a>
                                 </h4>
                                 <div class="info-product-price">
                                     @if($product->promotion_price > 0 && $product->status == 1 &&
